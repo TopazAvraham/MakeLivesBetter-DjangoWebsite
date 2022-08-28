@@ -1,6 +1,8 @@
+from email.policy import default
 import string
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 # Create your models here.
 class Feature(models.Model):
@@ -23,3 +25,4 @@ class Post(models.Model):
     city= models.CharField(max_length=100)
     phone_number= models.IntegerField()
     is_approved = models.BooleanField()
+    image= models.ImageField(upload_to = "files/", default= 'defultl.jpg' )

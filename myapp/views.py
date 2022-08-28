@@ -1,6 +1,6 @@
-import imp
+from distutils.file_util import move_file
+from email.mime import image
 from random import randint, random
-import re
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
@@ -8,6 +8,8 @@ from django.contrib import messages
 from .models import Feature, UserExtend, Stores, Post
 from django.db.models import F
 from django.shortcuts import get_object_or_404
+from django.http import Http404
+from .form import ImageForm
 
 
 # Create your views here.
@@ -102,24 +104,53 @@ def prices(request):
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2})
 
 def test(request):
+    if request.method == "POST":
+        form=ImageForm(data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            obj=form.instance
+            
+            return render(request,"index.html",{"obj":obj})
+        else:
+            form=ImageForm()
+        img=Post.objects.all()
+        return render(request,"index.html",{"img":img,"form":form})
     return render(request, 'index2.html')
 
 def upload(request):
     if not request.user.is_authenticated:
         return redirect('login')
 
-    if request.method == 'POST':
-        full_name= request.POST['full_name']
-        address= request.POST['address']
-        city= request.POST['city']
-        phone_number= request.POST['phone_number']
-        post = Post(full_name=full_name,address=address,city=city,phone_number=phone_number, is_approved = True )
-        post.save()
-        return redirect('index')
-        
-    else:
-        return render(request, 'upload.html')
+    #if request.method == 'POST':
+        #full_name= request.POST['full_name']
+        #address= request.POST['address']
+        #city= request.POST['city']
+        #phone_number= request.POST['phone_number']
+       # image = request.POST['image']
+        #post = Post.objects.create(full_name=full_name,address=address,city=city,phone_number=phone_number, is_approved = True, image=image )
+        #post.save()
+        #return redirect('index')   
+    #else:
+        #return render(request, 'upload.html')
+
+    if request.method == "POST":
+        form=ImageForm(data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            obj=form.instance
+            return render(request,"index.html",{"obj":obj})
+        else:
+            form=ImageForm()
+        img=Post.objects.all()
+        return render(request,"index.html",{"img":img,"form":form})
     
+
+def search(request):
+    posts = Post.objects.all()
     
+    return render(request, 'search.html', {'posts': posts})
+    
+
+
 
 

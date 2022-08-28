@@ -1,6 +1,7 @@
 from atexit import register
 from typing import Counter
 from django.urls import path
+from django.conf import settings
 
 from . import views
 
@@ -13,7 +14,8 @@ urlpatterns = [
     path('post/<str:pk>', views.post, name = 'post'),
     path('prices', views.prices, name ='prices'),
     path('test', views.test, name = 'test'),
-    path('upload', views.upload, name ='upload')
+    path('upload', views.test, name ='upload'),
+    path('search', views.search, name ='search')
 ]
 
 

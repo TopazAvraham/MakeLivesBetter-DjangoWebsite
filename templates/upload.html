@@ -22,6 +22,11 @@
         <input type="tel" class="form-control" id="inputPhone" name="phone_number"pattern="05[0-9]{8}" required>
     </div>
 
+    <div class="col-md-6">
+        <label for="inputCity" class="form-label">Image (optional)</label>
+        <input type="file" class="form-control" id="myFile" name="image" required>
+      </div>
+
 
     <div class="col-12">
       <div class="form-check">
@@ -45,12 +50,14 @@
         var phone_number = document.forms["myForm"]["phone_number"].value;
         var test = document.forms["myForm"]["is_approved"].value;
         var checkbox = document.getElementById("gridCheck");
+        var img = document.getElementById("myFile").value
+        
 
-        if (full_name == "" || address == "" || city == "" || !regex.test(phone_number) || !checkbox.checked ){
+        if (full_name == "" || address == "" || city == "" || !regex.test(phone_number) || !checkbox.checked || img == ""){
             alert('all field must be filled correctly')
         }
         else{
-            
+
                 alert('your post has been uploaded')
             
         }

@@ -16,6 +16,9 @@ class UserExtendInLine(admin.StackedInline):
 class CustomizeUserAdmin(UserAdmin):
     inlines= (UserExtendInLine, )
 
+class PostAdmin(admin.ModelAdmin):
+    readonly_fields= ('id',)
+
 
 
 admin.site.unregister(User)
@@ -23,6 +26,6 @@ admin.site.register(User, CustomizeUserAdmin)
 admin.site.register(Feature)
 admin.site.register(UserExtend)
 admin.site.register(Stores)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 
 
