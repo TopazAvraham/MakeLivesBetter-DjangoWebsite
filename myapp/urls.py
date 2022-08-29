@@ -14,7 +14,7 @@ urlpatterns = [
     path('post/<str:pk>', views.post, name = 'post'),
     path('prices', views.prices, name ='prices'),
     path('test', views.test, name = 'test'),
-    path('upload', views.test, name ='upload'),
+    path('upload', views.upload, name ='upload'),
     path('search', views.search, name ='search')
 ]
 
