@@ -115,7 +115,7 @@ def test(request):
             form=ImageForm()
         img=Post.objects.all()
         return render(request,"index.html",{"img":img,"form":form})
-    return render(request, 'index2.html')
+    return render(request, 'index3.html')
 
 def upload(request):
     if not request.user.is_authenticated:
@@ -126,7 +126,7 @@ def upload(request):
         address= request.POST['address']
         city= request.POST['city']
         phone_number= request.POST['phone_number']
-        image = request.POST['image']
+        image = request.FILES['image']
         post = Post.objects.create(full_name=full_name,address=address,city=city,phone_number=phone_number, is_approved = True, image=image )
         post.save()
         return redirect('index')   
