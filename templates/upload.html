@@ -5,16 +5,15 @@
   <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
 </head>
 
-
 <div class="col-md-6 offset-md-3 mt-5">
-  <a target="_blank" href="/">
-    <img src='https://i.imgur.com/O1cKLCn.png'>
+  <a  href="/">
+    <img src='../files/files/Logo.png' height="100px" id="myimage">
   </a>
-  <br>
   
-  <h1>Getform.io HTML Form Example with File Upload</h1>
+  <h1>Upload a Post of Good Act you did</h1>
   <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
+    {{ form.media }}
     <div class="form-group">
       <label for="exampleInputName">Full Name</label>
       <input type="text" name="full_name" class="form-control" id="exampleInputName" placeholder="Enter your name and surname" required="required">
@@ -30,24 +29,33 @@
 
     <div class="form-group">
       <label for="exampleInputName">Phone Number</label>
-      <input type="tel" name="phone_number" class="form-control" id="exampleInputName" placeholder="Enter Phone here" required="required">
+      <input type="tel" name="phone_number" class="form-control" id="exampleInputName" placeholder="Enter Phone here"  pattern="05[0-9]{8}" required="required">
     </div>
-    
 
+    
+      
+ 
+   
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Favorite Platform</label>
-      <select class="form-control" id="exampleFormControlSelect1" name="platform" required="required">
-        <option>Github</option>
-        <option>Gitlab</option>
-        <option>Bitbucket</option>
-      </select>
+      <label for="exampleInputName">Description</label>
+      <textarea name='description' name="description" placeholder='Describe your case here' class="form-control" ></textarea>
     </div>
+ 
+
     <hr>
     <div class="form-group mt-3">
       <label class="mr-2">Upload Image:</label>
       <input type="file" name="image">
     </div>
+
+    <div class="form-group">
+      <br>
+      <input type="checkbox" name='is_approved'  required="required"></textarea>
+      <label for="vehicle1"> I approve the details are correct</label><br>
+    </div>
     <hr>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+
+

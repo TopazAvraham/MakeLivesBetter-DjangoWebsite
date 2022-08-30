@@ -9,7 +9,7 @@ from .models import Feature, UserExtend, Stores, Post
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-from .form import ImageForm
+
 
 
 # Create your views here.
@@ -17,10 +17,6 @@ def index(request):
     features = Feature.objects.all()
     extendedUsers = UserExtend.objects.all()
     return render(request, 'index.html', {'features': features, 'extendedUsers': extendedUsers})
-
-def counter(request):
-    posts = [1,2,3,4,5, 'tim', 'tom', 'john']
-    return render(request, 'counter.html', {'posts': posts})
 
 def register(request):
     if request.method == 'POST':
@@ -69,10 +65,8 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-def post(request, pk):
-    return render(request, 'post.html', {'pk': pk})
 
-def prices(request):
+def test(request):
     stores = Stores.objects.all()
     list_stores = list(stores)
     store1 = list_stores[0]
@@ -103,19 +97,57 @@ def prices(request):
     
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2})
 
-def test(request):
-    if request.method == "POST":
-        form=ImageForm(data=request.POST,files=request.FILES)
-        if form.is_valid():
-            form.save()
-            obj=form.instance
-            
-            return render(request,"index.html",{"obj":obj})
-        else:
-            form=ImageForm()
-        img=Post.objects.all()
-        return render(request,"index.html",{"img":img,"form":form})
-    return render(request, 'index3.html')
+def prices(request):
+    stores = Stores.objects.all()
+    list_stores = list(stores)
+    store1 = list_stores[0]
+    store2 = list_stores[1]
+    store3 = list_stores[2]
+    store4 = list_stores[3]
+    extendedUsers = UserExtend.objects.all()
+    connected = False
+    if request.user.is_authenticated:
+        connected = True
+        check = request.user.username
+        for e in extendedUsers:
+            if e.user.username == check:
+                extended = e
+        
+    if request.POST.get('btn1') and connected:
+        if extended.coins - 20 >= 0:
+            extended.coins = extended.coins - 20
+            extended.save()
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+        
+    if request.POST.get('btn2') and connected:
+        if extended.coins - 10 >= 0:
+            extended.coins = extended.coins - 10
+            extended.save()
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+    
+    if request.POST.get('btn3') and connected:
+        if extended.coins - 50 >= 0:
+            extended.coins = extended.coins - 50
+            extended.save()
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+
+    if request.POST.get('btn4') and connected:
+        if extended.coins - 100 >= 0:
+            extended.coins = extended.coins - 100
+            extended.save()
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+    
+    if request.user.is_authenticated:
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+     'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+
+    
+    return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+     'store2': store2, 'store3': store3, 'store4': store4})
 
 def upload(request):
     if not request.user.is_authenticated:
@@ -127,7 +159,9 @@ def upload(request):
         city= request.POST['city']
         phone_number= request.POST['phone_number']
         image = request.FILES['image']
-        post = Post.objects.create(full_name=full_name,address=address,city=city,phone_number=phone_number, is_approved = True, image=image )
+        description= request.POST['description']
+        post = Post.objects.create(full_name=full_name,address=address,city=city
+                ,phone_number=phone_number, description=description, is_approved = True, image=image )
         post.save()
         return redirect('index')   
     else:
