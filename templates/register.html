@@ -2,10 +2,17 @@
 
 
 <head>  
-
     <link href="{% static 'styleRegister.css' %}" rel="stylesheet">
-
 </head>
+
+<style>
+  body {
+    background-image: url('files/files/screen.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+  }
+  </style>
 
 <style> 
 h4{
@@ -56,7 +63,7 @@ h4{
   </div>
 
 <script>
-  // Show Password
+// Show Password
 $(".show-pass").on("click", function () {
   var type = $(this).prev("input").attr("type");
   if (type == "password") {
@@ -67,5 +74,6 @@ $(".show-pass").on("click", function () {
     $(this).find("i").removeClass("fi-rr-eye-crossed").addClass("fi-rr-eye");
   }
 });
+
 </script>
 

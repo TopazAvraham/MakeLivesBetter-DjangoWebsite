@@ -67,35 +67,7 @@ def logout(request):
 
 
 def test(request):
-    stores = Stores.objects.all()
-    list_stores = list(stores)
-    store1 = list_stores[0]
-    store2 = list_stores[1]
-    extendedUsers = UserExtend.objects.all()
-    connected = False
-    if request.user.is_authenticated:
-        connected = True
-        check = request.user.username
-        for e in extendedUsers:
-            if e.user.username == check:
-                extended = e
-        
-    if request.POST.get('btn1') and connected:
-        if extended.coins - 20 >= 0:
-            extended.coins = extended.coins - 20
-            extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2, 'extended': extended})
-        
-    if request.POST.get('btn2') and connected:
-        if extended.coins - 10 >= 0:
-            extended.coins = extended.coins - 10
-            extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2, 'extended': extended})
-    
-    if request.user.is_authenticated:
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2, 'extended': extended})
-    
-    return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1, 'store2': store2})
+    return render(request, 'test2.html')
 
 def prices(request):
     stores = Stores.objects.all()

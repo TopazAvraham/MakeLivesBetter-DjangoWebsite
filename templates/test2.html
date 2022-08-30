@@ -1,118 +1,36 @@
-{% load static %}
 
-
-{% if user.is_authenticated %}
-    {% for e in extendedUsers %}
-        {% if e.user.username == user.username %}
-        <h2>you have <span data-purecounter-start="0" data-purecounter-end="1000" class="purecounter"></span> coins</h2>
-        {% endif %} 
-    {% endfor %}
-{% endif %}
-
-
-<div class="row icon-boxes">
-   
-    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-      <div class="icon-box">
-        <div class="icon"><i class="ri-stack-line"></i></div>
-        <h4 class="title"> {{store1.name}} </h4>
-        <p class="description">{{store1.product}}</p>
-        <div>
-            <form method="POST" > 
-                {% csrf_token %} 
-                <input type="submit" class="btn" value="Get Coupon!" name="btn2" onclick="myFunction11()" />
-                <script type="text/javascript">
-                    function myFunction11() {
-                        var x=Math.floor((Math.random()*10000000000)+1);
-                        var a = "{{extended.coins}}";
-                        let bool = "{{user.is_authenticated}}";
-                        var b = parseInt(a);
-                        if(b-20 >= 0){
-                            alert ('your coupun code is: ' +  x);
-                        }   
-                        else {
-                            if (bool == 'True')
-                                alert('You don\'t have enough coins');
-                            else
-                                alert("You need to login to get this coupon");
-                                
-                        }
-                    }   
-                    
-                </script>
-                
-        </div>
+<div class="container">
+    <div class="image-wapper" style="background-image: url(https://images.pexels.com/photos/3812433/pexels-photo-3812433.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1)">
+      <h1>Create an account</h1>
+    </div>
+    <div class="form-wapper">
+      <div class="form-header">
+        <h2>Sign Up</h2>
+        <p>Welcome to store name. Enter your personal details and start journey with us.</p>
+      </div>
+      <div class="form-body">
+        <form>
+          <div class="input-wrapper">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="John Doe"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="john@example.com"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="**********"/><span class="icon show-pass"><i class="fi-rr-eye"></i></span>
+          </div>
+          <div class="input-wrapper">
+            <label for="confirm-password">Confirm Password</label>
+            <input id="confirm-password" type="password" name="confirm_password" placeholder="**********"/><span class="icon show-pass"><i class="fi-rr-eye"></i></span>
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-footer">
+        <p>Already have an account?<a class="form-link" href="./auth-login.html">Sign In</a></p>
       </div>
     </div>
-    
-    
-    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-        <div class="icon-box">
-          <div class="icon"><i class="ri-stack-line"></i></div>
-          <h4 class="title"> {{store2.name}} </h4>
-          <p class="description">{{store2.product}}</p>
-          <div>
-              <form method="POST" >
-                {% csrf_token %} 
-                <input type="submit" class="btn" value="Get Coupon!" name="btn2" onclick="myFunction12()"  />
-                <script type="text/javascript">
-                    function myFunction12() {
-                        var x=Math.floor((Math.random()*10000000000)+1);
-                        var a = "{{extended.coins}}";
-                        let bool = "{{user.is_authenticated}}";
-                        var b = parseInt(a);
-                        if(b-10 >= 0){
-                            alert ('your coupun code is: ' +  x);
-                        }   
-                        else {
-                            if (bool == 'True')
-                                alert('You don\'t have enough coins');
-                            else
-                                alert("You need to login to get this coupon")
-                        }
-                        }   
-                </script>
-
-
-          </div>
-        </div>
-      </div>
-    
-
-
-  <!-- Vendor JS Files -->
-  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
-
-  <script>
-  var form = document.getElementById('11');
-
-  // Adds a listener for the "submit" event.
-  form.addEventListener('submit', function(e) {
-  
-    e.preventDefault();
-    document.getElementById("submitNew").value = "Loading...";
-    myFunction1();
-    setTimeout(function() {
-        form.submit();
-    }, 3000);  // 3 seconds
-    return false;
-  
-  });
-</script>
-
-
-
-
-
-
-
-  
+  </div>

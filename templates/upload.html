@@ -1,15 +1,27 @@
 {% load static %}
-
-<head>  
+<head>
+  
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
 </head>
+
+  <style>
+    body {
+      background-image: url('files/files/_110219166_gettyimages-1088255202.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-size: cover;
+      background-color: #33a96a;
+    }
+  </style>
+  
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
 <div class="col-md-6 offset-md-3 mt-5">
   <a  href="/">
     <img src='../files/files/Logo.png' height="100px" id="myimage">
   </a>
-  
   <h1>Upload a Post of Good Act you did</h1>
   <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
@@ -18,6 +30,7 @@
       <label for="exampleInputName">Full Name</label>
       <input type="text" name="full_name" class="form-control" id="exampleInputName" placeholder="Enter your name and surname" required="required">
     </div>
+    
     <div class="form-group">
       <label for="exampleInputName">Address</label>
       <input type="text" name="address" class="form-control" id="exampleInputName" placeholder="Enter your address here" required="required">
@@ -59,3 +72,16 @@
 </div>
 
 
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
