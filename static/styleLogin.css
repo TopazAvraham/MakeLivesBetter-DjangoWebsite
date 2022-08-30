@@ -168,7 +168,7 @@ a:hover {
 .container .image-wapper h1 {
   align-self: flex-end;
   font-size: 60px;
-  color: rgb(64, 143, 155);
+  color: #fff;
   z-index: 1;
   margin: 0;
 }
@@ -182,7 +182,7 @@ a:hover {
 }
 .container .form-wapper .form-header p {
   font-size: 14px;
-  color: #bbb;
+  color: rgb(99, 45, 45);
   margin: 20px 0 0;
 }
 .container .form-wapper .form-body .input-wrapper {
