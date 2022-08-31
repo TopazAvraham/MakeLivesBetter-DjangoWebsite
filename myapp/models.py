@@ -40,7 +40,7 @@ class Post(models.Model):
     full_name = models.CharField(max_length=100)
     address= models.CharField(max_length=100)
     city= models.CharField(max_length=100)
-    phone_number= models.IntegerField()
+    phone_number= models.CharField(max_length=10)
     is_approved = models.BooleanField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     description = models.CharField(blank = True, max_length=1000, null=True)

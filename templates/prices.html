@@ -53,13 +53,17 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
+          {% if user.is_authenticated %}
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
-                <h1 style="color:rgb(72, 116, 247);">Hi {{e.user.username}}!</h1>
-                <h2  style="color:rgb(72, 116, 247);">You have <span data-purecounter-start="0" 
+                <h1 style="color:#16507b;">Hi {{e.user.username}}!</h1>
+                <h2  style="color:#16507b;">You have <span data-purecounter-start="0" 
                   data-purecounter-end="{{e.coins}}" data-purecounter-duration="1" class="purecounter"></span> coins</h2>
               {% endif %}
             {% endfor %}
+          {% else %}
+          <h1 style="color:#16507b;">You need to Login in order to get coupons!</h1>    
+          {% endif %}
         </div>
       </div>
 
