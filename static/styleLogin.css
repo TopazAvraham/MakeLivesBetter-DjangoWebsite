@@ -1,8 +1,8 @@
 html {
-  --main-color: #2c2ccc;
+  --main-color: #2487ce;
   --main-color-hover: #2323a2;
   --body-background: #f5f5f5;
-  --text-color: #333;
+  --text-color: #16507b;
   --box-bg-color: #fff;
   --box-shadow-color: #e4e4e4;
   --menu-active-bg: #f3f3ff;
@@ -10,7 +10,7 @@ html {
   --menu-badge-bg: #ff9f43;
   --line-color: var(--body-background);
   --scroll-bar-bg: var(--box-bg-color);
-  --scroll-bar-color: #ccc;
+  --scroll-bar-color: rgb(142, 45, 45);
   --success-color: #28c76f;
   --danger-color: #ea5455;
   --warning-color: #ff9f43;
@@ -177,7 +177,7 @@ a:hover {
 }
 .container2 .form-wapper .form-header p {
   font-size: 14px;
-  color: #bbb;
+  color: #16507b;
   margin: 20px 0 0;
 }
 .container2 .form-wapper .form-body .input-wrapper {

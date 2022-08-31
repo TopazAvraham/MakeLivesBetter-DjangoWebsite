@@ -2,12 +2,13 @@
 <head>
   
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
+    <link href="{% static 'stylePrices.css' %}" rel="stylesheet">
+    <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
 </head>
 
   <style>
     body {
-      background-image: url('../files/files/_110219166_gettyimages-1088255202.jpg');
+      background-image: url('files/files/screen.png');
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
@@ -16,9 +17,35 @@
   </style>
 
 
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
 
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+    <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="about">About</a></li>
+        <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+        {% if user.is_authenticated %}
+          {% for e in extendedUsers %}
+            {% if e.user.username == user.username %}
+              <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+              <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+            {% endif %} 
+            {% endfor %}
+        {% else %}
+        <li><a class="getstarted scrollto" href="register">Register</a></li>
+        <li><a class="getstarted scrollto" href="login">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
 
 <div class="col-md-6 offset-md-3 mt-5">
   <a  href="/">
