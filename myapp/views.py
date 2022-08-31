@@ -1,5 +1,4 @@
-from distutils.file_util import move_file
-from email.mime import image
+
 from random import randint, random
 from unicodedata import category
 from django.shortcuts import render, redirect
@@ -202,11 +201,3 @@ def viewPost(request, primary_key):
     post = Post.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post})
 
-
-def gallery2(request):
-    categories = Category.objects.all()
-    
-    posts = Post.objects.all()
-    context = {'categories': categories, 'posts': posts}
-    return render(request, 'gallery.html', context) 
-        
