@@ -1,11 +1,11 @@
 {% load static %}
 <head>  
-  
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'stylePrices.css' %}" rel="stylesheet">
     <link href="{% static 'styleLogin.css' %}" rel="stylesheet">
+  
 
-  <!-- Template Main CSS File -->
-
-  </head>
+</head>
 
   <style>
     body {
@@ -22,11 +22,41 @@
     }
     </style>
 
-<section id="hero" class="d-flex align-items-center">
-  <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
-  
-<div class="container">
+
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="about">About</a></li>
+        <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+        {% if user.is_authenticated %}
+          {% for e in extendedUsers %}
+            {% if e.user.username == user.username %}
+              <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+              <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+            {% endif %} 
+            {% endfor %}
+        {% else %}
+        <li><a class="getstarted scrollto" href="register">Register</a></li>
+        <li><a class="getstarted scrollto" href="login">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+
+
+
+<div class="container2">
     <div class="image-wapper" style="background-image: url(https://images.unsplash.com/photo-1578932750294-f5075e85f44a?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80)">
       <h1>Welcome Back</h1>
     </div>
@@ -73,4 +103,5 @@ $(".show-pass").on("click", function () {
   });
 </script>
   
+
   
