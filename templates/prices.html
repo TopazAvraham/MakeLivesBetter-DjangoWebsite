@@ -18,6 +18,34 @@
     </style>
 
 
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <h1 class="logo"><a href="index.html">MakingLivesBetter</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="about">About</a></li>
+        <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+        {% if user.is_authenticated %}
+          {% for e in extendedUsers %}
+            {% if e.user.username == user.username %}
+              <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+              <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+            {% endif %} 
+            {% endfor %}
+        {% else %}
+        <li><a class="getstarted scrollto" href="register">Register</a></li>
+        <li><a class="getstarted scrollto" href="login">Login</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
 
 
   <section id="hero" class="d-flex align-items-center">
@@ -26,8 +54,8 @@
         <div class="col-xl-7 col-lg-9 text-center">
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
-                <h1 style="color:rgb(215, 64, 165);">Welcome {{e.user.username}}</h1>
-                <h2  style="color:rgb(215, 64, 165);">You have <span data-purecounter-start="0" 
+                <h1 style="color:rgb(72, 116, 247);">Hi {{e.user.username}}!</h1>
+                <h2  style="color:rgb(72, 116, 247);">You have <span data-purecounter-start="0" 
                   data-purecounter-end="{{e.coins}}" data-purecounter-duration="1" class="purecounter"></span> coins</h2>
               {% endif %}
             {% endfor %}
@@ -41,15 +69,17 @@
           <div class="col-sm-6 col-md-3">
             <div class="dl">
               <div class="brand">
-                  <h2>{{store1.name}}</h2>
+                <div>
+                  <img src="files/files/mc3.png" height="60" width="120"> <h2>{{store1.name}}</h2> 
+                </div> 
               </div>
               <div class="discount alizarin">
-                {{store1.product}}
-                  
+                  <img src="files/files/mcproduct.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store1.product}}</h2> 
               </div>
               <div class="descr">
-                  <strong>Mei mucius gloriatur reprimique mollis*.</strong> 
-                  Ad sonet perfecto antiopam mei, denique molestie ne has. 
+                  <strong>20 Coins</strong> 
+                  <br>
+                  The coupon can only be used once, and is avaliable in all branches.
               </div>
               <div class="ends">
                   <small>* Conditions and restrictions apply.</small>
@@ -64,17 +94,19 @@
           <div class="col-sm-6 col-md-3">
             <div  class="dl">
               <div class="brand">
-                  <h2>{{store2.name}}</h2>
+                <div>
+                  <img src="files/files/aroma.jpg" height="60" width="120"> <h2>{{store2.name}}</h2> 
+                </div>
               </div>
               <div class="discount emerald">
-                  {{store2.product}}
-                  
+                <img src="https://www.renanim.co.il/wp-content/uploads/2015/04/aroma1.jpg" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store2.product}}</h2>   
               </div>
               <div class="descr">
                   <strong>
-                      Ea per iuvaret ocurreret*. 
+                      10 Coins
                   </strong> 
-                  sit ea detraxit menandri mediocritatem, in mel dicant mentitum. 
+                  <br>
+                  The coupon can only be used once, and is avaliable in all branches.
               </div>
               <div class="ends">
                   <small>
@@ -92,18 +124,19 @@
             <div  class="dl">
               <div class="brand">
                   <h2>
-                  {{store3.name}}
+                    <img src="https://שירות-לקוחות.org.il/wp-content/uploads/2019/11/moses-מוזס-לוגו.jpg" height="50" width="120"> <h2>{{store3.name}}</h2> 
                   </h2>
               </div>
               <div class="discount peter-river">
-              {{store3.product}}
+                <img src="files/files/friess.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store3.product}}</h2>   
                   
               </div>
               <div class="descr">
                   <strong>
-                       Solet consul tractatos ei pro*. 
+                       50 Coins
                   </strong> 
-                  Ei mei quot invidunt explicari, placerat percipitur intellegam.
+                  <br>
+                  The coupon can only be used once, and is avaliable in all branches.
               </div>
               <div class="ends">
                   <small>
@@ -120,18 +153,19 @@
           <div class="col-sm-6 col-md-3">
             <div  class="dl">
               <div class="brand">
-                  <h2>
-                    {{store4.name}}
-                  </h2>
+                <h2>
+                  <img src="https://www.icoupons.co.il/wp-content/uploads/2021/02/קפה-גרג.png" height="50" width="120"> <h2>{{store4.name}}</h2> 
+                </h2>
               </div>
               <div class="discount amethyst">
-                {{store4.product}}
+                <img src="https://i.pinimg.com/736x/32/b5/7c/32b57cc35233007f29b95889e411c9b7--olive-bread-soft-drink.jpg" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store4.product}}</h2>   
               </div>
               <div class="descr">
                   <strong>
-                      Cu aliquip persius alterum duo*. 
+                      100 Coins
                   </strong> 
-                  Possit equidem disputando usu et, sea invidunt scriptorem in. 
+                  <br>
+                  The coupon can only be used once, and is avaliable in all branches.
               </div>
               <div class="ends">
                   <small>

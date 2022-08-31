@@ -14,7 +14,9 @@
       background-color: #33a96a;
     }
   </style>
-  
+
+
+
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
@@ -23,7 +25,7 @@
     <img src='../files/files/Logo.png' height="100px" id="myimage">
   </a>
   <h1>Upload a Post of Good Act you did</h1>
-  <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" >
+  <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}
     <div class="form-group">
@@ -42,13 +44,23 @@
 
     <div class="form-group">
       <label for="exampleInputName">Phone Number</label>
-      <input type="tel" name="phone_number" class="form-control" id="exampleInputName" placeholder="Enter Phone here"  pattern="05[0-9]{8}" required="required">
+      <input type="text" name="phone_number" class="form-control" id="exampleInputName" placeholder="Enter Phone here"  pattern="05[0-9]{8}" required="required">
     </div>
 
-    
-      
- 
-   
+    <div class="form-group">
+      <label>Select a category</label>
+      <select name="category" class="form-control" required>
+          <option value='none'>Select a category...</option>
+
+          {% for category in categories %}
+            {% if category.name != 'All' %}
+              <option value='{{ category.id }}'>{{ category.name }}</option>
+            {% endif %}
+          {% endfor %}
+      </select>
+  </div>
+
+
     <div class="form-group">
       <label for="exampleInputName">Description</label>
       <textarea name='description' name="description" placeholder='Describe your case here' class="form-control" ></textarea>
@@ -67,12 +79,14 @@
       <label for="vehicle1"> I approve the details are correct</label><br>
     </div>
     <hr>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" onclick="myfunction()">Submit</button>
+    <script >
+      function myFunction() {
+      alert('your post has been uploaded')  }
+    </script>
+    
   </form>
 </div>
-
-
-
 
 <!-- Vendor JS Files -->
 <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
@@ -85,3 +99,6 @@
 
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+

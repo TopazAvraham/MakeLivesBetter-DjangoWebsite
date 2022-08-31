@@ -5,6 +5,7 @@ from .models import Stores
 from .models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
+from .models import Category
 
 # Register your models here.
 class UserExtendInLine(admin.StackedInline):
@@ -27,5 +28,5 @@ admin.site.register(Feature)
 admin.site.register(UserExtend)
 admin.site.register(Stores)
 admin.site.register(Post, PostAdmin)
-
+admin.site.register(Category)
 
