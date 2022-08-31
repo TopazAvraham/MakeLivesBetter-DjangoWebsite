@@ -1,5 +1,6 @@
 *.pyc
 *.pyo
+__pycache__/
 *.sqlite3
 db.sqlite3
 myapp/__pycache__/
