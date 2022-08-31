@@ -1,4 +1,5 @@
-
+from distutils.file_util import move_file
+from email.mime import image
 from random import randint, random
 from unicodedata import category
 from django.shortcuts import render, redirect
@@ -66,7 +67,8 @@ def logout(request):
 
 
 def test(request):
-    return render(request, 'test2.html')
+    user=request.user
+    return render(request, 'test2.html', {'user':user})
 
 def prices(request):
     stores = Stores.objects.all()
@@ -120,28 +122,12 @@ def prices(request):
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
      'store2': store2, 'store3': store3, 'store4': store4})
 
-#def upload(request):
-   # if not request.user.is_authenticated:
-    #    return redirect('login')
-
-  #  if request.method == 'POST':
-   #     full_name= request.POST['full_name']
-   #     address= request.POST['address']
-   ##     city= request.POST['city']
-    #    phone_number= request.POST['phone_number']
-   #     image = request.FILES['image']
-    #    description= request.POST['description']
-    #    post = Post.objects.create(full_name=full_name,address=address,city=city
-    #            ,phone_number=phone_number, description=description, is_approved = True, image=image )
-    #    post.save()
-    #    return redirect('index')   
- #   else:
-     #   return render(request, 'upload.html')
         
 
 
 
 def upload(request):
+    extendedUsers = UserExtend.objects.all()
     if not request.user.is_authenticated:
        return redirect('login')
 
@@ -168,7 +154,7 @@ def upload(request):
         post.save()
         return redirect('index')
     else:
-        return render(request, 'upload.html', {'categories': categories})
+        return render(request, 'upload.html', {'categories': categories, 'extendedUsers': extendedUsers})
 
 
 def search(request):
@@ -201,3 +187,11 @@ def viewPost(request, primary_key):
     post = Post.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post})
 
+
+def gallery2(request):
+    categories = Category.objects.all()
+    
+    posts = Post.objects.all()
+    context = {'categories': categories, 'posts': posts}
+    return render(request, 'gallery.html', context) 
+        

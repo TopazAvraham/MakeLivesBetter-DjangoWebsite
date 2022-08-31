@@ -10,7 +10,7 @@
 
   <style>
     body {
-      background-image: url('../files/files/_110219166_gettyimages-1088255202.jpg');
+      background-image: url('files/files/_110219166_gettyimages-1088255202.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
@@ -53,13 +53,17 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
+          {% if user.is_authenticated %}
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
-                <h1 style="color:rgb(72, 116, 247);">Hi {{e.user.username}}!</h1>
-                <h2  style="color:rgb(72, 116, 247);">You have <span data-purecounter-start="0" 
+                <h1 style="color:#16507b;">Hi {{e.user.username}}!</h1>
+                <h2  style="color:#16507b;">You have <span data-purecounter-start="0" 
                   data-purecounter-end="{{e.coins}}" data-purecounter-duration="1" class="purecounter"></span> coins</h2>
               {% endif %}
             {% endfor %}
+          {% else %}
+          <h1 style="color:#16507b;">You need to Login in order to get coupons!</h1>    
+          {% endif %}
         </div>
       </div>
 
@@ -71,11 +75,11 @@
             <div class="dl">
               <div class="brand">
                 <div>
-                  <img src="../files/files/mc3.png" height="60" width="120"> <h2>{{store1.name}}</h2>
+                  <img src="files/files/mc3.png" height="60" width="120"> <h2>{{store1.name}}</h2> 
                 </div> 
               </div>
               <div class="discount alizarin">
-                  <img src="../files/files/mcproduct.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store1.product}}</h2>
+                  <img src="files/files/mcproduct.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store1.product}}</h2> 
               </div>
               <div class="descr">
                   <strong>20 Coins</strong> 
@@ -96,7 +100,7 @@
             <div  class="dl">
               <div class="brand">
                 <div>
-                  <img src="../files/files/aroma.jpg" height="60" width="120"> <h2>{{store2.name}}</h2>
+                  <img src="files/files/aroma.jpg" height="60" width="120"> <h2>{{store2.name}}</h2> 
                 </div>
               </div>
               <div class="discount emerald">
@@ -129,7 +133,7 @@
                   </h2>
               </div>
               <div class="discount peter-river">
-                <img src="../files/files/friess.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store3.product}}</h2>
+                <img src="files/files/friess.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store3.product}}</h2>   
                   
               </div>
               <div class="descr">
