@@ -120,15 +120,17 @@ a:hover {
   display: -ms-flexbox;
   display: flex;
   background-color: var(--box-bg-color);
-  border-radius: 15px;
-  -webkit-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -moz-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -ms-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  -o-box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
-  box-shadow: 3px 3px 6px 0px var(--box-shadow-color);
   overflow: hidden;
   flex-direction: column;
 }
+
+
+.container2 {
+  width: 100%;
+  max-width: 1400px;
+}
+
+
 @media (min-width: 576px) {
   .container {
     flex-direction: row;
@@ -255,3 +257,6 @@ a:hover {
   color: var(--main-color);
   vertical-align: middle;
 }
+
+
+
