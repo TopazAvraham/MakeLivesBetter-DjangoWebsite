@@ -5,10 +5,8 @@ __pycache__/
 db.sqlite3
 myapp/__pycache__/
 myproject/__pycache__/
-<<<<<<< HEAD
 /MakeLivesBetter-Website/db.sqlite3
 myapp/__pycache__/views.cpython-310.pyc
-=======
 *.log
 local_settings.py
 
