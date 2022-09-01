@@ -2,7 +2,7 @@
 <head>  
   
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'newIndex.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
     <link href="{% static 'stylePrices2.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
@@ -55,6 +55,7 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
+          <br>
           {% if user.is_authenticated %}
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
