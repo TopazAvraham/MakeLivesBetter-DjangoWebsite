@@ -12,7 +12,7 @@
     <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
   
     <!-- Template Main CSS File -->
-    <link href="{% static 'newIndex.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
   
   </head>
 
@@ -65,6 +65,7 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
+          <br>
           {% if user.is_authenticated %}
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
@@ -80,8 +81,10 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="gallery" class="btn-get-started scrollto">Search Post</a>
-        <a href="upload" class="btn-get-started scrollto">Upload Post</a>
+        
+        <a href="gallery" class="btn-get-started scrollto">Find volunteer opportunities</a>
+        <a href="upload" class="btn-get-started scrollto">Upload volunteer approval </a>
+        
       </div>
 
       <div class="row icon-boxes">

@@ -9,7 +9,7 @@ from PIL import Image
 # Create your models here.
 class Feature(models.Model):
     name = models.CharField(max_length=100)
-    details= models.CharField(max_length=100)
+    details= models.CharField(max_length=400)
 
 class UserExtend(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,6 +20,7 @@ class UserExtend(models.Model):
 class Stores(models.Model):
     name = models.CharField(max_length=100)
     product= models.CharField(max_length=100)
+    logo = models.ImageField(upload_to = "files/", null=True, blank=True )
 
 
 
