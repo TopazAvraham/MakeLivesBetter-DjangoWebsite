@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
     <!-- CSS only -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="Home.css">
+    
+    <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex.css' %}" rel="stylesheet">
+    
     <style>
         .image-thumbail {
             height: 200px;
@@ -37,7 +37,46 @@
 </style>
 
 
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
+     <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
+      
+      <a href="/" class="logo"><img src="files/files/MLBLogo.png"  ></a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="about">About</a></li>
+          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+          {% if user.is_authenticated %}
+            {% for e in extendedUsers %}
+              {% if e.user.username == user.username %}
+                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+              {% endif %} 
+              {% endfor %}
+          {% else %}
+          <li><a class="getstarted scrollto" href="register">Register</a></li>
+          <li><a class="getstarted scrollto" href="login">Login</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
 
 <body class="m-5">
 

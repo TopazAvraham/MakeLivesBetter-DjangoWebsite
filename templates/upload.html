@@ -2,7 +2,7 @@
 <head>
   
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'stylePrices.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex.css' %}" rel="stylesheet">
     <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
 </head>
 
@@ -17,12 +17,13 @@
   </style>
 
 
+<!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center justify-content-between">
 
-    <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+   <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
+    
+    <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
 
     <nav id="navbar" class="navbar">
       <ul>
@@ -48,10 +49,9 @@
 
 
 <div class="col-md-6 offset-md-3 mt-5">
-  <a  href="/">
-    <img src='../files/files/Logo.png' height="100px" id="myimage">
-  </a>
-  <h1>Upload a Post of Good Act you did</h1>
+  <br>
+  <br>
+  <h2 style="color:#16507b;">Upload a Post of a good act you did!</h2> 
   <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}

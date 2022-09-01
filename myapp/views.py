@@ -16,7 +16,7 @@ from django.http import Http404
 def index(request):
     features = Feature.objects.all()
     extendedUsers = UserExtend.objects.all()
-    return render(request, 'index.html', {'features': features, 'extendedUsers': extendedUsers})
+    return render(request, 'newIndex.html', {'features': features, 'extendedUsers': extendedUsers})
 
 def register(request):
     if request.method == 'POST':
@@ -67,8 +67,9 @@ def logout(request):
 
 
 def test(request):
-    user=request.user
-    return render(request, 'test2.html', {'user':user})
+    features = Feature.objects.all()
+    extendedUsers = UserExtend.objects.all()
+    return render(request, 'newIndex.html', {'features': features, 'extendedUsers': extendedUsers})
 
 def prices(request):
     stores = Stores.objects.all()
@@ -163,6 +164,7 @@ def search(request):
     return render(request, 'search.html', {'posts': posts})
     
 def gallery(request):
+    extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all() 
     category = request.GET.get('category')
 
@@ -170,15 +172,15 @@ def gallery(request):
         if request.GET.get('category') == 'All':
             posts = Post.objects.all() 
             categories = Category.objects.all()
-            context = {'categories': categories, 'posts': posts}
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
         else:
             posts = Post.objects.filter(category__name=category, ) 
-            context = {'categories': categories, 'posts': posts}
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
             return render(request, 'gallery.html', context)
 
     posts = Post.objects.all() 
     categories = Category.objects.all()
-    context = {'categories': categories, 'posts': posts}
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
     return render(request, 'gallery.html', context)
     
 

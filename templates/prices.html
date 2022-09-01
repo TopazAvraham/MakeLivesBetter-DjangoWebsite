@@ -2,7 +2,8 @@
 <head>  
   
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'stylePrices.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex.css' %}" rel="stylesheet">
+    <link href="{% static 'stylePrices2.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
 
@@ -10,7 +11,7 @@
 
   <style>
     body {
-      background-image: url('files/files/_110219166_gettyimages-1088255202.jpg');
+      background-image: url('files/files/screen.png');
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
@@ -19,34 +20,35 @@
 
 
   
-<header id="header" class="fixed-top">
-  <div class="container d-flex align-items-center justify-content-between">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+     <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
+      
+      <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid"></a>
 
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li><a class="nav-link scrollto" href="about">About</a></li>
-        <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
-        {% if user.is_authenticated %}
-          {% for e in extendedUsers %}
-            {% if e.user.username == user.username %}
-              <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
-              <li><a class="getstarted scrollto" href="logout">Logout</a></li>
-            {% endif %} 
-            {% endfor %}
-        {% else %}
-        <li><a class="getstarted scrollto" href="register">Register</a></li>
-        <li><a class="getstarted scrollto" href="login">Login</a></li>
-        {% endif %}
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav><!-- .navbar -->
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="about">About</a></li>
+          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+          {% if user.is_authenticated %}
+            {% for e in extendedUsers %}
+              {% if e.user.username == user.username %}
+                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+              {% endif %} 
+              {% endfor %}
+          {% else %}
+          <li><a class="getstarted scrollto" href="register">Register</a></li>
+          <li><a class="getstarted scrollto" href="login">Login</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
 
-  </div>
-</header><!-- End Header -->
+    </div>
+  </header><!-- End Header -->
 
 
   <section id="hero" class="d-flex align-items-center">
@@ -79,7 +81,7 @@
                 </div> 
               </div>
               <div class="discount alizarin">
-                  <img src="files/files/mcproduct.png" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store1.product}}</h2> 
+                  <img src="files/files/mcproduct2.png" height="90" width="100"> <h2 style="color:rgb(236, 191, 15);">{{store1.product}}</h2> 
               </div>
               <div class="descr">
                   <strong>20 Coins</strong> 
@@ -104,7 +106,7 @@
                 </div>
               </div>
               <div class="discount emerald">
-                <img src="https://www.renanim.co.il/wp-content/uploads/2015/04/aroma1.jpg" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store2.product}}</h2>   
+                <img src="files/files/aromacoffee.png" height="100" width="100"> <h2 style="color:rgb(236, 191, 15);">{{store2.product}}</h2>   
               </div>
               <div class="descr">
                   <strong>
@@ -129,7 +131,7 @@
             <div  class="dl">
               <div class="brand">
                   <h2>
-                    <img src="https://שירות-לקוחות.org.il/wp-content/uploads/2019/11/moses-מוזס-לוגו.jpg" height="50" width="120"> <h2>{{store3.name}}</h2> 
+                    <img src="files/files/moseslogo.png" height="50" width="120"> <h2>{{store3.name}}</h2> 
                   </h2>
               </div>
               <div class="discount peter-river">
@@ -159,11 +161,11 @@
             <div  class="dl">
               <div class="brand">
                 <h2>
-                  <img src="https://www.icoupons.co.il/wp-content/uploads/2021/02/קפה-גרג.png" height="50" width="120"> <h2>{{store4.name}}</h2> 
+                  <img src="https://mail.google.com/mail/u/0?ui=2&ik=fab7aa5479&attid=0.5&permmsgid=msg-f:1742706456748824947&th=182f564a064b1973&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ-GXqDLgJCFkThy5NvCg6SjjYBfWyIZ9N89ZA9KZj-z_uElmz3sAECc_JBNB1aN-OIzlHWi3eINGGQADQN-6r2pB2sna-7A0cGC0la48UVLsHoIiftVjbIZLm0&disp=emb&realattid=ii_l7i0mocp1" height="50" width="120"> <h2>{{store4.name}}</h2> 
                 </h2>
               </div>
               <div class="discount amethyst">
-                <img src="https://i.pinimg.com/736x/32/b5/7c/32b57cc35233007f29b95889e411c9b7--olive-bread-soft-drink.jpg" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store4.product}}</h2>   
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=fab7aa5479&attid=0.4&permmsgid=msg-f:1742706456748824947&th=182f564a064b1973&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ-5N27SfQEANQ1sG5NHZ1nc7znY8Iug5kyAcrEj7S6B6lCGSbu50in7HZuTvtRLKvA9ApnepRDdtnlNQogvI-EE0nfJfbF10nlbqKwGa5HTDJJ1xtQpps8bVIA&disp=emb&realattid=ii_l7i0moci0" height="100" width="120"> <h2 style="color:rgb(236, 191, 15);">{{store4.product}}</h2>   
               </div>
               <div class="descr">
                   <strong>
