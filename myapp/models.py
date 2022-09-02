@@ -10,6 +10,7 @@ from PIL import Image
 class Feature(models.Model):
     name = models.CharField(max_length=100)
     details= models.CharField(max_length=400)
+    icon = models.ImageField(upload_to = "files/", null=True, blank=True)
 
 class UserExtend(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
