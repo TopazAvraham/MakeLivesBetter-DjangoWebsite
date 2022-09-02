@@ -1,11 +1,37 @@
-<h1>
-  {% for coupon in user_coupons %}
-    {{coupon}}
-    <br>
-  {% endfor %}
 
-  {% for date in user_dates %}
-    {{date}}
-    <br>
+{% load static %}
+<head>  
+  
+    <link href="{% static 'styleMyCoupons.css' %}" rel="stylesheet">
+
+</head>
+
+  <style>
+    body {
+      background-image: url('files/files/screen.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    </style>
+
+<table>
+  
+  <thead>
+    <tr>
+      <th>Coupon Code</th>
+      <th>Date</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  {% for coupon, date in coupons_list %}
+  <tbody>
+    <tr>
+      <td><strong>{{coupon}}</strong></td>
+      <td>{{date}}</td>
+      <td>The speed of the show/reveal</td>
+    </tr>
   {% endfor %}
-</h1> 
+    
+</table>

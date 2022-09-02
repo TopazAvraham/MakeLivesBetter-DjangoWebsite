@@ -11,6 +11,7 @@ from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from datetime import datetime
+from random import random
 
 
 # Create your views here.
@@ -140,9 +141,6 @@ def prices(request):
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
      'store2': store2, 'store3': store3, 'store4': store4})
 
-        
-
-
 
 def upload(request):
     extendedUsers = UserExtend.objects.all()
@@ -174,11 +172,6 @@ def upload(request):
     else:
         return render(request, 'upload.html', {'categories': categories, 'extendedUsers': extendedUsers})
 
-
-def search(request):
-    posts = Post.objects.all()
-    
-    return render(request, 'search.html', {'posts': posts})
     
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
@@ -201,7 +194,6 @@ def gallery(request):
     return render(request, 'gallery.html', context)
     
 
-
 def viewPost(request, primary_key):
     post = Post.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post})
@@ -216,25 +208,15 @@ def gallery2(request):
 
 
 def myCoupons(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
-    features = Feature.objects.all()
     extendedUsers = UserExtend.objects.all()
     user = request.user
     for e in extendedUsers:
         if e.user.username == user.username:
             extended = e
-   
-    extended.add_coupon({'123':123})
-    extended.add_coupon({'456':123})
-    now=datetime.now()
-    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-    extended.add_date({date_time:123})
-    extended.save()
-    user_coupons = extended.get_coupons_list()
-    user_dates = extended.get_date_list()
-    
+    coupons_list = zip(extended.get_coupons_list(),extended.get_date_list())
+    context = {
+            'coupons_list': coupons_list,
+        }
+    return render(request, 'mycoupons.html', context)
 
-    return render(request, 'mycoupons.html', {'features': features, 'extendedUsers': extendedUsers,
-     'user_coupons': user_coupons, 'user_dates': user_dates})
+
