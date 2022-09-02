@@ -1,27 +1,13 @@
 from distutils.file_util import move_file
 from email.mime import image
-from random import randint, random
-from unicodedata import category
+from random import randint
+
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .models import Feature, UserExtend, Stores, Post, Category
-from django.db.models import F
-from django.shortcuts import get_object_or_404
-from django.http import Http404
 from datetime import datetime
-from random import random
-
-
-
-import json
-
-from flask import request
-
-from flask import Flask, render_template
-
-app = Flask(__name__)
 
 
 # Create your views here.
@@ -202,13 +188,13 @@ def gallery(request):
     return render(request, 'gallery.html', context)
 
 def viewPost(request, primary_key):
+    extendedUsers = UserExtend.objects.all()
     post = Post.objects.get(id=primary_key)
-    return render(request, 'photo.html', {'post': post})
+    return render(request, 'photo.html', {'post': post, 'extendedUsers': extendedUsers})
 
 
 def gallery2(request):
     categories = Category.objects.all()
-    
     posts = Post.objects.all()
     context = {'categories': categories, 'posts': posts}
     return render(request, 'gallery.html', context) 
