@@ -10,6 +10,8 @@ from .models import Feature, UserExtend, Stores, Post, Category
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.http import Http404
+from datetime import datetime
+from random import random
 
 
 # Create your views here.
@@ -72,7 +74,23 @@ def logout(request):
 def test(request):
     features = Feature.objects.all()
     extendedUsers = UserExtend.objects.all()
-    return render(request, 'newIndex.html', {'features': features, 'extendedUsers': extendedUsers})
+    user = request.user
+    for e in extendedUsers:
+        if e.user.username == user.username:
+            extended = e
+   
+    extended.add_coupon({'123':123})
+    extended.add_coupon({'456':123})
+    now=datetime.now()
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    extended.add_date({date_time:123})
+    extended.save()
+    user_coupons = extended.get_coupons_list()
+    user_dates = extended.get_date_list()
+    
+
+    return render(request, 'mycoupons.html', {'features': features, 'extendedUsers': extendedUsers,
+     'user_coupons': user_coupons, 'user_dates': user_dates})
 
 
 def prices(request):
@@ -151,7 +169,6 @@ def upload(request, primary_key):
 
     return render(request, 'upload.html', {'categories': categories})
 
-
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
@@ -172,7 +189,29 @@ def gallery(request):
     context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
     return render(request, 'gallery.html', context)
 
-
 def viewPost(request, primary_key):
     post = Post.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post})
+
+
+def gallery2(request):
+    categories = Category.objects.all()
+    
+    posts = Post.objects.all()
+    context = {'categories': categories, 'posts': posts}
+    return render(request, 'gallery.html', context) 
+
+
+def myCoupons(request):
+    extendedUsers = UserExtend.objects.all()
+    user = request.user
+    for e in extendedUsers:
+        if e.user.username == user.username:
+            extended = e
+    coupons_list = zip(extended.get_coupons_list(),extended.get_date_list())
+    context = {
+            'coupons_list': coupons_list,
+        }
+    return render(request, 'mycoupons.html', context)
+
+

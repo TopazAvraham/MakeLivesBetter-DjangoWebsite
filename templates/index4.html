@@ -101,9 +101,8 @@
            
             <h4 class="title"><a href="">{{feature.name}}</a></h4>
             <p class="description">{{feature.details}}</p>
-            {% if feature.name == 'Quick' %}
-            <p>this feature says our site is quick</p>
-          {% endif %}
+            <img src="{{feature.icon.url}}" />
+            
           </div>
         </div>
         {% endfor %}

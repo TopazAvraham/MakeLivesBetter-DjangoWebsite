@@ -52,6 +52,7 @@
 
 <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <<<<<<< HEAD
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-9 text-center">
                 <br>
@@ -202,99 +203,318 @@
                                 </div>
                         </div>
                     </div>
+                    =======
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-9 text-center">
+                            <br>
+                            {% if user.is_authenticated %}
+                                {% for e in extendedUsers %}
+                                    {% if e.user.username == user.username %}
+                                        <h1 style="color:#16507b;">Hi {{ e.user.username }}!</h1>
+                                        <h2 style="color:#16507b;">You have <span data-purecounter-start="0"
+                                                                                  data-purecounter-end="{{ e.coins }}"
+                                                                                  data-purecounter-duration="1"
+                                                                                  class="purecounter"></span> coins</h2>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <h1 style="color:#16507b;">You need to Login in order to get coupons!</h1>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                    <section id="labels">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="dl">
+                                        <div class="brand">
+                                            <div>
+                                                <img src="{{ store1.logo.url }}" height="70" width="110">
+                                            </div>
+                                        </div>
+                                        <div class="discount alizarin">
+                                            <img src="files/files/mcproduct2.png" height="90" width="100">
+                                            <h2 style="color:rgb(236, 191, 15);">{{ store1.product }}</h2>
+                                        </div>
+                                        <div class="descr">
+                                            <strong>20 Coins</strong>
+                                            <br>
+                                            The coupon can only be used once, and is avaliable in all branches.
+                                        </div>
+                                        <div class="ends">
+                                            <small>* Conditions and restrictions apply.</small>
+                                        </div>
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <div class="coupon midnight-blue">
+                                                <input type="submit" class="btn" value="Get Coupon!" name="btn1"
+                                                       onclick="myFunction11()"/>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="dl">
+                                        <div class="brand">
+                                            <div>
+                                                <img src="{{ store2.logo.url }}" height="60" width="120">
+                                            </div>
+                                        </div>
+
+                    </section>
+
+
+                    <script type="text/javascript">
+                        function myFunction11() {
+                            var x = Math.floor((Math.random() * 10000000000) + 1);
+                            var a = "{{extended.coins}}";
+                            let bool = "{{user.is_authenticated}}";
+                            var b = parseInt(a);
+                            if (b - 20 >= 0) {
+                                alert('Your coupon code is ' + x);
+                            } else {
+                                if (bool === 'True')
+                                    alert('You don\'t have enough coins');
+                                else
+                                    alert("You need to login to get this coupon");
+
+                            }
+                        }
+
+                    </script>
+
+
+                    <script type="text/javascript">
+                        function myFunction12() {
+                            var x = Math.floor((Math.random() * 10000000000) + 1);
+                            var a = "{{extended.coins}}";
+                            let bool = "{{user.is_authenticated}}";
+                            var b = parseInt(a);
+                            if (b - 10 >= 0) {
+                                alert('Your coupon code is ' + x);
+                            } else {
+                                if (bool === 'True')
+                                    alert('You don\'t have enough coins');
+                                else
+                                    alert("You need to login to get this coupon");
+
+                            }
+                        }
+
+                    </script>
+
+
+                    <script type="text/javascript">
+                        function myFunction13() {
+                            var x = Math.floor((Math.random() * 10000000000) + 1);
+                            var a = "{{extended.coins}}";
+                            let bool = "{{user.is_authenticated}}";
+                            var b = parseInt(a);
+                            if (b - 50 >= 0) {
+                                alert('Your coupon code is ' + x);
+                            } else {
+                                if (bool === 'True')
+                                    alert('You don\'t have enough coins');
+                                else
+                                    alert("You need to login to get this coupon");
+
+                            }
+                        }
+
+                    </script>
+
+
+                    <script type="text/javascript">
+                        function myFunction14() {
+                            var x = Math.floor((Math.random() * 10000000000) + 1);
+                            var a = "{{extended.coins}}";
+                            let bool = "{{user.is_authenticated}}";
+                            var b = parseInt(a);
+                            if (b - 100 >= 0) {
+                                alert('Your coupon code is ' + x);
+                            } else {
+                                if (bool === 'True')
+                                    alert('You don\'t have enough coins');
+                                else
+                                    alert("You need to login to get this coupon");
+
+                            }
+                        }
+
+                    </script>
+
+
+                    <!-- Vendor JS Files -->
+                    <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+                    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+                    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+                    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+                    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+                    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+                    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+                    <!-- Template Main JS File -->
+                    <script src="{% static 'assets/js/main.js' %}"></script>
+                    =======
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="dl">
+                        <div class="brand">
+                            <h2>
+                                <img src="{{ store3.logo.url }}" height="52" width="170">
+                            </h2>
+                        </div>
+                        <div class="discount peter-river">
+                            <img src="files/files/friess.png" height="100" width="120">
+                            <h2 style="color:rgb(236, 191, 15);">{{ store3.product }}</h2>
+
+                        </div>
+                        <div class="descr">
+                            <strong>
+                                50 Coins
+                            </strong>
+                            <br>
+                            The coupon can only be used once, and is avaliable in all branches.
+                        </div>
+                        <div class="ends">
+                            <small>
+                                * Conditions and restrictions apply.
+                            </small>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="coupon midnight-blue">
+                                <input type="submit" class="btn" value="Get Coupon!" name="btn3"
+                                       onclick="myFunction13()"/>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="dl">
+                        <div class="brand">
+                            <h2>
+                                <img src="{{ store4.logo.url }}" height="58" width="90">
+                            </h2>
+                        </div>
+                        <div class="discount amethyst">
+                            <img src="files/files/breakfast.jpg" height="100" width="120">
+                            <h2 style="color:rgb(236, 191, 15);">{{ store4.product }}</h2>
+                        </div>
+                        <div class="descr">
+                            <strong>
+                                100 Coins
+                            </strong>
+                            <br>
+                            The coupon can only be used once, and is avaliable in all branches.
+                        </div>
+                        <div class="ends">
+                            <small>
+                                * Conditions and restrictions apply.
+                            </small>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="coupon midnight-blue">
+                                <input type="submit" class="btn" value="Get Coupon!" name="btn4"
+                                       onclick="myFunction14()"/>
+                            </div>
+                    </div>
                 </div>
             </div>
-        </section>
+    </div>
+</section>
 
 
-        <script type="text/javascript">
-            function myFunction11() {
-                var x = Math.floor((Math.random() * 10000000000) + 1);
-                var a = "{{extended.coins}}";
-                let bool = "{{user.is_authenticated}}";
-                var b = parseInt(a);
-                if (b - 20 >= 0) {
-                    alert('Your coupon code is ' + x);
-                } else {
-                    if (bool === 'True')
-                        alert('You don\'t have enough coins');
-                    else
-                        alert("You need to login to get this coupon");
+<script type="text/javascript">
+    function myFunction11() {
+        var x = Math.floor((Math.random() * 10000000000) + 1);
+        var a = "{{extended.coins}}";
+        let bool = "{{user.is_authenticated}}";
+        var b = parseInt(a);
+        if (b - 20 >= 0) {
+            alert('Your coupon code is ' + x);
+        } else {
+            if (bool === 'True')
+                alert('You don\'t have enough coins');
+            else
+                alert("You need to login to get this coupon");
 
-                }
-            }
+        }
+    }
 
-        </script>
-
-
-        <script type="text/javascript">
-            function myFunction12() {
-                var x = Math.floor((Math.random() * 10000000000) + 1);
-                var a = "{{extended.coins}}";
-                let bool = "{{user.is_authenticated}}";
-                var b = parseInt(a);
-                if (b - 10 >= 0) {
-                    alert('Your coupon code is ' + x);
-                } else {
-                    if (bool === 'True')
-                        alert('You don\'t have enough coins');
-                    else
-                        alert("You need to login to get this coupon");
-
-                }
-            }
-
-        </script>
+</script>
 
 
-        <script type="text/javascript">
-            function myFunction13() {
-                var x = Math.floor((Math.random() * 10000000000) + 1);
-                var a = "{{extended.coins}}";
-                let bool = "{{user.is_authenticated}}";
-                var b = parseInt(a);
-                if (b - 50 >= 0) {
-                    alert('Your coupon code is ' + x);
-                } else {
-                    if (bool === 'True')
-                        alert('You don\'t have enough coins');
-                    else
-                        alert("You need to login to get this coupon");
+<script type="text/javascript">
+    function myFunction12() {
+        var x = Math.floor((Math.random() * 10000000000) + 1);
+        var a = "{{extended.coins}}";
+        let bool = "{{user.is_authenticated}}";
+        var b = parseInt(a);
+        if (b - 10 >= 0) {
+            alert('Your coupon code is ' + x);
+        } else {
+            if (bool === 'True')
+                alert('You don\'t have enough coins');
+            else
+                alert("You need to login to get this coupon");
 
-                }
-            }
+        }
+    }
 
-        </script>
-
-
-        <script type="text/javascript">
-            function myFunction14() {
-                var x = Math.floor((Math.random() * 10000000000) + 1);
-                var a = "{{extended.coins}}";
-                let bool = "{{user.is_authenticated}}";
-                var b = parseInt(a);
-                if (b - 100 >= 0) {
-                    alert('Your coupon code is ' + x);
-                } else {
-                    if (bool === 'True')
-                        alert('You don\'t have enough coins');
-                    else
-                        alert("You need to login to get this coupon");
-
-                }
-            }
-
-        </script>
+</script>
 
 
-        <!-- Vendor JS Files -->
-        <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-        <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
-        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-        <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-        <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-        <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-        <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script type="text/javascript">
+    function myFunction13() {
+        var x = Math.floor((Math.random() * 10000000000) + 1);
+        var a = "{{extended.coins}}";
+        let bool = "{{user.is_authenticated}}";
+        var b = parseInt(a);
+        if (b - 50 >= 0) {
+            alert('Your coupon code is ' + x);
+        } else {
+            if (bool === 'True')
+                alert('You don\'t have enough coins');
+            else
+                alert("You need to login to get this coupon");
 
-        <!-- Template Main JS File -->
-        <script src="{% static 'assets/js/main.js' %}"></script>
+        }
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    function myFunction14() {
+        var x = Math.floor((Math.random() * 10000000000) + 1);
+        var a = "{{extended.coins}}";
+        let bool = "{{user.is_authenticated}}";
+        var b = parseInt(a);
+        if (b - 100 >= 0) {
+            alert('Your coupon code is ' + x);
+        } else {
+            if (bool === 'True')
+                alert('You don\'t have enough coins');
+            else
+                alert("You need to login to get this coupon");
+
+        }
+    }
+
+</script>
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+

@@ -6,6 +6,7 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
+
     path('', views.index, name='index'),
 
     path('register', views.register, name='register'),
@@ -14,10 +15,7 @@ urlpatterns = [
     path('prices', views.prices, name='prices'),
     path('test2', views.test, name='test'),
     path('upload/<str:primary_key>/', views.upload, name='upload'),
-    path('upload', views.upload, name='upload'),
-
     path('gallery', views.gallery, name='gallery'),
     path('photo/<str:primary_key>/', views.viewPost, name='photo'),
-
-
+    path('mycoupons', views.myCoupons, name='mycoupons'),
 ]

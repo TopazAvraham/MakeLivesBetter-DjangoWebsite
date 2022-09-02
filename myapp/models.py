@@ -3,21 +3,46 @@ from pydoc import describe
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
-from PIL import Image
+
 
 
 # Create your models here.
 class Feature(models.Model):
     name = models.CharField(max_length=100)
-    details = models.CharField(max_length=400)
+
+    details= models.CharField(max_length=400)
+    icon = models.ImageField(upload_to = "files/", null=True, blank=True)
+
 
 
 class UserExtend(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     coins = models.IntegerField()
-    coupons = models
+    coupons_list = models.CharField(max_length=1000000, null=True, blank=True)
+    coupons_counter = models.IntegerField(default=0)
+    date_list = models.CharField(max_length=1000000, null=True, blank=True)
 
+    def add_coupon(self,data):
+        if self.coupons_list is None:
+            self.coupons_list = '.'.join(map(str, data))
+            self.coupons_counter = 1
+        else:
+            self.coupons_list +=  ('.' + '.'.join(map(str, data)))
+            self.coupons_counter = self.coupons_counter +1
+
+    def get_coupons_list(self):
+        return list(map(str, self.coupons_list.split('.')))
+
+    def add_date(self,data):
+        if self.date_list is None:
+            self.date_list = '.'.join(map(str, data))
+        else:
+            self.date_list +=  ('.' + '.'.join(map(str, data)))
+
+    def get_date_list(self):
+        return list(map(str, self.date_list.split('.')))
+
+    
 
 class Stores(models.Model):
     name = models.CharField(max_length=100)
@@ -30,8 +55,6 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-    # user = models.ForeignKey(
-    #   User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100, null=False, blank=False)
 
     def __str__(self):
@@ -52,3 +75,4 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
