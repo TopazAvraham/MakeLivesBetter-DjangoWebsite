@@ -14,6 +14,16 @@ from datetime import datetime
 from random import random
 
 
+
+import json
+
+from flask import request
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
 # Create your views here.
 def index(request):
     features = Feature.objects.all()
@@ -39,9 +49,9 @@ def register(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 extendedUser = UserExtend()
                 extendedUser.user = user
-                extendedUser.coins = randint(0, 9)
+                extendedUser.coins = 0
                 extendedUser.save()
-                return redirect('index')
+                return redirect('/')
         else:
             messages.info(request, 'Passwords don\'t match')
             return redirect('register')
@@ -72,25 +82,8 @@ def logout(request):
 
 
 def test(request):
-    features = Feature.objects.all()
-    extendedUsers = UserExtend.objects.all()
-    user = request.user
-    for e in extendedUsers:
-        if e.user.username == user.username:
-            extended = e
-   
-    extended.add_coupon({'123':123})
-    extended.add_coupon({'456':123})
-    now=datetime.now()
-    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-    extended.add_date({date_time:123})
-    extended.save()
-    user_coupons = extended.get_coupons_list()
-    user_dates = extended.get_date_list()
-    
 
-    return render(request, 'mycoupons.html', {'features': features, 'extendedUsers': extendedUsers,
-     'user_coupons': user_coupons, 'user_dates': user_dates})
+    return render(request, 'mycoupons.html', {'features': features, 'extendedUsers': extendedUsers,})
 
 
 def prices(request):
@@ -108,34 +101,52 @@ def prices(request):
         for e in extendedUsers:
             if e.user.username == check:
                 extended = e
+    
+    now=datetime.now()
+    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+    coupon_code = randint(1000000000, 9999999999)
+    if request.method == 'POST':
+        userInput = request.POST.get("userInput")
 
-    if request.POST.get('btn1') and connected:
+    if request.POST.get('btn1') and connected and userInput == 'True':
         if extended.coins - 20 >= 0:
             extended.coins = extended.coins - 20
+            extended.add_coupon({coupon_code:123})
+            extended.add_date({date_time:123})
+            extended.add_store({'1':123})
             extended.save()
         return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
-    if request.POST.get('btn2') and connected:
+    if request.POST.get('btn2') and connected and userInput == 'True':
         if extended.coins - 10 >= 0:
             extended.coins = extended.coins - 10
+            extended.add_coupon({coupon_code:123})
+            extended.add_date({date_time:123})
+            extended.add_store({'2':123})
             extended.save()
         return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
-    if request.POST.get('btn3') and connected:
+    if request.POST.get('btn3') and connected and userInput == 'True':
         if extended.coins - 50 >= 0:
             extended.coins = extended.coins - 50
+            extended.add_coupon({coupon_code:123})
+            extended.add_date({date_time:123})
+            extended.add_store({'3':123})
             extended.save()
         return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
-    if request.POST.get('btn4') and connected:
+    if request.POST.get('btn4') and connected and userInput == 'True':
         if extended.coins - 100 >= 0:
             extended.coins = extended.coins - 100
+            extended.add_coupon({coupon_code:123})
+            extended.add_date({date_time:123})
+            extended.add_store({'4':123})
             extended.save()
         return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
