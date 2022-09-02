@@ -18,12 +18,13 @@ def index(request):
     extendedUsers = UserExtend.objects.all()
     return render(request, 'newIndex.html', {'features': features, 'extendedUsers': extendedUsers})
 
+
 def register(request):
     if request.method == 'POST':
-        username= request.POST['username']
-        email= request.POST['email']
-        password= request.POST['password']
-        password2= request.POST['password2']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password2 = request.POST['password2']
 
         if password == password2:
             if User.objects.filter(email=email).exists():
@@ -36,7 +37,7 @@ def register(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 extendedUser = UserExtend()
                 extendedUser.user = user
-                extendedUser.coins = randint(0,9)
+                extendedUser.coins = randint(0, 9)
                 extendedUser.save()
                 return redirect('index')
         else:
@@ -45,13 +46,14 @@ def register(request):
     else:
         return render(request, 'register.html')
 
+
 def login(request):
     if request.method == 'POST':
-        username= request.POST['username']
-        password= request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
 
-        user = auth.authenticate(username = username, password = password)
-        
+        user = auth.authenticate(username=username, password=password)
+
         if user is not None:
             auth.login(request, user)
             return redirect('/')
@@ -60,6 +62,7 @@ def login(request):
             return redirect('login')
     else:
         return render(request, 'login.html')
+
 
 def logout(request):
     auth.logout(request)
@@ -70,6 +73,7 @@ def test(request):
     features = Feature.objects.all()
     extendedUsers = UserExtend.objects.all()
     return render(request, 'newIndex.html', {'features': features, 'extendedUsers': extendedUsers})
+
 
 def prices(request):
     stores = Stores.objects.all()
@@ -86,114 +90,89 @@ def prices(request):
         for e in extendedUsers:
             if e.user.username == check:
                 extended = e
-        
+
     if request.POST.get('btn1') and connected:
         if extended.coins - 20 >= 0:
             extended.coins = extended.coins - 20
             extended.save()
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
-        
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
+
     if request.POST.get('btn2') and connected:
         if extended.coins - 10 >= 0:
             extended.coins = extended.coins - 10
             extended.save()
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
-    
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
+
     if request.POST.get('btn3') and connected:
         if extended.coins - 50 >= 0:
             extended.coins = extended.coins - 50
             extended.save()
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
 
     if request.POST.get('btn4') and connected:
         if extended.coins - 100 >= 0:
             extended.coins = extended.coins - 100
             extended.save()
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-         'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
-    
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
+
     if request.user.is_authenticated:
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-     'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended})
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
 
-    
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-     'store2': store2, 'store3': store3, 'store4': store4})
-
-        
+                                           'store2': store2, 'store3': store3, 'store4': store4})
 
 
-
-def upload(request):
-    extendedUsers = UserExtend.objects.all()
+def upload(request, primary_key):
     if not request.user.is_authenticated:
-       return redirect('login')
+        return redirect('login')
+    post = Post.objects.get(id=primary_key)
 
-    
-    categories = Category.objects.all()
     if request.method == 'POST':
+        extendedUsers = UserExtend.objects.all()
+        check = request.user.username
+        for e in extendedUsers:
+            if e.user.username == check:
+                extended = e
+        extended.coins += post.value
+        extended.save()
+        return redirect('/')
 
-        data = request.POST
+    categories = Category.objects.all()
 
-        if data['category'] != 'none':
-            category = Category.objects.get(id=data['category'])
-        
-        
-        full_name = request.POST['full_name']
-        address = request.POST['address']
-        city = request.POST['city']
-        phone_number = request.POST['phone_number']
-        image = request.FILES['image']
-        description = request.POST['description']
-        post = Post.objects.create(category=category,
-                                   image=image, full_name=full_name, address=address, city=city,
-                                   phone_number=phone_number, is_approved=True, description=description)
-
-        post.save()
-        return redirect('index')
-    else:
-        return render(request, 'upload.html', {'categories': categories, 'extendedUsers': extendedUsers})
+    return render(request, 'upload.html', {'categories': categories})
 
 
-def search(request):
-    posts = Post.objects.all()
-    
-    return render(request, 'search.html', {'posts': posts})
-    
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
-    categories = Category.objects.all() 
+    categories = Category.objects.all()
     category = request.GET.get('category')
 
     if category != None:
         if request.GET.get('category') == 'All':
-            posts = Post.objects.all() 
+            posts = Post.objects.all()
             categories = Category.objects.all()
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
         else:
-            posts = Post.objects.filter(category__name=category, ) 
+            posts = Post.objects.filter(category__name=category, )
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
             return render(request, 'gallery.html', context)
 
-    posts = Post.objects.all() 
+    posts = Post.objects.all()
     categories = Category.objects.all()
     context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
     return render(request, 'gallery.html', context)
-    
 
 
 def viewPost(request, primary_key):
     post = Post.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post})
-
-
-def gallery2(request):
-    categories = Category.objects.all()
-    
-    posts = Post.objects.all()
-    context = {'categories': categories, 'posts': posts}
-    return render(request, 'gallery.html', context) 
-        

@@ -8,7 +8,7 @@
 
   <style>
     body {
-      background-image: url('files/files/screen.png');
+      background-image: url('/files/files/screen.png');
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
@@ -23,7 +23,7 @@
 
    <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
     
-    <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
+    <a href="/" class="logo"><img src="/files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
 
     <nav id="navbar" class="navbar">
       <ul>
@@ -52,7 +52,7 @@
   <br>
   <br>
   <h2 style="color:#16507b;">Upload a Post of a good deed you did!</h2> 
-  <form accept-charset="UTF-8"  method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
+  <form accept-charset="UTF-8"   method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}
     <div class="form-group">
@@ -107,11 +107,10 @@
     </div>
     <hr>
     <button type="submit" class="btn btn-primary" onclick="myfunction()">Submit</button>
-    <script >
+      <script >
       function myFunction() {
       alert('your post has been uploaded')  }
     </script>
-    
   </form>
 </div>
 
