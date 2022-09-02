@@ -15,7 +15,8 @@ urlpatterns = [
     path('test2', views.test, name = 'test'),
     path('upload', views.upload, name ='upload'),
     path('gallery', views.gallery, name='gallery'),
-    path('photo/<str:primary_key>/', views.viewPost, name='photo')
+    path('photo/<str:primary_key>/', views.viewPost, name='photo'),
+    path('mycoupons', views.myCoupons, name='mycoupons')
 ]
 
 
