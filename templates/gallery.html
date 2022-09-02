@@ -9,10 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery</title>
     <!-- CSS only -->
-    
+
     <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
     <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
-    
+
     <style>
         .image-thumbail {
             height: 200px;
@@ -29,10 +29,10 @@
 </head>
 <style>
     body {
-      background-image: url('../files/files/screen.png');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
+        background-image: url('../files/files/screen.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
     }
 </style>
 
@@ -41,33 +41,31 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-     <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
-      
-      <a href="/" class="logo"><img src="files/files/MLBLogo.png"  ></a>
+        <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="about">About</a></li>
-          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
-          {% if user.is_authenticated %}
-            {% for e in extendedUsers %}
-              {% if e.user.username == user.username %}
-                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
-                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
-              {% endif %} 
-              {% endfor %}
-          {% else %}
-          <li><a class="getstarted scrollto" href="register">Register</a></li>
-          <li><a class="getstarted scrollto" href="login">Login</a></li>
-          {% endif %}
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+        <a href="/" class="logo"><img src="/files/files/MLBLogo.png"></a>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="about">About</a></li>
+                <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+                {% if user.is_authenticated %}
+                    {% for e in extendedUsers %}
+                        {% if e.user.username == user.username %}
+                            <li><a class="nav-link scrollto" href="prices">Coins: {{ e.coins }}</a></li>
+                            <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <li><a class="getstarted scrollto" href="register">Register</a></li>
+                    <li><a class="getstarted scrollto" href="login">Login</a></li>
+                {% endif %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
-
-
+</header><!-- End Header -->
 
 
 <br><br><br>
@@ -104,12 +102,16 @@
                             <div class="card-body">
                                 <br><small>Category : {{ post.category.name }}</small><br>
                                 <small>Full Name: {{ post.full_name }}</small><br>
-                                <small>City:{{ post.city}}</small><br>
+                                <small>City:{{ post.city }}</small><br>
                                 <small>Address: {{ post.address }}</small><br>
                                 <small>Phone Number: {{ post.phone_number }}</small><br>
-                                
+                                <small>Post Coins : {{ post.value }} </small>
+
                             </div>
-                            <a href="{% url 'photo' post.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                            <!-- go to photo with the id of the current post-->
+                            <a href="{% url 'photo' post.id %}" class="btn btn-outline-dark btn-sm m-1">
+                                <b><i>Get more details</i></b>
+                            </a>
                         </div>
                     </div>
                 {% empty %}

@@ -25,6 +25,10 @@
                 <small>City:{{ post.city }}</small><br>
                 <small>Address: {{ post.address }}</small><br>
                 <small>Phone Number: {{ post.phone_number }}</small><br>
+                <small> Post value is : {{ post.value }} </small>
+                            <a href="{% url 'upload' post.id  %}" class="btn btn-outline-dark btn-sm m-1">
+                                <b><i>Participant</i></b>
+                            </a>
             </div>
         </div>
     </div>
