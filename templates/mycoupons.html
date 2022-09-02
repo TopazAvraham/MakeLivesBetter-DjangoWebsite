@@ -2,7 +2,7 @@
 {% load static %}
 <head>  
   
-    <link href="{% static 'styleMyCoupons.css' %}" rel="stylesheet">
+    <link href="{% static 'styleMyCoupons2.css' %}" rel="stylesheet">
 
 </head>
 
@@ -21,7 +21,8 @@
     <tr>
       <th>Coupon Code</th>
       <th>Date</th>
-      <th>Description</th>
+      <th>Store</th>
+      <th>Product</th>
     </tr>
   </thead>
 
@@ -31,6 +32,7 @@
       <td><strong>{{coupon}}</strong></td>
       <td>{{date}}</td>
       <td>The speed of the show/reveal</td>
+      <td></td>
     </tr>
   {% endfor %}
     
