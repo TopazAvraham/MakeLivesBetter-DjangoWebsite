@@ -21,6 +21,7 @@ class UserExtend(models.Model):
     coupons_list = models.CharField(max_length=1000000, null=True, blank=True)
     coupons_counter = models.IntegerField(default=0)
     date_list = models.CharField(max_length=1000000, null=True, blank=True)
+    store_list = models.CharField(max_length=1000000, null=True, blank=True)
 
     def add_coupon(self,data):
         if self.coupons_list is None:
@@ -42,12 +43,22 @@ class UserExtend(models.Model):
     def get_date_list(self):
         return list(map(str, self.date_list.split('.')))
 
+    def add_store(self,data):
+        if self.store_list is None:
+            self.store_list = '.'.join(map(str, data))
+        else:
+            self.store_list +=  ('.' + '.'.join(map(str, data)))
+
+    def get_store_list(self):
+        return list(map(str, self.store_list.split('.')))
     
 
 class Stores(models.Model):
     name = models.CharField(max_length=100)
     product = models.CharField(max_length=100)
     logo = models.ImageField(upload_to="files/", null=True, blank=True)
+    id_number = models.CharField(blank=True,default= 0, max_length=100)
+    product_photo = models.ImageField(upload_to = "files/", null=True, blank=True)
 
 
 class Category(models.Model):

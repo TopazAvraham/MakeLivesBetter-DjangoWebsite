@@ -113,7 +113,7 @@ def prices(request):
         if extended.coins - 20 >= 0:
             extended.coins = extended.coins - 20
             extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
@@ -121,7 +121,7 @@ def prices(request):
         if extended.coins - 10 >= 0:
             extended.coins = extended.coins - 10
             extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
@@ -129,7 +129,7 @@ def prices(request):
         if extended.coins - 50 >= 0:
             extended.coins = extended.coins - 50
             extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
@@ -137,37 +137,38 @@ def prices(request):
         if extended.coins - 100 >= 0:
             extended.coins = extended.coins - 100
             extended.save()
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
     if request.user.is_authenticated:
-        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                'store2': store2, 'store3': store3, 'store4': store4,
                                                'extended': extended})
 
-    return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+    return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                            'store2': store2, 'store3': store3, 'store4': store4})
 
 
 def upload(request, primary_key):
-    if not request.user.is_authenticated:
-        return redirect('login')
     post = Post.objects.get(id=primary_key)
+    user = request.user.username
+    extendedUsers = UserExtend.objects.all()
+    for e in extendedUsers:
+        if e.user.username == user:
+            extended = e
 
     if request.method == 'POST':
         extendedUsers = UserExtend.objects.all()
-        check = request.user.username
         for e in extendedUsers:
-            if e.user.username == check:
+            if e.user.username == user:
                 extended = e
         extended.coins += post.value
         extended.save()
         return redirect('/')
 
-    categories = Category.objects.all()
-
-    return render(request, 'upload.html', {'categories': categories})
+   
+    return render(request, 'upload.html', {'extended':extended})
 
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
@@ -203,15 +204,20 @@ def gallery2(request):
 
 
 def myCoupons(request):
+    stores = Stores.objects.all()
+    list_stores = list(stores)
+    store1 = list_stores[0]
+    store2 = list_stores[1]
+    store3 = list_stores[2]
+    store4 = list_stores[3]
     extendedUsers = UserExtend.objects.all()
     user = request.user
     for e in extendedUsers:
         if e.user.username == user.username:
             extended = e
-    coupons_list = zip(extended.get_coupons_list(),extended.get_date_list())
-    context = {
-            'coupons_list': coupons_list,
-        }
-    return render(request, 'mycoupons.html', context)
+    coupons_list = zip(extended.get_coupons_list(),extended.get_date_list(), extended.get_store_list())
+    
+    context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
+    return render(request, 'mycoupons.html', context,)
 
 

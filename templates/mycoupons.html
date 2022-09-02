@@ -1,8 +1,10 @@
 
 {% load static %}
 <head>  
-  
-    <link href="{% static 'styleMyCoupons2.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
+    <link href="{% static 'styleMyCoupons5.css' %}" rel="stylesheet">
+
 
 </head>
 
@@ -15,25 +17,78 @@
     }
     </style>
 
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
+
+   <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
+    
+    <a href="/" class="logo"><img src="/files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto" href="../../about">About</a></li>
+        <li><a class="nav-link scrollto" href="../../prices">Prices & Coupons</a></li>
+        <li><a class="nav-link scrollto" href="../../mycoupons">My Coupons</a></li>
+        <li><a class="nav-link scrollto" href="../../prices">Coins: {{extended.coins}}</a></li>
+        <li><a class="getstarted scrollto" href="../../logout">Logout</a></li>
+            
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+
 <table>
-  
+  <br><br><br><br>
   <thead>
     <tr>
-      <th>Coupon Code</th>
-      <th>Date</th>
-      <th>Store</th>
-      <th>Product</th>
+      <th style="font-size:25px">Coupon Code</th>
+      <th style="font-size:25px">Date</th>
+      <th style="font-size:25px">Store</th>
+      <th style="font-size:25px">Product</th>
+      <th style="font-size:25px">Photo</th>
     </tr>
   </thead>
 
-  {% for coupon, date in coupons_list %}
+  
   <tbody>
+  {% for coupon, date, store in coupons_list %}
     <tr>
-      <td><strong>{{coupon}}</strong></td>
-      <td>{{date}}</td>
-      <td>The speed of the show/reveal</td>
-      <td></td>
+      
+      <td><strong><h2 style="font-size:22px"> {{coupon}}</h2></strong></td>
+      <td><h2 style="font-size:22px">{{date}}</h2></td>
+        
+      {% if store == store1.id_number %}
+        <td><img src="{{store1.logo.url}}" height="70" width="100" class="center"/></td>
+        <td><h2 style="font-size:22px">{{store1.product}}</h2></td>
+        <td><img src="{{store1.product_photo.url}}" height="70" width="70" class="center"/></td>
+     
+
+      {% elif store == store2.id_number %}
+      <td><img src="{{store2.logo.url}}" height="70" width="100" class="center"/></td>
+      <td><h2 style="font-size:22px">{{store2.product}}</h2></td>
+      <td><img src="{{store2.product_photo.url}}" height="70" width="70" class="center"/></td>
+      
+      
+
+      {% elif store == store3.id_number %}
+      <td><img src="{{store3.logo.url}}" height="70" width="100" class="center"/></td>
+      <td><h2 style="font-size:22px">{{store3.product}}</h2></td>
+      <td><img src="{{store3.product_photo.url}}" height="70" width="70" class="center"/></td>
+      
+      
+
+      {% elif store == store4.id_number %}
+      <td><img src="{{store4.logo.url}}" height="70" width="100" class="center"/></td>
+      <td><h2 style="font-size:22px">{{store4.product}}</h2></td>
+      <td><img src="{{store4.product_photo.url}}" height="70" width="70" class="center"/></td>
+      
+      {% endif %}
+      
     </tr>
   {% endfor %}
-    
+
 </table>
