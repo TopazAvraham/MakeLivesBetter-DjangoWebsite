@@ -219,8 +219,15 @@ def myCoupons(request):
     return render(request, 'mycoupons.html', context,)
 
 def about(request):
+    stores = Stores.objects.all()
+    list_stores = list(stores)
+    store1 = list_stores[0]
+    store2 = list_stores[1]
+    store3 = list_stores[2]
+    store4 = list_stores[3]
     extendedUsers = UserExtend.objects.all()
     if request.POST.get('btn1'):
         return redirect('register')
     
-    return render(request, 'about.html', {'extendedUsers': extendedUsers})
+    return render(request, 'about.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                           'store2': store2, 'store3': store3, 'store4': store4})
