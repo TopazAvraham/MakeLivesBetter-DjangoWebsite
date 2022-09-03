@@ -194,11 +194,7 @@ def viewPost(request, primary_key):
     return render(request, 'photo.html', {'post': post, 'extendedUsers': extendedUsers})
 
 
-def gallery2(request):
-    categories = Category.objects.all()
-    posts = Post.objects.all()
-    context = {'categories': categories, 'posts': posts}
-    return render(request, 'gallery.html', context) 
+
 
 
 def myCoupons(request):
