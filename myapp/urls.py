@@ -8,7 +8,6 @@ from . import views
 urlpatterns = [
 
     path('', views.index, name='index'),
-
     path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
@@ -18,4 +17,5 @@ urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
     path('photo/<str:primary_key>/', views.viewPost, name='photo'),
     path('mycoupons', views.myCoupons, name='mycoupons'),
+    path('about', views.about, name = 'about')
 ]

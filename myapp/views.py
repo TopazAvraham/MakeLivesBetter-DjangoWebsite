@@ -1,6 +1,7 @@
 from distutils.file_util import move_file
 from email.mime import image
 from random import randint
+from urllib import request
 
 from django.shortcuts import render, redirect
 
@@ -217,4 +218,9 @@ def myCoupons(request):
     context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
     return render(request, 'mycoupons.html', context,)
 
-
+def about(request):
+    extendedUsers = UserExtend.objects.all()
+    if request.POST.get('btn1'):
+        return redirect('register')
+    
+    return render(request, 'about.html', {'extendedUsers': extendedUsers})
