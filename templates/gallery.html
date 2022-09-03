@@ -10,8 +10,9 @@
     <title>Volunteering Options</title>
     <!-- CSS only -->
  
+    
     <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'styleGalleryExtra.css' %}" rel="stylesheet">
+    <link href="{% static 'styleGalleryExtra2.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -113,7 +114,7 @@
 
                             </div>
                             <!-- go to photo with the id of the current post-->
-                            <section id="hero" class="d-flex align-items-center">
+                            <section id="hero" >
                             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                             <div class="text-center">
                             <a href="{% url 'photo' post.id %}" class="btn-get-started scrollto">

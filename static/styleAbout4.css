@@ -420,7 +420,9 @@ body {
     right: 0;
   }
   
-  
+  #hero .container {
+    padding-top: 80-px;
+  }
   
   #hero h1 {
     margin: 0;
@@ -437,7 +439,21 @@ body {
     font-size: 22px;
   }
   
-
+  #hero .btn-get-started {
+    
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    padding: 14px 50px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 30px;
+    color: #fff;
+    background: #2487ce;
+  }
+  
   
   #hero .btn-get-started {
     
@@ -540,19 +556,53 @@ body {
     }
   }
   
+  @media (max-width: 992px) {
+    #hero {
+      height: auto;
+    }
   
-   
-   
+    #hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+  
+    #hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
   
   /*--------------------------------------------------------------
   # Sections General
   --------------------------------------------------------------*/
   section {
-    padding: 5px ;
+    padding: 80px 0;
     overflow: hidden;
   }
   
-
+  .section-bg {
+    background-color: #f8fbfe71;
+  }
+  
+  .section-title {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  .section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #124265;
+  }
+  
+  .section-title p {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #919191;
+  }
   
   /*--------------------------------------------------------------
   # About
@@ -788,7 +838,7 @@ body {
     transition: all 0.4s ease-in-out;
     display: inline-block;
     padding: 15px 0;
-    filter: grayscale(100);
+    
   }
   
   .clients img:hover {
@@ -1560,7 +1610,7 @@ body {
   --------------------------------------------------------------*/
   .contact .info {
     width: 100%;
-    background: #fff;
+    background: transparent;
   }
   
   .contact .info i {
@@ -1569,7 +1619,7 @@ body {
     float: left;
     width: 44px;
     height: 44px;
-    background: #e3f0fa;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1606,7 +1656,7 @@ body {
   
   .contact .php-email-form {
     width: 100%;
-    background: #fff;
+    background: transparent;
   }
   
   .contact .php-email-form .form-group {
@@ -1615,7 +1665,7 @@ body {
   
   .contact .php-email-form .error-message {
     display: none;
-    color: #fff;
+    color: transparent;
     background: #ed3c0d;
     text-align: left;
     padding: 15px;

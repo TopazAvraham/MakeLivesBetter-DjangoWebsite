@@ -12,8 +12,7 @@
   <!-- Favicons -->
   <link href="static/assets/img/favicon.png" rel="icon">
   <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
 
   <!-- Vendor CSS Files -->
   <link href="static/assets/vendor/aos/aos.css" rel="stylesheet">
@@ -24,7 +23,7 @@
   <link href="static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <!-- Template Main CSS File -->
-  <link href="{% static 'styleAbout3.css' %}" rel="stylesheet">
+  <link href="{% static 'styleAbout4.css' %}" rel="stylesheet">
 </head>
 
 
@@ -71,6 +70,7 @@
   </header><!-- End Header -->
 
   <main id="main">
+    <br>
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -99,7 +99,7 @@
               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
               culpa qui officia deserunt mollit anim id est laborum.
             </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
+            <a href="/" class="btn-learn-more">Start Your Journey</a>
           </div>
         </div>
       </div>
@@ -151,8 +151,7 @@
         <div class="row">
 
           <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
-            <img src="static/assets/img/about-video.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+            <img src="files/files/aboutpic2.jpg" width="600" height="360"  alt="">
           </div>
 
           <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
@@ -184,30 +183,30 @@
       <div class="container">
 
         <div class="row">
-
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-1.png" class="img-fluid" alt="">
+            <img src="files/files/MLBLogo.png" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-2.png" class="img-fluid" alt="">
+            <img src="{{store1.logo.url}}" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-3.png" class="img-fluid" alt="">
+            <img src="{{store4.logo.url}}" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-4.png" class="img-fluid" alt="">
+            <img src="{{store3.logo.url}}" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-5.png" class="img-fluid" alt="">
+            <img src="{{store2.logo.url}}"  class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
+            <img src="files/files/MLBLogo.png" class="img-fluid" alt="">
           </div>
 
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center" data-aos="zoom-in">
-            <img src="static/assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
+          
 
         </div>
 
@@ -231,17 +230,17 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="static/assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <img src="files/files/topaz.jpg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                  <a href="https://twitter.com/AvrahamTopaz"><i class="bi bi-twitter"></i></a>
+                  <a href="https://www.facebook.com/topaz.avraham.7/"><i class="bi bi-facebook"></i></a>
+                  <a href="https://www.instagram.com/topazavraham20/"><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.linkedin.com/in/topaz-avraham-68b340208/"><i class="bi bi-linkedin"></i></a>
                 </div>
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
+                <h4>Topaz Avraham</h4>
+                <span>Founder & CEO</span>
               </div>
             </div>
           </div>
@@ -258,8 +257,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
+                <h4>Ariel Albaz</h4>
+                <span>CTO</span>
               </div>
             </div>
           </div>
