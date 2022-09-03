@@ -4,13 +4,10 @@
 <html>
 
 <head>
-    <title>Photo</title>
-    
+    <title>Volunteering Info</title>
     <link href="{% static 'stylePhoto.css' %}" rel="stylesheet">
     <link href="{% static 'stylePhotoExtra.css' %}" rel="stylesheet">
     <link href="{% static 'indexForPhoto.css' %}" rel="stylesheet">
-    
-    
 </head>
 
 <style>
@@ -52,34 +49,15 @@
     </div>
   </header><!-- End Header -->
 
+<style>
+  small{
+    color: #16507b
+  }
+</style>
 
 
-<!--
-<body class="m-5">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
-
-            <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Go Back</a>
-            <div style="height: 90vh;">
-                <img style="width: 400px; height: 400px;" src="{{ post.image.url }}">
-                <br><small>Category : {{ post.category.name }}</small><br>
-                <small>Full Name: {{ post.full_name }}</small><br>
-                <small>City:{{ post.city }}</small><br>
-                <small>Address: {{ post.address }}</small><br>
-                <small>Phone Number: {{ post.phone_number }}</small><br>
-                <small> Post value is : {{ post.value }} </small>
-                <a href="{% url 'upload' post.id  %}" class="btn btn-outline-dark btn-sm m-1">
-                   <b><i>I volunteered here</i></b>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-</body>
--->
-
+  <div class="container position-relative">
+<a href="{% url 'gallery' %}" class="btn-get2 scrollto">Go Back</a>
 
 <div class="card">
   <div class="thumbnail"><img class="left" src="{{ post.image.url }}" /></div>
@@ -87,14 +65,13 @@
     <h1><b style="color:#16507b">{{post.full_name}}</b></h1>
     <div class="separator"></div>
     <br>
-    <small>Worth: {{ post.value }} coins</small><br>
-    <small>Address: {{ post.address }}</small><br>
-    <small>City:{{ post.city }}</small><br>
-    <small>Phone Number: {{ post.phone_number }}</small><br>
-    <p> Volunteer Description: {{post.description}} </p>
+    <small ><b>Worth: </b></small> <small>{{ post.value }} coins </small><br>
+    <small><b>Address: </b></small> <small>{{ post.address }}</small><br>
+    <small><b>City: </b></small>  <small>{{ post.city }}</small><br>
+    <small><b>Phone Number: </b></small>  <small>{{ post.phone_number }}</small><br>
+    <small><b> Volunteer Description: </b></small> <small>{{post.description}} </small>
       <section id="hero">
         <div class="container position-relative">
-          
         {% if user.is_authenticated %}
         <a href="{% url 'upload' post.id  %}" class="btn-get-started2 scrollto">Upload Volunteering Approval</a>
         {% else %}
@@ -106,9 +83,8 @@
   
   <h5>{{ post.value }}</h5>
   <h6>COINS</h6>
-  
+
   <ul>
-    
     <li><i class="fa fa-eye fa-2x"></i></li>
     <li><i class="fa fa-heart-o fa-2x"></i></li>
     <li><i class="fa fa-envelope-o fa-2x"></i></li>
@@ -116,7 +92,6 @@
   </ul>
   
 </div>
-
 </html>
 
 
@@ -127,4 +102,4 @@
   
 </script>
 
-<a href="{% url 'gallery' %}" class="btn-get-started2 scrollto">Go Back</a>
+

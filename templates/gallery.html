@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery</title>
+    <title>Volunteering Options</title>
     <!-- CSS only -->
  
     <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
@@ -33,6 +33,10 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
+    }
+
+    small {
+        color: #16507b;
     }
 </style>
 
@@ -100,12 +104,12 @@
                             <img class="image-thumbail" src="{{ post.image.url }}" alt="Card image cap">
 
                             <div class="card-body">
-                                <br><b><small>Category : {{ post.category.name }}</small></b><br>
-                                <b> <small>Full Name: {{ post.full_name }}</small></b><br>
-                                <b> <small>City:{{ post.city }}</small></b><br>
-                                <b>  <small>Address: {{ post.address }}</small></b><br>
-                                <b>  <small>Phone Number: {{ post.phone_number }}</small></b><br>
-                                <b> <small>Coins Prize : {{ post.value }} </b></small>
+                                <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
+                                <b> <small>Full Name: </b></small><small>{{ post.full_name }}</small><br>
+                                <b> <small>City: </b></small><small>{{ post.city }}</small><br>
+                                <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
+                                <b>  <small>Phone Number: </b></small><small>{{ post.phone_number }}</small><br>
+                                <b> <small>Coins Prize : </b></small><small>{{ post.value }} </b></small>
 
                             </div>
                             <!-- go to photo with the id of the current post-->

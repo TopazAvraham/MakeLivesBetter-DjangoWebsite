@@ -79,7 +79,7 @@ class Post(models.Model):
     phone_number = models.CharField(max_length=10)
     is_approved = models.BooleanField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    description = models.CharField(blank=True, max_length=1000, null=True)
+    description = models.CharField(blank=True, max_length=224, null=True)
     image = models.ImageField(upload_to="files/", null=False, blank=False)
     value = models.IntegerField(blank=True,default= 0)
 

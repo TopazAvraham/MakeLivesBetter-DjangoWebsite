@@ -488,7 +488,25 @@ body {
     color: #fff;
     background: #2487ce;
   }
-  
+
+  .btn-get2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    left: 969px;
+    top: -70px;
+    position: absolute;
+    text-align: center;
+    height: 40px;
+    width: 140px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 5px;
+    color: #fff;
+    background: #2487ce;
+  }
   
 
   #hero .btn-get-started:hover {
