@@ -68,8 +68,8 @@ def logout(request):
 
 
 def test(request):
-
-    return render(request, 'mycoupons.html', {'features': features, 'extendedUsers': extendedUsers,})
+    extendedUsers = UserExtend.objects.all()
+    return render(request, 'test2.html', {'extendedUsers': extendedUsers})
 
 
 def prices(request):
