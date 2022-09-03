@@ -1,9 +1,9 @@
 {% load static %}
 <head>
-  
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'styleUpload2.css' %}" rel="stylesheet">
+  <link href="{% static 'styleUpload3.css' %}" rel="stylesheet">
     <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
-    <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
+   
     <title>Upload Volunteer Approval Page</title>
 </head>
 
@@ -41,13 +41,14 @@
   </div>
 </header><!-- End Header -->
 
+<br><br><br><br><br>
 
+    
+<img src="/files/files/text.png" alt="Italian Trulli" STYLE="position:absolute; LEFT:350px; WIDTH:500px; HEIGHT:50px">
+<br>
+</div>
 <div class="col-md-6 offset-md-3 mt-5">
-  <br>
-  <br>
-  <br>
-  <h3 style="color:#16507b;">Upload the approval and get coins!</h3> 
-  <br>
+
   <form accept-charset="UTF-8"   method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}
@@ -55,24 +56,24 @@
 
 
     <div class="form-group">
-      <label for="exampleInputName">Tell us how was the volunteering: (optional)</label>
+      <label for="exampleInputName" STYLE="color: #16507b;"> <b>Tell us how was the volunteering: (optional)</b></label>
       <textarea name='description' name="description" placeholder='Describe your volunteering here' class="form-control" ></textarea>
     </div>
  
 
     <hr>
     <div class="form-group mt-3">
-      <label class="mr-2">Upload approval:</label>
+      <label class="mr-2" STYLE="color: #16507b;"><b>Upload approval:</b></label>
       <input type="file" name="image">
     </div>
 
     <div class="form-group">
       <br>
       <input type="checkbox" name='is_approved'  required="required"></textarea>
-      <label for="vehicle1"> I approve the details are correct</label><br>
+      <label for="vehicle1" STYLE="color: #16507b;"> <b>I approve the details are correct</b></label><br>
     </div>
     <hr>
-    <button type="submit" class="btn btn-primary" onclick="myfunction()">Submit</button>
+    <button type="submit" class="btn btn-primary" onclick="myfunction()" >Submit</button>
       <script >
       function myFunction() {
       alert('your approval has been uploaded and you recieved the coins')  }
