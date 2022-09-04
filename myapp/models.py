@@ -87,3 +87,4 @@ class Post(models.Model):
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
 
+

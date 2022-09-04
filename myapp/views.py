@@ -70,8 +70,23 @@ def logout(request):
 
 def test(request):
     extendedUsers = UserExtend.objects.all()
-    return render(request, 'test2.html', {'extendedUsers': extendedUsers})
+    categories = Category.objects.all()
+    category = request.GET.get('category')
 
+    if category != None:
+        if request.GET.get('category') == 'All':
+            posts = Post.objects.all()
+            categories = Category.objects.all()
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+        else:
+            posts = Post.objects.filter(category__name=category, )
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+            return render(request, 'test2.html', context)
+
+    posts = Post.objects.all()
+    categories = Category.objects.all()
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+    return render(request, 'test2.html', context)
 
 def prices(request):
     stores = Stores.objects.all()

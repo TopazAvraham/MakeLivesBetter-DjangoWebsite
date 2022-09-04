@@ -52,8 +52,6 @@
   <form accept-charset="UTF-8"   method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}
-    
-
 
     <div class="form-group">
       <label for="exampleInputName" STYLE="color: #16507b;"> <b>Tell us how was the volunteering: (optional)</b></label>
@@ -69,7 +67,7 @@
 
     <div class="form-group">
       <br>
-      <input type="checkbox" name='is_approved'  required="required"></textarea>
+      <input type="checkbox" name='is_approved'  required="required">
       <label for="vehicle1" STYLE="color: #16507b;"> <b>I approve the details are correct</b></label><br>
     </div>
     <hr>

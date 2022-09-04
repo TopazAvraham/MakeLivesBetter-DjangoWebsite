@@ -1,30 +1,55 @@
 {% load static %}
 
-<head>  
-    
-    <link href="static/stylePhoto2.css" rel="stylesheet">
-    <link href="static/stylePhotoExtra.css" rel="stylesheet">
-    <link href="static/newIndex3.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
 
-  </head>
-  
-  <style>
-    body {
-      background-image: url('../files/files/screen.png');
-      background-repeat: no-repeat;
-      background-attachment: fixed; 
-      background-size: cover;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteering Options</title>
+    <!-- CSS only -->
+ 
+    
+    <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
+    <link href="{% static 'styleGalleryExtra2.css' %}" rel="stylesheet">
+
+    <style>
+        .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
     </style>
-  
-  <!-- ======= Header ======= -->
+
+
+</head>
+<style>
+    body {
+        background-image: url('../files/files/screen.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    small {
+        color: #16507b;
+    }
+</style>
+
+
+
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-  
+
      <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
       
       <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
-  
+
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto" href="about">About</a></li>
@@ -44,26 +69,105 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->  
 
-  
-  <div class="card">
-    <div class="thumbnail"><img class="left" src="{{ post.image.url }}" /></div>
-    <div class="right">
-      <h1>Lorem Ipsum Dolor Sit Amet</h1>
-      <div class="separator"></div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
     </div>
-    <h5>{{ post.value }}</h5>
-    <h6>COINS</h6>
-    <ul>
-      <li><i class="fa fa-eye fa-2x"></i></li>
-      <li><i class="fa fa-heart-o fa-2x"></i></li>
-      <li><i class="fa fa-envelope-o fa-2x"></i></li>
-      <li><i class="fa fa-share-alt fa-2x"></i></li>
-    </ul>
-  </div>
+  </header><!-- End Header -->
+
+
+<br><br><br>
+
+<body class="m-5">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Sort By:
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class=" list-group-item">
+                    <a style="color:#16507b" href="{% url 'test' %}?category={{ category.name }}">
+                      <b> Price</b>
+                   </a>
+                   <li class=" list-group-item">
+                    <a style="color:#16507b" href="{% url 'test' %}?category={{ category.name }}">
+                      <b> Name</b>
+                   </a>
+
+                   <li class=" list-group-item">
+                   <label for="cars" style="color:#16507b"><b>Category: </b> </label>
+                   <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                      {% for category in categories %}
+                      <li><a href="{% url 'test' %}?category={{ category.name }}">{{ category.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                </ul>
+                
+            </div>
+
+            <br>
+   
+          </div>
+        
+        <div class="col-md-9">
+            <div class="row">
+
+                {% for post in posts %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{ post.image.url }}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
+                                <b> <small>Full Name: </b></small><small>{{ post.full_name }}</small><br>
+                                <b> <small>City: </b></small><small>{{ post.city }}</small><br>
+                                <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
+                                <b>  <small>Phone Number: </b></small><small>{{ post.phone_number }}</small><br>
+                                <b> <small>Coins Prize : </b></small><small>{{ post.value }} </b></small>
+
+                            </div>
+                            <!-- go to photo with the id of the current post-->
+                            <section id="hero" >
+                            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+                            <div class="text-center">
+                            <a href="{% url 'photo' post.id %}" class="btn-get-started scrollto">
+                                Get more details
+                            </a>
+                            </div>
+                            </div>
+                            </section>
+                        </section>
+                        </div>
+                    </div>
+                {% empty %}
+                    <h3>No Posts Yet...</h3>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+</script>
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+
 
 
 
