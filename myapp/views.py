@@ -81,12 +81,68 @@ def test(request):
         else:
             posts = Post.objects.filter(category__name=category, )
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-            return render(request, 'test2.html', context)
+            return render(request, 'galleryOld.html', context)
 
     posts = Post.objects.all()
     categories = Category.objects.all()
     context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-    return render(request, 'test2.html', context)
+    return render(request, 'galleryOld.html', context)
+
+
+
+def galleryByPrice(request):
+    extendedUsers = UserExtend.objects.all()
+    categories = Category.objects.all()
+    category = request.GET.get('category')
+
+    if category != None:
+        if request.GET.get('category') == 'All':
+            posts = Post.objects.all()
+            categories = Category.objects.all()
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+        else:
+            posts = Post.objects.filter(category__name=category, )
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+            return render(request, 'gallery.html', context)
+
+    posts = Post.objects.order_by('value').reverse()
+    categories = Category.objects.all()
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+    return render(request, 'gallery.html', context)
+
+
+
+def galleryByName(request):
+    extendedUsers = UserExtend.objects.all()
+    categories = Category.objects.all()
+    category = request.GET.get('category')
+
+    if category != None:
+        if request.GET.get('category') == 'All':
+            posts = Post.objects.all()
+            categories = Category.objects.all()
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+        else:
+            posts = Post.objects.filter(category__name=category, )
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+            return render(request, 'gallery.html', context)
+
+    posts = Post.objects.order_by('full_name')
+    categories = Category.objects.all()
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+    return render(request, 'gallery.html', context)
+
+
+    
+
+
+
+
+
+
+
+
+
 
 def prices(request):
     stores = Stores.objects.all()

@@ -17,5 +17,7 @@ urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
     path('photo/<str:primary_key>/', views.viewPost, name='photo'),
     path('mycoupons', views.myCoupons, name='mycoupons'),
-    path('about', views.about, name = 'about')
+    path('about', views.about, name = 'about'),
+    path('galleryByPrice', views.galleryByPrice, name = 'galleryByPrice'),
+    path('galleryByName', views.galleryByName, name = 'galleryByName')
 ]

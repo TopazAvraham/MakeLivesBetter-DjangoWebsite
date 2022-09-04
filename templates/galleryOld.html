@@ -42,7 +42,6 @@
 </style>
 
 
-
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -83,35 +82,40 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    Sort By:
+                    Categories
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class=" list-group-item">
-                    <a style="color:#16507b" href="{% url 'test' %}?category={{ category.name }}">
-                      <b> Price</b>
-                   </a>
-                   <li class=" list-group-item">
-                    <a style="color:#16507b" href="{% url 'test' %}?category={{ category.name }}">
-                      <b> Name</b>
-                   </a>
-
-                   <li class=" list-group-item">
-                   <label for="cars" style="color:#16507b"><b>Category: </b> </label>
-                   <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                      {% for category in categories %}
-                      <li><a href="{% url 'test' %}?category={{ category.name }}">{{ category.name }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </li>
+                    {% for category in categories %}
+                        <li class=" list-group-item">
+                            <a style="color:#16507b" href="{% url 'gallery' %}?category={{ category.name }}">
+                               <b> {{ category.name }}</b>
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
                 
             </div>
 
             <br>
-   
-          </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Sort By:
+                </div>
+                <ul class="list-group list-group-flush">
+                <form method="POST">
+                {% csrf_token %}
+                <li class=" list-group-item">
+                <input type="checkbox" name='price' onclick="change(is_price)"/>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+                <li class=" list-group-item">
+                <input type="checkbox" name='is_approved'>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
+                </ul>
+            </div>
         
+
+        </div>
         <div class="col-md-9">
             <div class="row">
 
@@ -169,6 +173,16 @@
 <script src="{% static 'assets/js/main.js' %}"></script>
 
 
-
-
-
+<script>
+function change(is_price){
+    $.ajax({
+        url: 'test2',
+        data : {
+            'is_price': true,
+        },
+        success: function (data) {
+            $("#idImg").html(data);
+        }
+    });
+}
+</script>

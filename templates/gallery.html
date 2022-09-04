@@ -10,9 +10,8 @@
     <title>Volunteering Options</title>
     <!-- CSS only -->
  
-    
-    <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'styleGalleryExtra2.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGallery1.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -40,6 +39,7 @@
         color: #16507b;
     }
 </style>
+
 
 
 <header id="header" class="fixed-top">
@@ -82,40 +82,36 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    Categories
+                    Sort By:
                 </div>
                 <ul class="list-group list-group-flush">
-                    {% for category in categories %}
-                        <li class=" list-group-item">
-                            <a style="color:#16507b" href="{% url 'gallery' %}?category={{ category.name }}">
-                               <b> {{ category.name }}</b>
-                            </a>
-                        </li>
-                    {% endfor %}
+                  <li class=" list-group-item">
+                    <a style="color:#16507b" href="{% url 'galleryByPrice' %}?category=All">
+                      <b> Price</b>
+                   </a>
+                   <li class=" list-group-item">
+                    <a style="color:#16507b" href="{% url 'galleryByName' %}?category=All">
+                      <b> Name</b>
+                   </a>
+
+                   <li class="list-group-item">
+                   <nav id="navbar" class="navbar" >
+                    <ul>
+                   <li class="dropdown"><a href="#" style="font-size:16px; color:#16507b; position:relative;"><span><b>Category</b></span> </a>
+                    <ul>
+                      {% for category in categories %}
+                      <li><a style="font-size:16px; color:#16507b; " href="{% url 'gallery' %}?category={{ category.name }}">{{ category.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
                 </ul>
                 
             </div>
 
             <br>
-
-            <div class="card">
-                <div class="card-header">
-                    Sort By:
-                </div>
-                <ul class="list-group list-group-flush">
-                <form method="POST">
-                {% csrf_token %}
-                <li class=" list-group-item">
-                <input type="checkbox" name='price' onclick="change(is_price)"/>
-                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
-                <li class=" list-group-item">
-                <input type="checkbox" name='is_approved'>
-                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
-                </ul>
-            </div>
+   
+          </div>
         
-
-        </div>
         <div class="col-md-9">
             <div class="row">
 
@@ -125,8 +121,8 @@
                             <img class="image-thumbail" src="{{ post.image.url }}" alt="Card image cap">
 
                             <div class="card-body">
-                                <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
-                                <b> <small>Full Name: </b></small><small>{{ post.full_name }}</small><br>
+                                <br><b><small>Full Name: </b></small></small> <small>{{ post.full_name }}</small><br>
+                                <b> <small>Catergory: </b></small><small>{{ post.category.name }}</small><br>
                                 <b> <small>City: </b></small><small>{{ post.city }}</small><br>
                                 <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
                                 <b>  <small>Phone Number: </b></small><small>{{ post.phone_number }}</small><br>
@@ -173,16 +169,6 @@
 <script src="{% static 'assets/js/main.js' %}"></script>
 
 
-<script>
-function change(is_price){
-    $.ajax({
-        url: 'test2',
-        data : {
-            'is_price': true,
-        },
-        success: function (data) {
-            $("#idImg").html(data);
-        }
-    });
-}
-</script>
+
+
+
