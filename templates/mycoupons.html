@@ -58,32 +58,32 @@
   {% for coupon, date, store in coupons_list %}
     <tr>
       
-      <td><strong><h2 style="font-size:22px"> {{coupon}}</h2></strong></td>
-      <td><h2 style="font-size:22px">{{date}}</h2></td>
+      <td><strong><h2 style="color: #16507b; font-size:22px"> {{coupon}}</h2></strong></td>
+      <td><h2 style="color: #16507b; font-size:22px">{{date}}</h2></td>
         
       {% if store == store1.id_number %}
         <td><img src="{{store1.logo.url}}" height="70" width="100" class="center"/></td>
-        <td><h2 style="font-size:22px">{{store1.product}}</h2></td>
+        <td><h2 style="color: #16507b; font-size:22px">{{store1.product}}</h2></td>
         <td><img src="{{store1.product_photo.url}}" height="70" width="70" class="center"/></td>
      
 
       {% elif store == store2.id_number %}
       <td><img src="{{store2.logo.url}}" height="70" width="100" class="center"/></td>
-      <td><h2 style="font-size:22px">{{store2.product}}</h2></td>
+      <td><h2 style="color: #16507b; font-size:22px">{{store2.product}}</h2></td>
       <td><img src="{{store2.product_photo.url}}" height="70" width="70" class="center"/></td>
       
       
 
       {% elif store == store3.id_number %}
       <td><img src="{{store3.logo.url}}" height="70" width="100" class="center"/></td>
-      <td><h2 style="font-size:22px">{{store3.product}}</h2></td>
+      <td><h2 style="color: #16507b; font-size:22px">{{store3.product}}</h2></td>
       <td><img src="{{store3.product_photo.url}}" height="70" width="70" class="center"/></td>
       
       
 
       {% elif store == store4.id_number %}
       <td><img src="{{store4.logo.url}}" height="70" width="100" class="center"/></td>
-      <td><h2 style="font-size:22px">{{store4.product}}</h2></td>
+      <td><h2 style="color: #16507b; font-size:22px">{{store4.product}}</h2></td>
       <td><img src="{{store4.product_photo.url}}" height="70" width="70" class="center"/></td>
       
       {% endif %}

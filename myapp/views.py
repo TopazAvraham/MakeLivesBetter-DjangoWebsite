@@ -38,7 +38,7 @@ def register(request):
                 extendedUser.user = user
                 extendedUser.coins = 0
                 extendedUser.save()
-                return redirect('/')
+                return redirect('login')
         else:
             messages.info(request, 'Passwords don\'t match')
             return redirect('register')
@@ -70,8 +70,23 @@ def logout(request):
 
 def test(request):
     extendedUsers = UserExtend.objects.all()
-    return render(request, 'test2.html', {'extendedUsers': extendedUsers})
+    categories = Category.objects.all()
+    category = request.GET.get('category')
 
+    if category != None:
+        if request.GET.get('category') == 'All':
+            posts = Post.objects.all()
+            categories = Category.objects.all()
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+        else:
+            posts = Post.objects.filter(category__name=category, )
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+            return render(request, 'test2.html', context)
+
+    posts = Post.objects.all()
+    categories = Category.objects.all()
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+    return render(request, 'test2.html', context)
 
 def prices(request):
     stores = Stores.objects.all()
@@ -194,13 +209,6 @@ def viewPost(request, primary_key):
     return render(request, 'photo.html', {'post': post, 'extendedUsers': extendedUsers})
 
 
-def gallery2(request):
-    categories = Category.objects.all()
-    posts = Post.objects.all()
-    context = {'categories': categories, 'posts': posts}
-    return render(request, 'gallery.html', context) 
-
-
 def myCoupons(request):
     stores = Stores.objects.all()
     list_stores = list(stores)
@@ -213,14 +221,26 @@ def myCoupons(request):
     for e in extendedUsers:
         if e.user.username == user.username:
             extended = e
-    coupons_list = zip(extended.get_coupons_list(),extended.get_date_list(), extended.get_store_list())
     
-    context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
-    return render(request, 'mycoupons.html', context,)
+    if(extended.coupons_counter):
+        coupons_list = zip(extended.get_coupons_list(),extended.get_date_list(), extended.get_store_list())
+        context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
+        return render(request, 'mycoupons.html', context,)
+    
+    context = {'coupons_list': [], 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
+    return render(request, 'mycoupons.html', context,) 
+    
 
 def about(request):
+    stores = Stores.objects.all()
+    list_stores = list(stores)
+    store1 = list_stores[0]
+    store2 = list_stores[1]
+    store3 = list_stores[2]
+    store4 = list_stores[3]
     extendedUsers = UserExtend.objects.all()
     if request.POST.get('btn1'):
         return redirect('register')
     
-    return render(request, 'about.html', {'extendedUsers': extendedUsers})
+    return render(request, 'about.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                           'store2': store2, 'store3': store3, 'store4': store4})

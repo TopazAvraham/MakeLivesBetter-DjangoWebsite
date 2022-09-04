@@ -10,8 +10,9 @@
     <title>Volunteering Options</title>
     <!-- CSS only -->
  
+    
     <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'styleGalleryExtra.css' %}" rel="stylesheet">
+    <link href="{% static 'styleGalleryExtra2.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -68,13 +69,33 @@
                 <ul class="list-group list-group-flush">
                     {% for category in categories %}
                         <li class=" list-group-item">
-                            <a href="{% url 'gallery' %}?category={{ category.name }}">
-                                {{ category.name }}
+                            <a style="color:#16507b" href="{% url 'gallery' %}?category={{ category.name }}">
+                               <b> {{ category.name }}</b>
                             </a>
                         </li>
                     {% endfor %}
                 </ul>
+                
             </div>
+
+            <br>
+
+            <div class="card">
+                <div class="card-header">
+                    Sort By:
+                </div>
+                <ul class="list-group list-group-flush">
+                <form method="POST">
+                {% csrf_token %}
+                <li class=" list-group-item">
+                <input type="checkbox" name='price' onclick="change(is_price)"/>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+                <li class=" list-group-item">
+                <input type="checkbox" name='is_approved'>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
+                </ul>
+            </div>
+        
 
         </div>
         <div class="col-md-9">
@@ -95,7 +116,7 @@
 
                             </div>
                             <!-- go to photo with the id of the current post-->
-                            <section id="hero" class="d-flex align-items-center">
+                            <section id="hero" >
                             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                             <div class="text-center">
                             <a href="{% url 'photo' post.id %}" class="btn-get-started scrollto">
@@ -132,3 +153,17 @@
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
 
+
+<script>
+function change(is_price){
+    $.ajax({
+        url: 'test2',
+        data : {
+            'is_price': true,
+        },
+        success: function (data) {
+            $("#idImg").html(data);
+        }
+    });
+}
+</script>

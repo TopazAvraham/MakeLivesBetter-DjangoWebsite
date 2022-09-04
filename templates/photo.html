@@ -7,7 +7,7 @@
     <title>Volunteering Info</title>
     <link href="{% static 'stylePhoto.css' %}" rel="stylesheet">
     <link href="{% static 'stylePhotoExtra.css' %}" rel="stylesheet">
-    <link href="{% static 'indexForPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'indexForPhoto2.css' %}" rel="stylesheet">
 </head>
 
 <style>
@@ -39,44 +39,44 @@
 </style>
 
 
-<div class="container position-relative">
-    <a href="{% url 'gallery' %}" class="btn-get2 scrollto">Go Back</a>
+  
+  <div class="container position-relative">
+<a href="{% url 'gallery' %}" class="btn-get2 scrollto">Go Back</a>
 
-    <div class="card">
-        <div class="thumbnail"><img class="left" src="{{ post.image.url }}"/></div>
-        <div class="right">
-            <h1><b style="color:#16507b">{{ post.full_name }}</b></h1>
-            <div class="separator"></div>
-            <br>
-            <small><b>Worth: </b></small> <small>{{ post.value }} coins </small><br>
-            <small><b>Address: </b></small> <small>{{ post.address }}</small><br>
-            <small><b>City: </b></small> <small>{{ post.city }}</small><br>
-            <small><b>Phone Number: </b></small> <small>{{ post.phone_number }}</small><br>
-            <small><b> Volunteer Description: </b></small> <small>{{ post.description }} </small>
-            <section id="hero">
-                <div class="container position-relative">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'upload' post.id %}" class="btn-get-started2 scrollto">Upload Volunteering
-                            Approval</a>
-                    {% else %}
-                        <a href="../../login" class="btn-get-started2 scrollto" onclick="myFunction()">Upload
-                            Volunteering Approval</a>
-                    {% endif %}
-                </div>
-            </section>
-        </div>
+<div class="card">
+  <div class="thumbnail"><img class="left" src="{{ post.image.url }}" /></div>
+  <div class="right">
+    <h1><b style="color:#16507b">{{post.full_name}}</b></h1>
+    <div class="separator"></div>
+    <br>
+    <small ><b>Worth: </b></small> <small>{{ post.value }} coins </small><br>
+    <small><b>Address: </b></small> <small>{{ post.address }}</small><br>
+    <small><b>City: </b></small>  <small>{{ post.city }}</small><br>
+    <small><b>Phone Number: </b></small>  <small>{{ post.phone_number }}</small><br>
+    <small><b> Volunteer Description: </b></small> <small>{{post.description}} </small>
+      <section id="hero">
+        <div class="container position-relative">
+        {% if user.is_authenticated %}
+        <a href="{% url 'upload' post.id  %}" class="btn-get-started2 scrollto">Upload Volunteering Approval</a>
+        {% else %}
+        <a href="../../login" class="btn-get-started2 scrollto" onclick="myFunction()">Upload Volunteering Approval</a>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+  
+  <h5>{{ post.value }}</h5>
+  <h6>COINS</h6>
 
-        <h5>{{ post.value }}</h5>
-        <h6>COINS</h6>
+  <ul>
+    <li><i class="fa fa-eye fa-2x"></i></li>
+    <li><i class="fa fa-heart-o fa-2x"></i></li>
+    <li><i class="fa fa-envelope-o fa-2x"></i></li>
+    <li><i class="fa fa-share-alt fa-2x"></i></li>
+  </ul>
+  
+</div>
 
-        <ul>
-            <li><i class="fa fa-eye fa-2x"></i></li>
-            <li><i class="fa fa-heart-o fa-2x"></i></li>
-            <li><i class="fa fa-envelope-o fa-2x"></i></li>
-            <li><i class="fa fa-share-alt fa-2x"></i></li>
-        </ul>
-
-    </div>
 </html>
 
 

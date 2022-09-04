@@ -413,7 +413,7 @@ body {
   
   #hero:before {
     content: "";
-    position: absolute;
+    position: realtive;
     bottom: 0;
     top: 0;
     left: 0;
@@ -440,7 +440,7 @@ body {
   }
   
   #hero .btn-get-started {
-    
+  
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -469,27 +469,65 @@ body {
     color: #fff;
     background: #2487ce;
   }
-  
-  
+
+
   #hero .btn-get-started2 {
-    
+  
     font-family: "Poppins", sans-serif;
-    font-weight: 520;
-    font-size: 25px;
+    font-weight: 400;
+    font-size: 15px;
     letter-spacing: 0.5px;
     position: absolute;
     text-align: center;
-    height: 60px;
-    width: 1298px;
-    padding: 14px 50px;
+    height: 50px;
+    width: 240px;
+    padding: 13px 5px;
     border-radius: 5px;
     transition: 0.5s;
-    margin-top: 20px;
+    margin-top: 5px;
     color: #fff;
-    background: #5f9bc6;
+    background: #2487ce;
+  }
+
+  .btn-get2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    left: 969px;
+    top: -70px;
+    position: absolute;
+    text-align: center;
+    height: 40px;
+    width: 140px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 5px;
+    color: #fff;
+    background: #2487ce;
+  }
+
+  .btn-get2:focus {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    left: 969px;
+    top: -70px;
+    position: absolute;
+    text-align: center;
+    height: 40px;
+    width: 140px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 5px;
+    color: #fff;
+    background: #2487ce;
   }
   
-  
+
   #hero .btn-get-started:hover {
     background: #3194db;
   }
@@ -581,7 +619,7 @@ body {
   }
   
   .section-bg {
-    background-color: #f8fbfe71;
+    background-color: #f8fbfe;
   }
   
   .section-title {
@@ -1610,7 +1648,7 @@ body {
   --------------------------------------------------------------*/
   .contact .info {
     width: 100%;
-    background: transparent;
+    background: #fff;
   }
   
   .contact .info i {
@@ -1619,7 +1657,7 @@ body {
     float: left;
     width: 44px;
     height: 44px;
-    background: transparent;
+    background: #e3f0fa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1656,7 +1694,7 @@ body {
   
   .contact .php-email-form {
     width: 100%;
-    background: transparent;
+    background: #fff;
   }
   
   .contact .php-email-form .form-group {
@@ -1665,7 +1703,7 @@ body {
   
   .contact .php-email-form .error-message {
     display: none;
-    color: transparent;
+    color: #fff;
     background: #ed3c0d;
     text-align: left;
     padding: 15px;
