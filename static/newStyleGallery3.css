@@ -441,6 +441,21 @@ body {
     background: #2487ce;
     
   }
+
+  .btn-get-started {
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 8px;
+    transition: 0.5s;
+    color: #fff;
+    background: #2487ce;
+    
+  }
   
   
 
@@ -1820,3 +1835,13 @@ body {
     color: #fff;
     text-decoration: none;
   }
+
+  select {
+    margin: 8px;
+    background: #1294f1;
+    color: #ffffff;
+    font-size: 18px;
+    width: 227px;
+  }
+
+

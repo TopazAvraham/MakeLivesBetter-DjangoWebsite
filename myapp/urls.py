@@ -12,12 +12,12 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
     path('prices', views.prices, name='prices'),
-    path('test2', views.test, name='test'),
     path('upload/<str:primary_key>/', views.upload, name='upload'),
     path('gallery', views.gallery, name='gallery'),
     path('photo/<str:primary_key>/', views.viewPost, name='photo'),
     path('mycoupons', views.myCoupons, name='mycoupons'),
     path('about', views.about, name = 'about'),
     path('galleryByPrice', views.galleryByPrice, name = 'galleryByPrice'),
-    path('galleryByName', views.galleryByName, name = 'galleryByName')
+    path('galleryByName', views.galleryByName, name = 'galleryByName'),
+    path('galleryOld', views.test, name='galleryOld'),
 ]

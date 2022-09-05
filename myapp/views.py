@@ -11,6 +11,9 @@ from .models import Feature, UserExtend, Stores, Post, Category
 from datetime import datetime
 
 
+
+
+
 # Create your views here.
 def index(request):
     features = Feature.objects.all()
@@ -50,11 +53,22 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
+        
         user = auth.authenticate(username=username, password=password)
-
+        
         if user is not None:
             auth.login(request, user)
+            return redirect('/')
+
+        try:
+            user2= User.objects.get(email__exact=username)
+            user_by_mail= auth.authenticate(username=user2.username, password=password)
+        except:
+            messages.info(request, 'Credentials invalid')
+            return redirect('login')
+
+        if user_by_mail is not None:
+            auth.login(request, user_by_mail)
             return redirect('/')
         else:
             messages.info(request, 'Credentials invalid')
@@ -68,23 +82,36 @@ def logout(request):
     return redirect('/')
 
 
-def test(request):
+def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
-    category = request.GET.get('category')
-
-    if category != None:
-        if request.GET.get('category') == 'All':
-            posts = Post.objects.all()
-            categories = Category.objects.all()
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-        else:
-            posts = Post.objects.filter(category__name=category, )
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-            return render(request, 'galleryOld.html', context)
-
     posts = Post.objects.all()
-    categories = Category.objects.all()
+    
+
+    if request.method == 'POST':
+        category = request.POST.get('categories')
+        print(category)
+        if category == 'All':
+            if request.POST.get('price'):
+                posts = Post.objects.order_by('value').reverse()
+            elif request.POST.get('name'):
+                posts = Post.objects.order_by('full_name')
+            else:
+                posts = Post.objects.all()
+
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers,}
+            return render(request, 'galleryOld.html', context)
+                
+        else:
+            if request.POST.get('price'):    
+                posts = Post.objects.filter(category__name=category, ).order_by('value').reverse()
+            elif request.POST.get('name'):
+                posts = Post.objects.filter(category__name=category, ).order_by('full_name')
+            else:
+                posts = Post.objects.all().filter(category__name=category, )
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers,}
+            return render(request, 'galleryOld.html', context)
+                
     context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
     return render(request, 'galleryOld.html', context)
 
@@ -239,7 +266,7 @@ def upload(request, primary_key):
    
     return render(request, 'upload.html', {'extended':extended})
 
-def gallery(request):
+def test(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
     category = request.GET.get('category')
@@ -300,3 +327,5 @@ def about(request):
     
     return render(request, 'about.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                            'store2': store2, 'store3': store3, 'store4': store4})
+
+

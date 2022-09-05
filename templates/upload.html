@@ -1,7 +1,8 @@
 {% load static %}
 <head>
+  
   <link href="{% static 'styleUpload2.css' %}" rel="stylesheet">
-  <link href="{% static 'styleUpload3.css' %}" rel="stylesheet">
+  <link href="{% static 'styleUpload4.css' %}" rel="stylesheet">
     <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
    
     <title>Upload Volunteer Approval Page</title>
@@ -41,14 +42,11 @@
   </div>
 </header><!-- End Header -->
 
-<br><br><br><br><br>
+<br><br><br><br>
 
-    
-<img src="/files/files/text.png" alt="Italian Trulli" STYLE="position:absolute; LEFT:350px; WIDTH:500px; HEIGHT:50px">
-<br>
 </div>
 <div class="col-md-6 offset-md-3 mt-5">
-
+  <h1 class="btn btn-primary2 ">Please Upload The Approval To Get Coins</h1> <br><br>
   <form accept-charset="UTF-8"   method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}

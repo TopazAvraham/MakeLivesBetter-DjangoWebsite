@@ -11,8 +11,8 @@
     <!-- CSS only -->
  
     
-    <link href="{% static 'styleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'styleGalleryExtra2.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGallery3.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -76,44 +76,42 @@
 <br><br><br>
 
 <body class="m-5">
-
+    <form method="POST">
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="card">
-                <div class="card-header">
-                    Categories
+                <div class="card-header"STYLE="color: #16507b;">
+                    <b>Choose Category</b>
                 </div>
                 <ul class="list-group list-group-flush">
-                    {% for category in categories %}
-                        <li class=" list-group-item">
-                            <a style="color:#16507b" href="{% url 'gallery' %}?category={{ category.name }}">
-                               <b> {{ category.name }}</b>
-                            </a>
-                        </li>
-                    {% endfor %}
+                            <select name="categories" id="categories">
+                            <option  value="All" name="All" class="option-text">All</option>
+                            {% for category in categories %}
+                            <option value="{{category.name}}" name="{{category.name}}">{{category.name}}</option>
+                            {% endfor %}
+                            </select>  
                 </ul>
-                
             </div>
-
             <br>
-
             <div class="card">
-                <div class="card-header">
-                    Sort By:
+                <div class="card-header" STYLE="color: #16507b;">
+                    <b>Sort By:</b>
                 </div>
                 <ul class="list-group list-group-flush">
                 <form method="POST">
-                {% csrf_token %}
+                {% csrf_token %}           
                 <li class=" list-group-item">
-                <input type="checkbox" name='price' onclick="change(is_price)"/>
+                <input type="checkbox" name='price' id="price"/>
                 <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
                 <li class=" list-group-item">
-                <input type="checkbox" name='is_approved'>
+                <input type="checkbox" name='name' id="name">
                 <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
                 </ul>
             </div>
-        
+            <br>
+                
+            <button type="submit" class="btn-get-started scrollto"  >Find Volunteering Options</button>
 
         </div>
         <div class="col-md-9">
@@ -126,7 +124,7 @@
 
                             <div class="card-body">
                                 <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
-                                <b> <small>Full Name: </b></small><small>{{ post.full_name }}</small><br>
+                                <b> <small>Association Name: </b></small><small>{{ post.full_name }}</small><br>
                                 <b> <small>City: </b></small><small>{{ post.city }}</small><br>
                                 <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
                                 <b>  <small>Phone Number: </b></small><small>{{ post.phone_number }}</small><br>
@@ -147,7 +145,7 @@
                         </div>
                     </div>
                 {% empty %}
-                    <h3>No Posts Yet...</h3>
+                    <h3>No Volunteerings Options Yet...</h3>
                 {% endfor %}
 
 
@@ -155,10 +153,12 @@
         </div>
     </div>
 </div>
+    </form>
 
 </body>
 
 </html>
+
 </script>
 <!-- Vendor JS Files -->
 <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
@@ -173,16 +173,11 @@
 <script src="{% static 'assets/js/main.js' %}"></script>
 
 
-<script>
-function change(is_price){
-    $.ajax({
-        url: 'test2',
-        data : {
-            'is_price': true,
-        },
-        success: function (data) {
-            $("#idImg").html(data);
-        }
-    });
-}
-</script>
+
+
+
+
+
+
+
+
