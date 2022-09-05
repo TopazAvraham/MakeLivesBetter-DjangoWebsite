@@ -1,17 +1,10 @@
-from distutils.file_util import move_file
-from email.mime import image
 from random import randint
-from urllib import request
-
 from django.shortcuts import render, redirect
-
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from .forms import ApprovalForm
 from .models import Feature, UserExtend, Stores, Post, Category
 from datetime import datetime
-
-
-
 
 
 # Create your views here.
@@ -53,16 +46,16 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        
+
         user = auth.authenticate(username=username, password=password)
-        
+
         if user is not None:
             auth.login(request, user)
             return redirect('/')
 
         try:
-            user2= User.objects.get(email__exact=username)
-            user_by_mail= auth.authenticate(username=user2.username, password=password)
+            user2 = User.objects.get(email__exact=username)
+            user_by_mail = auth.authenticate(username=user2.username, password=password)
         except:
             messages.info(request, 'Credentials invalid')
             return redirect('login')
@@ -86,7 +79,6 @@ def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
     posts = Post.objects.all()
-    
 
     if request.method == 'POST':
         category = request.POST.get('categories')
@@ -99,76 +91,21 @@ def gallery(request):
             else:
                 posts = Post.objects.all()
 
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers,}
-            return render(request, 'galleryOld.html', context)
-                
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
+            return render(request, 'templates/gallery.html', context)
+
         else:
-            if request.POST.get('price'):    
+            if request.POST.get('price'):
                 posts = Post.objects.filter(category__name=category, ).order_by('value').reverse()
             elif request.POST.get('name'):
                 posts = Post.objects.filter(category__name=category, ).order_by('full_name')
             else:
                 posts = Post.objects.all().filter(category__name=category, )
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers,}
-            return render(request, 'galleryOld.html', context)
-                
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
+            return render(request, 'templates/gallery.html', context)
+
     context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-    return render(request, 'galleryOld.html', context)
-
-
-
-def galleryByPrice(request):
-    extendedUsers = UserExtend.objects.all()
-    categories = Category.objects.all()
-    category = request.GET.get('category')
-
-    if category != None:
-        if request.GET.get('category') == 'All':
-            posts = Post.objects.all()
-            categories = Category.objects.all()
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-        else:
-            posts = Post.objects.filter(category__name=category, )
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-            return render(request, 'gallery.html', context)
-
-    posts = Post.objects.order_by('value').reverse()
-    categories = Category.objects.all()
-    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-    return render(request, 'gallery.html', context)
-
-
-
-def galleryByName(request):
-    extendedUsers = UserExtend.objects.all()
-    categories = Category.objects.all()
-    category = request.GET.get('category')
-
-    if category != None:
-        if request.GET.get('category') == 'All':
-            posts = Post.objects.all()
-            categories = Category.objects.all()
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-        else:
-            posts = Post.objects.filter(category__name=category, )
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-            return render(request, 'gallery.html', context)
-
-    posts = Post.objects.order_by('full_name')
-    categories = Category.objects.all()
-    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-    return render(request, 'gallery.html', context)
-
-
-    
-
-
-
-
-
-
-
-
+    return render(request, 'templates/gallery.html', context)
 
 
 def prices(request):
@@ -186,8 +123,8 @@ def prices(request):
         for e in extendedUsers:
             if e.user.username == check:
                 extended = e
-    
-    now=datetime.now()
+
+    now = datetime.now()
     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     coupon_code = randint(1000000000, 9999999999)
     if request.method == 'POST':
@@ -196,95 +133,81 @@ def prices(request):
     if request.POST.get('btn1') and connected and userInput == 'True':
         if extended.coins - 20 >= 0:
             extended.coins = extended.coins - 20
-            extended.add_coupon({coupon_code:123})
-            extended.add_date({date_time:123})
-            extended.add_store({'1':123})
+            extended.add_coupon({coupon_code: 123})
+            extended.add_date({date_time: 123})
+            extended.add_store({'1': 123})
             extended.save()
-        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                               'store2': store2, 'store3': store3, 'store4': store4,
-                                               'extended': extended})
+        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                         'store2': store2, 'store3': store3, 'store4': store4,
+                                                         'extended': extended})
 
     if request.POST.get('btn2') and connected and userInput == 'True':
         if extended.coins - 10 >= 0:
             extended.coins = extended.coins - 10
-            extended.add_coupon({coupon_code:123})
-            extended.add_date({date_time:123})
-            extended.add_store({'2':123})
+            extended.add_coupon({coupon_code: 123})
+            extended.add_date({date_time: 123})
+            extended.add_store({'2': 123})
             extended.save()
-        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                               'store2': store2, 'store3': store3, 'store4': store4,
-                                               'extended': extended})
+        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                         'store2': store2, 'store3': store3, 'store4': store4,
+                                                         'extended': extended})
 
     if request.POST.get('btn3') and connected and userInput == 'True':
         if extended.coins - 50 >= 0:
             extended.coins = extended.coins - 50
-            extended.add_coupon({coupon_code:123})
-            extended.add_date({date_time:123})
-            extended.add_store({'3':123})
+            extended.add_coupon({coupon_code: 123})
+            extended.add_date({date_time: 123})
+            extended.add_store({'3': 123})
             extended.save()
-        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                               'store2': store2, 'store3': store3, 'store4': store4,
-                                               'extended': extended})
+        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                         'store2': store2, 'store3': store3, 'store4': store4,
+                                                         'extended': extended})
 
     if request.POST.get('btn4') and connected and userInput == 'True':
         if extended.coins - 100 >= 0:
             extended.coins = extended.coins - 100
-            extended.add_coupon({coupon_code:123})
-            extended.add_date({date_time:123})
-            extended.add_store({'4':123})
+            extended.add_coupon({coupon_code: 123})
+            extended.add_date({date_time: 123})
+            extended.add_store({'4': 123})
             extended.save()
-        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                               'store2': store2, 'store3': store3, 'store4': store4,
-                                               'extended': extended})
+        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                         'store2': store2, 'store3': store3, 'store4': store4,
+                                                         'extended': extended})
 
     if request.user.is_authenticated:
-        return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                               'store2': store2, 'store3': store3, 'store4': store4,
-                                               'extended': extended})
+        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                         'store2': store2, 'store3': store3, 'store4': store4,
+                                                         'extended': extended})
 
-    return render(request, 'prices2.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                           'store2': store2, 'store3': store3, 'store4': store4})
+    return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+                                                     'store2': store2, 'store3': store3, 'store4': store4})
 
 
 def upload(request, primary_key):
+    global extended
     post = Post.objects.get(id=primary_key)
-    user = request.user.username
+    user = request.user
     extendedUsers = UserExtend.objects.all()
     for e in extendedUsers:
-        if e.user.username == user:
+        if e.user.username == user.username:
             extended = e
-
+    form = ApprovalForm()
+    form.user = extended
     if request.method == 'POST':
-        extendedUsers = UserExtend.objects.all()
-        for e in extendedUsers:
-            if e.user.username == user:
-                extended = e
+
+        # when user upload form ---> add the coins and save .
         extended.coins += post.value
         extended.save()
+
+        # upload the form and validate .
+        form = ApprovalForm(request.POST, request.FILES)
+        form.user = extended
+        if form.is_valid():
+            form.save()
         return redirect('/')
+    context = {'form': form, 'extended': extended}
+    return render(request, 'upload.html', context)
 
-   
-    return render(request, 'upload.html', {'extended':extended})
-
-def test(request):
-    extendedUsers = UserExtend.objects.all()
-    categories = Category.objects.all()
-    category = request.GET.get('category')
-
-    if category != None:
-        if request.GET.get('category') == 'All':
-            posts = Post.objects.all()
-            categories = Category.objects.all()
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-        else:
-            posts = Post.objects.filter(category__name=category, )
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-            return render(request, 'gallery.html', context)
-
-    posts = Post.objects.all()
-    categories = Category.objects.all()
-    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
-    return render(request, 'gallery.html', context)
 
 def viewPost(request, primary_key):
     extendedUsers = UserExtend.objects.all()
@@ -304,15 +227,17 @@ def myCoupons(request):
     for e in extendedUsers:
         if e.user.username == user.username:
             extended = e
-    
-    if(extended.coupons_counter):
-        coupons_list = zip(extended.get_coupons_list(),extended.get_date_list(), extended.get_store_list())
-        context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
-        return render(request, 'mycoupons.html', context,)
-    
-    context = {'coupons_list': [], 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4, 'extended': extended}
-    return render(request, 'mycoupons.html', context,) 
-    
+
+    if (extended.coupons_counter):
+        coupons_list = zip(extended.get_coupons_list(), extended.get_date_list(), extended.get_store_list())
+        context = {'coupons_list': coupons_list, 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4,
+                   'extended': extended}
+        return render(request, 'mycoupons.html', context, )
+
+    context = {'coupons_list': [], 'store1': store1, 'store2': store2, 'store3': store3, 'store4': store4,
+               'extended': extended}
+    return render(request, 'mycoupons.html', context, )
+
 
 def about(request):
     stores = Stores.objects.all()
@@ -324,8 +249,6 @@ def about(request):
     extendedUsers = UserExtend.objects.all()
     if request.POST.get('btn1'):
         return redirect('register')
-    
+
     return render(request, 'about.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                           'store2': store2, 'store3': store3, 'store4': store4})
-
-
+                                          'store2': store2, 'store3': store3, 'store4': store4})

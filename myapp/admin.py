@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Feature
+from .models import Feature, Approval
 from .models import UserExtend
 from .models import Stores
 from .models import Post
@@ -29,4 +29,4 @@ admin.site.register(UserExtend)
 admin.site.register(Stores)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
-
+admin.site.register(Approval)

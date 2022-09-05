@@ -10,8 +10,9 @@
     <title>Volunteering Options</title>
     <!-- CSS only -->
  
+    
     <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'newStyleGallery1.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGallery3.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -41,15 +42,32 @@
 </style>
 
 
-
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
      <!-- <h1 class="logo"><a href="/">MakingLivesBetter</a></h1>-->
       
       <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
-        <!-- .navbar -->
-        {% include "navbar.html" %}
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="about">About</a></li>
+          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+          {% if user.is_authenticated %}
+            {% for e in extendedUsers %}
+              {% if e.user.username == user.username %}
+                <li><a class="nav-link scrollto" href="mycoupons">My Coupons</a></li>
+                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+              {% endif %} 
+              {% endfor %}
+          {% else %}
+          <li><a class="getstarted scrollto" href="register">Register</a></li>
+          <li><a class="getstarted scrollto" href="login">Login</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
@@ -58,42 +76,44 @@
 <br><br><br>
 
 <body class="m-5">
-
+    <form method="POST">
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="card">
-                <div class="card-header">
-                    Sort By:
+                <div class="card-header"STYLE="color: #16507b;">
+                    <b>Choose Category</b>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class=" list-group-item">
-                    <a style="color:#16507b" href="{% url 'galleryByPrice' %}?category=All">
-                      <b> Price</b>
-                   </a>
-                   <li class=" list-group-item">
-                    <a style="color:#16507b" href="{% url 'galleryByName' %}?category=All">
-                      <b> Name</b>
-                   </a>
-
-                   <li class="list-group-item">
-                   <nav id="navbar" class="navbar" >
-                    <ul>
-                   <li class="dropdown"><a href="#" style="font-size:16px; color:#16507b; position:relative;"><span><b>Category</b></span> </a>
-                    <ul>
-                      {% for category in categories %}
-                      <li><a style="font-size:16px; color:#16507b; " href="{% url 'gallery' %}?category={{ category.name }}">{{ category.name }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </li>
+                            <select name="categories" id="categories">
+                            <option  value="All" name="All" class="option-text">All</option>
+                            {% for category in categories %}
+                            <option value="{{category.name}}" name="{{category.name}}">{{category.name}}</option>
+                            {% endfor %}
+                            </select>  
                 </ul>
-                
             </div>
-
             <br>
-   
-          </div>
-        
+            <div class="card">
+                <div class="card-header" STYLE="color: #16507b;">
+                    <b>Sort By:</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                <form method="POST">
+                {% csrf_token %}           
+                <li class=" list-group-item">
+                <input type="checkbox" name='price' id="price"/>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+                <li class=" list-group-item">
+                <input type="checkbox" name='name' id="name">
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
+                </ul>
+            </div>
+            <br>
+                
+            <button type="submit" class="btn-get-started scrollto"  >Find Volunteering Options</button>
+
+        </div>
         <div class="col-md-9">
             <div class="row">
 
@@ -103,8 +123,8 @@
                             <img class="image-thumbail" src="{{ post.image.url }}" alt="Card image cap">
 
                             <div class="card-body">
-                                <br><b><small>Full Name: </b></small></small> <small>{{ post.full_name }}</small><br>
-                                <b> <small>Catergory: </b></small><small>{{ post.category.name }}</small><br>
+                                <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
+                                <b> <small>Association Name: </b></small><small>{{ post.full_name }}</small><br>
                                 <b> <small>City: </b></small><small>{{ post.city }}</small><br>
                                 <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
                                 <b>  <small>Phone Number: </b></small><small>{{ post.phone_number }}</small><br>
@@ -121,10 +141,11 @@
                             </div>
                             </div>
                             </section>
+                        </section>
                         </div>
                     </div>
                 {% empty %}
-                    <h3>No Posts Yet...</h3>
+                    <h3>No Volunteerings Options Yet...</h3>
                 {% endfor %}
 
 
@@ -132,10 +153,12 @@
         </div>
     </div>
 </div>
+    </form>
 
 </body>
 
 </html>
+
 </script>
 <!-- Vendor JS Files -->
 <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
@@ -148,6 +171,11 @@
 
 <!-- Template Main JS File -->
 <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+
+
+
 
 
 
