@@ -49,50 +49,55 @@
       
       <a href="/" class="logo"><img src="files/files/MLBLogo.png" alt="" class="img-fluid" height="100"></a>
 
-{% include 'navbar.html' %}<!-- .navbar -->
+      <!-- .navbar -->
+
+    {% include  "navbar.html" %}
 
     </div>
   </header><!-- End Header -->
 
-<br><br><br><br>
-        </div>
+
+<br><br><br>
+
+<body class="m-5">
+    <form method="POST">
+        {% csrf_token %}
+<div class="container">
+    <div class="row">
         <div class="col-md-9">
             <div class="row">
-                <form method="POST" >
-                    {% csrf_token %}
+
                 {% for approval in approvals %}
                     <div class="col-md-4">
                         <div class="card my-2">
                             <img class="image-thumbail" src="{{ approval.image.url }}" alt="Card image cap">
 
                             <div class="card-body">
+                                <br><a href="{{ approval.image.url }}"><b>View Approval</b></a>
+
                                 <br><b><small>Username: </b></small></small> <small>{{ approval.user }}</small><br>
-                                
                                 <b> <small>Coins Prize : </b></small><small>{{ approval.value }} </b></small>
 
                             </div>
                             <!-- go to photo with the id of the current post-->
                             <section id="hero" >
-                            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                             <div class="text-center">
-                            <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="{{approval.id}}">
-                                YES
-                            </button>
-                            
-                            <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="-{{approval.id}}">
-                                NO
-                    </button>    
-                        </div>
+                                <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="{{approval.id}}">
+                                    YES
+                                </button>
+                                <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="-{{approval.id}}">
+                                    NO
+                        </button>    
                             </div>
                             </section>
                         </section>
                         </div>
                     </div>
                 {% empty %}
-                    <h3>No Volunteerings Options Yet...</h3>
+                    <h3>No Approvals Yet...</h3>
                 {% endfor %}
 
-                </form>
+
             </div>
         </div>
     </div>
