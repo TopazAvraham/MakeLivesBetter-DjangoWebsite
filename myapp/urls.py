@@ -20,5 +20,5 @@ urlpatterns = [
     path('approvals', views.approvals, name='approvals'),
     path('uploadPost', views.uploadPost, name='uploadPost'),
     path('postRequests', views.postRequests, name='postRequests'),
-    path('approvedPosts', views.approvedPosts, name='approvedPosts')
-]
+    path('approvedPosts', views.approvedPosts, name='approvedPosts'),
+    path('approvedUserPosts', views.showUserApprovedPosts, name='approvedUserPosts')]

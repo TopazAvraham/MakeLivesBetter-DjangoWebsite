@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Feature, Approval
+from .models import Feature, Approval, ApprovedPost
 from .models import UserExtend
 from .models import Stores
 from .models import Post
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from .models import Category
+
 
 # Register your models here.
 class UserExtendInLine(admin.StackedInline):
@@ -15,11 +16,11 @@ class UserExtendInLine(admin.StackedInline):
 
 
 class CustomizeUserAdmin(UserAdmin):
-    inlines= (UserExtendInLine, )
+    inlines = (UserExtendInLine,)
+
 
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields= ('id',)
-
+    readonly_fields = ('id',)
 
 
 admin.site.unregister(User)
@@ -30,3 +31,4 @@ admin.site.register(Stores)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
 admin.site.register(Approval)
+admin.site.register(ApprovedPost)

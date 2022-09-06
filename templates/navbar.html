@@ -1,28 +1,30 @@
-      <nav id="navbar" class="navbar">
-        <ul>
-          {% if user.is_authenticated %}
+<nav id="navbar" class="navbar">
+    <ul>
+        {% if user.is_authenticated %}
             {% for e in extendedUsers %}
-              {% if e.user.username == user.username %}
-                {% if e.user.username == 'admin' %}
-                <li><a class="nav-link scrollto" href="approvals">View Approvals</a></li>
-                <li><a class="nav-link scrollto" href="postRequests">View Associations Request</a></li>
-                <li><a class="nav-link scrollto" href="approvedPosts">View Approved Posts</a></li>
-                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
-                {% else %}
-                <li><a class="nav-link scrollto" href="about">About</a></li>
-                <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
-                <li><a class="nav-link scrollto" href="mycoupons">My Coupons</a></li>
-                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
-                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+                {% if e.user.username == user.username %}
+                    {% if e.user.username == 'admin' %}
+                        <li><a class="nav-link scrollto" href="approvals">View Approvals</a></li>
+                        <li><a class="nav-link scrollto" href="postRequests">View Associations Request</a></li>
+                        <li><a class="nav-link scrollto" href="approvedPosts">View Approved Posts</a></li>
+                        <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+                    {% else %}
+                        <li><a class="nav-link scrollto" href="about">About</a></li>
+                        <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+                        <li><a class="nav-link scrollto" href="mycoupons">My Coupons</a></li>
+                        <li><a class="nav-link scrollto" href="approvedUserPosts">My Approvals</a></li>
+
+                        <li><a class="nav-link scrollto" href="prices">Coins: {{ e.coins }}</a></li>
+                        <li><a class="getstarted scrollto" href="logout">Logout</a></li>
+                    {% endif %}
                 {% endif %}
-              {% endif %}
-              {% endfor %}
-          {% else %}
-          <li><a class="nav-link scrollto" href="about">About</a></li>
-          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
-          <li><a class="getstarted scrollto" href="register">Register</a></li>
-          <li><a class="getstarted scrollto" href="login">Login</a></li>
-          {% endif %}
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
+            {% endfor %}
+        {% else %}
+            <li><a class="nav-link scrollto" href="about">About</a></li>
+            <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
+            <li><a class="getstarted scrollto" href="register">Register</a></li>
+            <li><a class="getstarted scrollto" href="login">Login</a></li>
+        {% endif %}
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+</nav>
