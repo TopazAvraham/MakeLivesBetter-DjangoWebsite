@@ -1,5 +1,3 @@
-from email.policy import default
-from pydoc import describe
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -11,6 +9,9 @@ class Feature(models.Model):
 
     details = models.CharField(max_length=400)
     icon = models.ImageField(upload_to="files/", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class UserExtend(models.Model):
@@ -50,6 +51,9 @@ class UserExtend(models.Model):
     def get_store_list(self):
         return list(map(str, self.store_list.split('.')))
 
+    def __str__(self):
+        return self.user.username
+
 
 class Stores(models.Model):
     name = models.CharField(max_length=100)
@@ -57,6 +61,9 @@ class Stores(models.Model):
     logo = models.ImageField(upload_to="files/", null=True, blank=True)
     id_number = models.CharField(blank=True, default=0, max_length=100)
     product_photo = models.ImageField(upload_to="files/", null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Category(models.Model):
@@ -71,6 +78,10 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
+
     full_name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -81,9 +92,8 @@ class Post(models.Model):
     image = models.ImageField(upload_to="files/", null=False, blank=False)
     value = models.IntegerField(blank=True, default=0)
 
-    class Meta:
-        verbose_name = 'Post'
-        verbose_name_plural = 'Posts'
+    def __str__(self):
+        return self.full_name
 
 
 class Approval(models.Model):
@@ -91,3 +101,6 @@ class Approval(models.Model):
     description = models.CharField(blank=True, max_length=250, null=True)
     image = models.ImageField(upload_to="files/", null=True, blank=True)
     is_approved = models.BooleanField()
+
+    def __str__(self):
+        return str(self.user)
