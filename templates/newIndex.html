@@ -52,9 +52,11 @@
                     {% for e in extendedUsers %}
                         {% if e.user.username == user.username %}
                             <h1>Welcome {{ e.user.username }}</h1>
+                            {% if e.user.username != 'admin' %}
                             <h2>You have <span data-purecounter-start="0"
                                                data-purecounter-end="{{ e.coins }}" data-purecounter-duration="1"
                                                class="purecounter"></span> coins</h2>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% else %}

@@ -57,8 +57,12 @@
   </header><!-- End Header -->
 
 
-<br><br><br>
+<br><br>
 
+<button style=" float: right;"type="submit" class="btn-get-started scrollto" onclick="myFunction()" >
+    Go Back
+</button>
+<br><br><br>
 <body class="m-5">
     <form method="POST">
         {% csrf_token %}
@@ -66,12 +70,12 @@
     <div class="row">
         <div class="col-md-9">
             <div class="row">
-
+                
                 {% for approval in approvals %}
                     <div class="col-md-4">
                         <div class="card my-2">
                             <img class="image-thumbail" src="{{ approval.image.url }}" alt="Card image cap">
-
+                            
                             <div class="card-body">
                                 <br><a href="{{ approval.image.url }}"><b>View Approval</b></a>
 
@@ -124,8 +128,11 @@
 
 
 
-
-
+<script type="text/javascript">
+    function myFunction() {
+        window.location.replace("/");
+    }   
+</script>
 
 
 
