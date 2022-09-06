@@ -184,27 +184,32 @@ def prices(request):
 
 
 def upload(request, primary_key):
-    global extended
     post = Post.objects.get(id=primary_key)
     user = request.user
+    print(type(user))
     extendedUsers = UserExtend.objects.all()
     for e in extendedUsers:
         if e.user.username == user.username:
             extended = e
     form = ApprovalForm()
-    form.user = extended
+    # print(extended)
     if request.method == 'POST':
+        # upload the form and validate .
+        form = ApprovalForm(request.POST, request.FILES)
 
         # when user upload form ---> add the coins and save .
         extended.coins += post.value
         extended.save()
 
-        # upload the form and validate .
-        form = ApprovalForm(request.POST, request.FILES)
         form.user = extended
+        extended = UserExtend.objects.get(pk=extended.id)
+
         if form.is_valid():
+            form = form.save(commit=False)
+            form.user = extended
             form.save()
         return redirect('/')
+
     context = {'form': form, 'extended': extended}
     return render(request, 'upload.html', context)
 
