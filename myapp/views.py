@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .forms import ApprovalForm
-from .models import Feature, UserExtend, Stores, Post, Category
+from .models import Feature, UserExtend, Stores, Post, Category, Approval
 from datetime import datetime
 
 
@@ -192,21 +192,17 @@ def upload(request, primary_key):
         if e.user.username == user.username:
             extended = e
     form = ApprovalForm()
-    # print(extended)
+
     if request.method == 'POST':
-        # upload the form and validate .
+
         form = ApprovalForm(request.POST, request.FILES)
 
-        # when user upload form ---> add the coins and save .
-        extended.coins += post.value
-        extended.save()
-
-        form.user = extended
         extended = UserExtend.objects.get(pk=extended.id)
 
         if form.is_valid():
             form = form.save(commit=False)
             form.user = extended
+            form.value = post.value
             form.save()
         return redirect('/')
 
@@ -257,3 +253,33 @@ def about(request):
 
     return render(request, 'about.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                           'store2': store2, 'store3': store3, 'store4': store4})
+
+
+def approvals(request):
+    approvals=Approval.objects.all()
+    extendedUsers = UserExtend.objects.all()
+    if not request.user.is_authenticated:
+        redirect('login')
+    user = request.user
+    if user.username != 'admin':
+        return redirect('/')
+
+    if request.method == 'POST':
+        
+        for approval in approvals:
+            if request.POST.get(str(approval.id)) != None:
+                realApproval = Approval.objects.get(pk=approval.id)
+                realApproval.user.coins += approval.value
+                realApproval.user.save()
+                realApproval.delete()
+                approvals=Approval.objects.all()
+                return render(request,'approvals.html',{'approvals': approvals, 'extendedUsers':extendedUsers})               
+
+        for approval in approvals:
+            if request.POST.get(str(-approval.id)) != None:
+                realApproval = Approval.objects.get(pk=approval.id)
+                realApproval.delete()
+                approvals=Approval.objects.all()
+                return render(request,'approvals.html',{'approvals': approvals, 'extendedUsers':extendedUsers})   
+
+    return render(request,'approvals.html',{'approvals': approvals, 'extendedUsers':extendedUsers})

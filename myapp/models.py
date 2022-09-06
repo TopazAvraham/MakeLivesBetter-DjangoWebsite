@@ -101,6 +101,7 @@ class Approval(models.Model):
     description = models.CharField(blank=True, max_length=250, null=True)
     image = models.ImageField(upload_to="files/", null=True, blank=True)
     is_approved = models.BooleanField()
+    value = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return str(self.user)

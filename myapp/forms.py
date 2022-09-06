@@ -5,6 +5,5 @@ from .models import Approval
 class ApprovalForm(ModelForm):
     class Meta:
         model = Approval
-        fields = ['image','description','is_approved','user']
-
- topaz avraham       
+        fields = ['image','description','is_approved','user','value']
+      

@@ -17,4 +17,5 @@ urlpatterns = [
     path('mycoupons', views.myCoupons, name='mycoupons'),
     path('about', views.about, name = 'about'),
     path('gallery', views.gallery, name='gallery'),
+    path('approvals', views.approvals, name='approvals')
 ]

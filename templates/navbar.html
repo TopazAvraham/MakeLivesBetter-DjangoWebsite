@@ -1,18 +1,18 @@
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="../../about">About</a></li>
-          <li><a class="nav-link scrollto" href="../../prices">Prices & Coupons</a></li>
+          <li><a class="nav-link scrollto" href="about">About</a></li>
+          <li><a class="nav-link scrollto" href="prices">Prices & Coupons</a></li>
           {% if user.is_authenticated %}
             {% for e in extendedUsers %}
               {% if e.user.username == user.username %}
-                <li><a class="nav-link scrollto" href="../../mycoupons">My Coupons</a></li>
-                <li><a class="nav-link scrollto" href="../../prices">Coins: {{e.coins}}</a></li>
-                <li><a class="getstarted scrollto" href="../../logout">Logout</a></li>
+                <li><a class="nav-link scrollto" href="mycoupons">My Coupons</a></li>
+                <li><a class="nav-link scrollto" href="prices">Coins: {{e.coins}}</a></li>
+                <li><a class="getstarted scrollto" href="logout">Logout</a></li>
               {% endif %}
               {% endfor %}
           {% else %}
-          <li><a class="getstarted scrollto" href="../../register">Register</a></li>
-          <li><a class="getstarted scrollto" href="../../login">Login</a></li>
+          <li><a class="getstarted scrollto" href="register">Register</a></li>
+          <li><a class="getstarted scrollto" href="login">Login</a></li>
           {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
