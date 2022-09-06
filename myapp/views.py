@@ -197,12 +197,13 @@ def upload(request, primary_key):
     if request.method == 'POST':
 
         form = ApprovalForm(request.POST, request.FILES)
-
         extended = UserExtend.objects.get(pk=extended.id)
         if form.is_valid():
             form = form.save(commit=False)
             form.user = extended
             form.value = post.value
+            user_approval = ApprovedPost(date=datetime.now(),description=form.description, image=form.image, is_approved=False, value=form.value, user=form.user)
+            user_approval.save()
             form.save()
         return redirect('/')
 
@@ -273,12 +274,6 @@ def approvals(request):
             if request.POST.get(str(approval.id)) != None:
                 realApproval = Approval.objects.get(pk=approval.id)
                 realApproval.user.coins += approval.value
-                # extendedApprovalls = extended.approvals
-                # extendedApprovalls.create(pk = realApproval.pk)
-                ApprovedPost.objects.create(value=realApproval.value, date=realApproval.date,
-                                                 description=realApproval.description, image=realApproval.image,
-                                                 is_approved=realApproval.is_approved,user = extended)
-
                 realApproval.user.save()
                 realApproval.delete()
                 approvals = Approval.objects.all()
@@ -374,4 +369,4 @@ def showUserApprovedPosts(request):
             extended = e
     approvedPostsFiltered = approvedPosts.filter(user=extended)
 
-    return render(request,'approvedUserPosts.html', {'approvedPostsFiltered': approvedPostsFiltered})
+    return render(request,'approvedUserPosts.html', {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})

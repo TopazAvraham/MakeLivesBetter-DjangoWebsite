@@ -63,43 +63,7 @@
 <form method="POST">
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header" STYLE="color: #16507b;">
-                        <b>Choose Category</b>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <select name="categories" id="categories">
-                            <option value="All" name="All" class="option-text">All</option>
-                            {% for category in categories %}
-                                <option value="{{ category.name }}"
-                                        name="{{ category.name }}">{{ category.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </ul>
-                </div>
-                <br>
-                <div class="card">
-                    <div class="card-header" STYLE="color: #16507b;">
-                        <b>Sort By:</b>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <form method="POST">
-                            {% csrf_token %}
-                            <li class=" list-group-item">
-                                <input type="checkbox" name='price' id="price"/>
-                                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
-                            <li class=" list-group-item">
-                                <input type="checkbox" name='name' id="name">
-                                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li>
-                        </form>
-                    </ul>
-                </div>
-                <br>
-
-                <button type="submit" class="btn-get-started scrollto">Find Volunteering Options</button>
-
-            </div>
+            
             <div class="col-md-9">
                 <div class="row">
 
@@ -109,19 +73,14 @@
                                 <img class="image-thumbail" src="{{ approval.image.url }}" alt="Card image cap">
 
                                 <div class="card-body">
-                                    <br><b><small>Category: </b></small></small>
-                                    <small>{{ approval.category.name }}</small><br>
-                                    <b> <small>Coins Prize : </b></small><small>{{ approval.value }} </b></small>
-                                    <b> <small>Coins Prize : </b></small><small>{{ approval.date }} </b></small>
-                                    <b> <small>Coins Prize : </b></small><small>{{ approval.description }} </b></small>
-                                    <b> <small>Coins Prize : </b></small><small>{{ approval.date }} </b></small>
-
-
+                                    <b><small>Value: </b></small><small>{{ approval.value }} </b></small><br>
+                                    <b><small>Date of approval: </b></small><small>{{ approval.date }} </b></small><br>
+                                    <b><small>Approval description: </b></small><small>{{ approval.description }} </b></small><br>
                                 </div>
                             </div>
                         </div>
                     {% empty %}
-                        <h3>No Volunteerings Options Yet...</h3>
+                        <h3>No Approvals Yet...</h3>
                     {% endfor %}
 
 
