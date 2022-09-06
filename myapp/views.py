@@ -1,4 +1,6 @@
 from random import randint
+import re
+from unicodedata import category
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -78,29 +80,29 @@ def logout(request):
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
-    posts = Post.objects.all()
+    posts = posts= Post.objects.filter(is_approved = True)
 
     if request.method == 'POST':
         category = request.POST.get('categories')
         print(category)
         if category == 'All':
             if request.POST.get('price'):
-                posts = Post.objects.order_by('value').reverse()
+                posts = Post.objects.filter(is_approved = True).order_by('value').reverse()
             elif request.POST.get('name'):
-                posts = Post.objects.order_by('full_name')
+                posts = Post.objects.filter(is_approved = True).order_by('full_name')
             else:
-                posts = Post.objects.all()
+                posts = Post.objects.filter(is_approved = True)
 
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
             return render(request, 'templates/gallery.html', context)
 
         else:
             if request.POST.get('price'):
-                posts = Post.objects.filter(category__name=category, ).order_by('value').reverse()
+                posts = Post.objects.filter(category__name=category, is_approved = True).order_by('value').reverse()
             elif request.POST.get('name'):
-                posts = Post.objects.filter(category__name=category, ).order_by('full_name')
+                posts = Post.objects.filter(category__name=category, is_approved = True).order_by('full_name')
             else:
-                posts = Post.objects.all().filter(category__name=category, )
+                posts = Post.objects.all().filter(category__name=category, is_approved = True)
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
             return render(request, 'templates/gallery.html', context)
 
@@ -265,7 +267,6 @@ def approvals(request):
         return redirect('/')
 
     if request.method == 'POST':
-        
         for approval in approvals:
             if request.POST.get(str(approval.id)) != None:
                 realApproval = Approval.objects.get(pk=approval.id)
@@ -283,3 +284,76 @@ def approvals(request):
                 return render(request,'approvals.html',{'approvals': approvals, 'extendedUsers':extendedUsers})   
 
     return render(request,'approvals.html',{'approvals': approvals, 'extendedUsers':extendedUsers})
+
+
+def uploadPost(request):
+    categories=Category.objects.all()  
+    if request.method == "POST":
+        full_name = request.POST.get('association')
+        print(full_name)
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        phone_number = request.POST.get('phone')
+        image = request.FILES.get('image')
+        description = request.POST.get('description')
+        category_name = request.POST.get('categories')
+        value= request.POST.get('coins')
+
+        for category in categories:
+            if category.name == category_name:
+                real_category = category
+        post=Post(full_name=full_name, address= address, city=city, phone_number=phone_number,category=real_category, image=image, description=description, is_approved=False, value=value)
+        post.save()
+      
+    return render(request, 'uploadPost.html', {'categories': categories})
+
+
+def postRequests(request):
+    posts= Post.objects.filter(is_approved = False)
+    extendedUsers = UserExtend.objects.all()
+    if not request.user.is_authenticated:
+        redirect('login')
+    user = request.user
+    if user.username != 'admin':
+        return redirect('/')
+
+    if request.method == 'POST':
+        for post in posts:
+            if request.POST.get(str(post.id)) != None:
+                realPost = Post.objects.get(pk=post.id)
+                realPost.is_approved = True
+                realPost.save()
+                posts= Post.objects.filter(is_approved = False)
+                return render(request,'postRequests.html',{'posts': posts, 'extendedUsers':extendedUsers})  
+
+
+        for post in posts:
+            if request.POST.get(str(-post.id)) != None:
+                realPost = Post.objects.get(pk=post.id)
+                realPost.delete()
+                posts= Post.objects.filter(is_approved = False)
+                return render(request,'postRequests.html',{'posts': posts, 'extendedUsers':extendedUsers}) 
+
+    return render(request, 'postRequests.html', {'posts': posts, 'extendedUsers':extendedUsers})  
+
+
+def approvedPosts(request):
+    posts= Post.objects.filter(is_approved = True)
+    extendedUsers = UserExtend.objects.all()
+    if not request.user.is_authenticated:
+        redirect('login')
+    user = request.user
+    if user.username != 'admin':
+        return redirect('/')
+
+    if request.method == 'POST':
+        for post in posts:
+            if request.POST.get(str(post.id)) != None:
+                realPost = Post.objects.get(pk=post.id)
+                realPost.delete()
+                posts= Post.objects.filter(is_approved = True)
+                return render(request,'approvedPosts.html',{'posts': posts, 'extendedUsers':extendedUsers}) 
+
+    return render(request, 'approvedPosts.html', {'posts': posts, 'extendedUsers':extendedUsers})  
+
+    

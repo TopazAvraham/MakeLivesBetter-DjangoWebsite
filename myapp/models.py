@@ -81,12 +81,11 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
-
     full_name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=10)
-    is_approved = models.BooleanField()
+    is_approved = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     description = models.CharField(blank=True, max_length=224, null=True)
     image = models.ImageField(upload_to="files/", null=False, blank=False)
