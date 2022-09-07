@@ -117,6 +117,6 @@ class ApprovedPost(models.Model):
     date = DateField(default=date.today)
     description = CharField(blank=True, max_length=250, null=True)
     image = ImageField(upload_to="files/", null=True, blank=True)
-    is_approved = BooleanField()
+    is_approved = BooleanField(default=None, blank=True, null=True)
     value = IntegerField(blank=True, default=0)
     user = ForeignKey(UserExtend, on_delete=models.SET_NULL, null=True, blank=True)

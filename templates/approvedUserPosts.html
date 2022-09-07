@@ -74,8 +74,18 @@
 
                                 <div class="card-body">
                                     <b><small>Value: </b></small><small>{{ approval.value }} </b></small><br>
-                                    <b><small>Date of approval: </b></small><small>{{ approval.date }} </b></small><br>
+                                    <b><small>Date Approval Uploaded: </b></small><small>{{ approval.date }} </b></small><br>
                                     <b><small>Approval description: </b></small><small>{{ approval.description }} </b></small><br>
+                                    <b><small>Is approved:  </b></small><small></small>
+                                        {% if approval.is_approved is None %} 
+                                    <small>
+                                        Not Yet Determined 
+                                    </small><br>
+                                        {% else %}
+                                    <small> 
+                                        {{ approval.is_approved }}
+                                    </small>
+                                        {% endif %}
                                 </div>
                             </div>
                         </div>

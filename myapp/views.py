@@ -177,11 +177,11 @@ def prices(request):
                                                          'extended': extended})
 
     if request.user.is_authenticated:
-        return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+        return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                          'store2': store2, 'store3': store3, 'store4': store4,
                                                          'extended': extended})
 
-    return render(request, 'templates/prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
+    return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
                                                      'store2': store2, 'store3': store3, 'store4': store4})
 
 
@@ -202,12 +202,13 @@ def upload(request, primary_key):
             form = form.save(commit=False)
             form.user = extended
             form.value = post.value
-            user_approval = ApprovedPost(date=datetime.now(),description=form.description, image=form.image, is_approved=False, value=form.value, user=form.user)
-            user_approval.save()
             form.save()
+           
+            user_approval = ApprovedPost(date=datetime.now(),description=form.description, image=form.image, is_approved=None, value=form.value, user=form.user,pk = form.pk)
+            user_approval.save()
         return redirect('/')
 
-    context = {'form': form, 'extended': extended}
+    context = {'form': form, 'extended': extended, 'extendedUsers': extendedUsers}
     return render(request, 'upload.html', context)
 
 
@@ -275,9 +276,11 @@ def approvals(request):
                 realApproval = Approval.objects.get(pk=approval.id)
                 realApproval.user.coins += approval.value
                 realApproval.user.save()
+                approvalPost = ApprovedPost.objects.get(id = realApproval.id)
+                approvalPost.is_approved = realApproval.is_approved
+                approvalPost.save()
                 realApproval.delete()
                 approvals = Approval.objects.all()
-
                 return render(request, 'approvals.html', {'approvals': approvals, 'extendedUsers': extendedUsers})
 
         for approval in approvals:
@@ -293,6 +296,7 @@ def approvals(request):
 
 def uploadPost(request):
     categories = Category.objects.all()
+    extendedUsers=UserExtend.objects.all()
     if request.method == "POST":
         full_name = request.POST.get('association')
         address = request.POST.get('address')
@@ -310,7 +314,7 @@ def uploadPost(request):
                     image=image, description=description, is_approved=False, value=value)
         post.save()
 
-    return render(request, 'uploadPost.html', {'categories': categories})
+    return render(request, 'uploadPost.html', {'categories': categories, 'extendedUsers': extendedUsers})
 
 
 def postRequests(request):
