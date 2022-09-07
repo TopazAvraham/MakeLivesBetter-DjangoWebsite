@@ -115,3 +115,6 @@ class UserApproval(models.Model):
     is_approved = BooleanField(default=None, blank=True, null=True)
     value = IntegerField(blank=True, default=0)
     user = ForeignKey(UserExtend, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
