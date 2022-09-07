@@ -7,7 +7,8 @@ from django.contrib import messages
 from .forms import ApprovalForm
 from .models import Feature, UserExtend, Store, VolunteeringOption, Category, ApprovalToConfirm, UserApproval
 from datetime import datetime
-import swal from 'sweetalert';
+
+
 
 
 # Create your views here.
