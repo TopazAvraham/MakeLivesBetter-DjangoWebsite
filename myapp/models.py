@@ -99,7 +99,6 @@ class VolunteeringOption(models.Model):
         return self.full_name
 
 
-
 class Approval(models.Model):
     user = ForeignKey(UserExtend, on_delete=models.SET_NULL, null=True, blank=True)
     date = DateField(default=date.today)
