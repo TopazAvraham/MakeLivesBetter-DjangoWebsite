@@ -90,7 +90,7 @@ class VolunteeringOption(models.Model):
     is_approved = BooleanField(default=False)
     category = ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     description = CharField(blank=True, max_length=224, null=True)
-    image = ImageField(upload_to="files/", null=False, blank=False)
+    image = ImageField(upload_to="files/", null=True, blank=True)
     value = IntegerField(blank=True, default=0)
 
     def __str__(self):
