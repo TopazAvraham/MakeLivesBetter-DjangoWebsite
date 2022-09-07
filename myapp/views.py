@@ -98,9 +98,11 @@ def gallery(request):
 
         else:
             if request.POST.get('price'):
-                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by('value').reverse()
+                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by(
+                    'value').reverse()
             elif request.POST.get('name'):
-                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by('full_name')
+                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by(
+                    'full_name')
             else:
                 posts = VolunteeringOption.objects.all().filter(category__name=category, is_approved=True)
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
@@ -178,11 +180,11 @@ def prices(request):
 
     if request.user.is_authenticated:
         return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                                         'store2': store2, 'store3': store3, 'store4': store4,
-                                                         'extended': extended})
+                                               'store2': store2, 'store3': store3, 'store4': store4,
+                                               'extended': extended})
 
     return render(request, 'prices.html', {'extendedUsers': extendedUsers, 'store1': store1,
-                                                     'store2': store2, 'store3': store3, 'store4': store4})
+                                           'store2': store2, 'store3': store3, 'store4': store4})
 
 
 def uploadApproval(request, primary_key):
@@ -203,8 +205,9 @@ def uploadApproval(request, primary_key):
             form.user = extended
             form.value = post.value
             form.save()
-           
-            user_approval = ApprovedPost(date=datetime.now(),description=form.description, image=form.image, is_approved=None, value=form.value, user=form.user,pk = form.pk)
+
+            user_approval = ApprovedPost(date=datetime.now(), description=form.description, image=form.image,
+                                         is_approved=None, value=form.value, user=form.user, pk=form.pk)
             user_approval.save()
         return redirect('/')
 
@@ -276,12 +279,13 @@ def adminViewApprovals(request):
                 realApproval = Approval.objects.get(pk=approval.id)
                 realApproval.user.coins += approval.value
                 realApproval.user.save()
-                approvalPost = ApprovedPost.objects.get(id = realApproval.id)
+                approvalPost = ApprovedPost.objects.get(id=realApproval.id)
                 approvalPost.is_approved = realApproval.is_approved
                 approvalPost.save()
                 realApproval.delete()
                 approvals = Approval.objects.all()
-                return render(request, 'admin_view_approvals.html', {'approvals': approvals, 'extendedUsers': extendedUsers})
+                return render(request, 'admin_view_approvals.html',
+                              {'approvals': approvals, 'extendedUsers': extendedUsers})
 
         for approval in approvals:
             if request.POST.get(str(-approval.id)) != None:
@@ -289,14 +293,15 @@ def adminViewApprovals(request):
                 realApproval.delete()
 
                 approvals = Approval.objects.all()
-                return render(request, 'admin_view_approvals.html', {'approvals': approvals, 'extendedUsers': extendedUsers})
+                return render(request, 'admin_view_approvals.html',
+                              {'approvals': approvals, 'extendedUsers': extendedUsers})
 
     return render(request, 'admin_view_approvals.html', {'approvals': approvals, 'extendedUsers': extendedUsers})
 
 
 def uploadVolunteerOption(request):
     categories = Category.objects.all()
-    extendedUsers=UserExtend.objects.all()
+    extendedUsers = UserExtend.objects.all()
     if request.method == "POST":
         full_name = request.POST.get('association')
         address = request.POST.get('address')
@@ -310,8 +315,9 @@ def uploadVolunteerOption(request):
         for category in categories:
             if category.name == category_name:
                 real_category = category
-        post = VolunteeringOption(full_name=full_name, address=address, city=city, phone_number=phone_number, category=real_category,
-                    image=image, description=description, is_approved=False, value=value)
+        post = VolunteeringOption(full_name=full_name, address=address, city=city, phone_number=phone_number,
+                                  category=real_category,
+                                  image=image, description=description, is_approved=False, value=value)
         post.save()
 
     return render(request, 'upload_volunteer_option.html', {'categories': categories, 'extendedUsers': extendedUsers})
@@ -333,14 +339,16 @@ def adminViewVolunteeringRequests(request):
                 realPost.is_approved = True
                 realPost.save()
                 posts = VolunteeringOption.objects.filter(is_approved=False)
-                return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
+                return render(request, 'admin_view_volunteering_requests.html',
+                              {'posts': posts, 'extendedUsers': extendedUsers})
 
         for post in posts:
             if request.POST.get(str(-post.id)) != None:
                 realPost = VolunteeringOption.objects.get(pk=post.id)
                 realPost.delete()
                 posts = VolunteeringOption.objects.filter(is_approved=False)
-                return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
+                return render(request, 'admin_view_volunteering_requests.html',
+                              {'posts': posts, 'extendedUsers': extendedUsers})
 
     return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
@@ -360,12 +368,13 @@ def adminViewExistingPosts(request):
                 realPost = VolunteeringOption.objects.get(pk=post.id)
                 realPost.delete()
                 posts = VolunteeringOption.objects.filter(is_approved=True)
-                return render(request, 'admin_view_existing_posts.html', {'posts': posts, 'extendedUsers': extendedUsers})
+                return render(request, 'admin_view_existing_posts.html',
+                              {'posts': posts, 'extendedUsers': extendedUsers})
 
     return render(request, 'admin_view_existing_posts.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
 
-def myapprovals(request):
+def myApprovals(request):
     extendedUsers = UserExtend.objects.all()
     approvedPosts = ApprovedPost.objects.all()
     for e in extendedUsers:
@@ -381,7 +390,8 @@ def myapprovals(request):
         elif request.POST.get('approved'):
             approvedPostsFiltered = approvedPostsFiltered.filter(is_approved=True)
 
-        return render(request,'myapprovals.html', {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})
-        
+        return render(request, 'templates/my_approvals.html',
+                      {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})
 
-    return render(request,'myapprovals.html', {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})
+    return render(request, 'templates/my_approvals.html',
+                  {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})

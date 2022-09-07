@@ -6,7 +6,6 @@ from django.db.models import CharField,ImageField,ManyToManyField,BooleanField,\
     IntegerField,OneToOneField,ForeignKey,DateField
 
 
-# Create your models here.
 class Feature(models.Model):
     name = CharField(max_length=100)
     details = CharField(max_length=400)
