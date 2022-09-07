@@ -1,8 +1,7 @@
-from datetime import timezone
 from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import CharField,ImageField,ManyToManyField,BooleanField,\
+from django.db.models import CharField,ImageField,BooleanField,\
     IntegerField,OneToOneField,ForeignKey,DateField
 
 
@@ -22,7 +21,7 @@ class UserExtend(models.Model):
     coupons_counter = IntegerField(default=0)
     date_list = CharField(max_length=1000000, null=True, blank=True)
     store_list = CharField(max_length=1000000, null=True, blank=True)
-    approvals = ForeignKey('ApprovedPost',on_delete=models.SET_NULL, null=True, blank=True)
+    approvals = ForeignKey('UserApproval',on_delete=models.SET_NULL, null=True, blank=True)
 
     def add_coupon(self, data):
         if self.coupons_list is None:
@@ -98,7 +97,7 @@ class VolunteeringOption(models.Model):
         return self.full_name
 
 
-class Approval(models.Model):
+class ApprovalToConfirm(models.Model):
     user = ForeignKey(UserExtend, on_delete=models.SET_NULL, null=True, blank=True)
     date = DateField(default=date.today)
     description = CharField(blank=True, max_length=250, null=True)
@@ -109,7 +108,7 @@ class Approval(models.Model):
     def __str__(self):
         return str(self.user)
 
-class ApprovedPost(models.Model):
+class UserApproval(models.Model):
     date = DateField(default=date.today)
     description = CharField(blank=True, max_length=250, null=True)
     image = ImageField(upload_to="files/", null=True, blank=True)

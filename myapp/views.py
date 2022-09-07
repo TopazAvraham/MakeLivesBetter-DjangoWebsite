@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .forms import ApprovalForm
-from .models import Feature, UserExtend, Store, VolunteeringOption, Category, Approval, ApprovedPost
+from .models import Feature, UserExtend, Store, VolunteeringOption, Category, ApprovalToConfirm, UserApproval
 from datetime import datetime
 
 
@@ -206,7 +206,7 @@ def uploadApproval(request, primary_key):
             form.value = post.value
             form.save()
 
-            user_approval = ApprovedPost(date=datetime.now(), description=form.description, image=form.image,
+            user_approval = UserApproval(date=datetime.now(), description=form.description, image=form.image,
                                          is_approved=None, value=form.value, user=form.user, pk=form.pk)
             user_approval.save()
         return redirect('/')
@@ -261,7 +261,7 @@ def about(request):
 
 
 def adminViewApprovals(request):
-    approvals = Approval.objects.all()
+    approvals = ApprovalToConfirm.objects.all()
     extendedUsers = UserExtend.objects.all()
 
     if not request.user.is_authenticated:
@@ -276,23 +276,23 @@ def adminViewApprovals(request):
                 extended = e
         for approval in approvals:
             if request.POST.get(str(approval.id)) != None:
-                realApproval = Approval.objects.get(pk=approval.id)
+                realApproval = ApprovalToConfirm.objects.get(pk=approval.id)
                 realApproval.user.coins += approval.value
                 realApproval.user.save()
-                approvalPost = ApprovedPost.objects.get(id=realApproval.id)
+                approvalPost = UserApproval.objects.get(id=realApproval.id)
                 approvalPost.is_approved = realApproval.is_approved
                 approvalPost.save()
                 realApproval.delete()
-                approvals = Approval.objects.all()
+                approvals = ApprovalToConfirm.objects.all()
                 return render(request, 'admin_view_approvals.html',
                               {'approvals': approvals, 'extendedUsers': extendedUsers})
 
         for approval in approvals:
             if request.POST.get(str(-approval.id)) != None:
-                realApproval = Approval.objects.get(pk=approval.id)
+                realApproval = ApprovalToConfirm.objects.get(pk=approval.id)
                 realApproval.delete()
 
-                approvals = Approval.objects.all()
+                approvals = ApprovalToConfirm.objects.all()
                 return render(request, 'admin_view_approvals.html',
                               {'approvals': approvals, 'extendedUsers': extendedUsers})
 
@@ -376,7 +376,7 @@ def adminViewExistingPosts(request):
 
 def myApprovals(request):
     extendedUsers = UserExtend.objects.all()
-    approvedPosts = ApprovedPost.objects.all()
+    approvedPosts = UserApproval.objects.all()
     for e in extendedUsers:
         if e.user.username == request.user.username:
             extended = e

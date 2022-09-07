@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Feature, Approval, ApprovedPost
+from .models import Feature, ApprovalToConfirm, UserApproval
 from .models import UserExtend
 from .models import Store
 from .models import VolunteeringOption
@@ -30,5 +30,5 @@ admin.site.register(UserExtend)
 admin.site.register(Store)
 admin.site.register(VolunteeringOption, PostAdmin)
 admin.site.register(Category)
-admin.site.register(Approval)
-admin.site.register(ApprovedPost)
+admin.site.register(ApprovalToConfirm)
+admin.site.register(UserApproval)
