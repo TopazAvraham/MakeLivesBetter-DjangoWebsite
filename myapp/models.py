@@ -9,7 +9,6 @@ from django.db.models import CharField,ImageField,ManyToManyField,BooleanField,\
 # Create your models here.
 class Feature(models.Model):
     name = CharField(max_length=100)
-
     details = CharField(max_length=400)
     icon = ImageField(upload_to="files/", null=True, blank=True)
 
@@ -26,7 +25,6 @@ class UserExtend(models.Model):
     store_list = CharField(max_length=1000000, null=True, blank=True)
     approvals = ForeignKey('ApprovedPost',on_delete=models.SET_NULL, null=True, blank=True)
 
-    # approvals = ForeignKey('Approval',on_delete=models.SET_NULL, null=True, blank=True)
     def add_coupon(self, data):
         if self.coupons_list is None:
             self.coupons_list = '.'.join(map(str, data))
@@ -60,7 +58,7 @@ class UserExtend(models.Model):
         return self.user.username
 
 
-class Stores(models.Model):
+class Store(models.Model):
     name = CharField(max_length=100)
     product = CharField(max_length=100)
     logo = ImageField(upload_to="files/", null=True, blank=True)
@@ -82,10 +80,10 @@ class Category(models.Model):
         return self.name
 
 
-class Post(models.Model):
+class VolunteeringOption(models.Model):
     class Meta:
-        verbose_name = 'Post'
-        verbose_name_plural = 'Posts'
+        verbose_name = 'VolunteeringOption'
+        verbose_name_plural = 'VolunteeringOptions'
 
     full_name = CharField(max_length=100)
     address = CharField(max_length=100)

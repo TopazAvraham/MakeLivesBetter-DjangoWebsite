@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from .forms import ApprovalForm
-from .models import Feature, UserExtend, Stores, Post, Category, Approval, ApprovedPost
+from .models import Feature, UserExtend, Store, VolunteeringOption, Category, Approval, ApprovedPost
 from datetime import datetime
 
 
@@ -80,29 +80,29 @@ def logout(request):
 def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
-    posts = posts = Post.objects.filter(is_approved=True)
+    posts = posts = VolunteeringOption.objects.filter(is_approved=True)
 
     if request.method == 'POST':
         category = request.POST.get('categories')
         print(category)
         if category == 'All':
             if request.POST.get('price'):
-                posts = Post.objects.filter(is_approved=True).order_by('value').reverse()
+                posts = VolunteeringOption.objects.filter(is_approved=True).order_by('value').reverse()
             elif request.POST.get('name'):
-                posts = Post.objects.filter(is_approved=True).order_by('full_name')
+                posts = VolunteeringOption.objects.filter(is_approved=True).order_by('full_name')
             else:
-                posts = Post.objects.filter(is_approved=True)
+                posts = VolunteeringOption.objects.filter(is_approved=True)
 
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
             return render(request, 'templates/gallery.html', context)
 
         else:
             if request.POST.get('price'):
-                posts = Post.objects.filter(category__name=category, is_approved=True).order_by('value').reverse()
+                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by('value').reverse()
             elif request.POST.get('name'):
-                posts = Post.objects.filter(category__name=category, is_approved=True).order_by('full_name')
+                posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by('full_name')
             else:
-                posts = Post.objects.all().filter(category__name=category, is_approved=True)
+                posts = VolunteeringOption.objects.all().filter(category__name=category, is_approved=True)
             context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
             return render(request, 'templates/gallery.html', context)
 
@@ -111,7 +111,7 @@ def gallery(request):
 
 
 def prices(request):
-    stores = Stores.objects.all()
+    stores = Store.objects.all()
     list_stores = list(stores)
     store1 = list_stores[0]
     store2 = list_stores[1]
@@ -186,7 +186,7 @@ def prices(request):
 
 
 def uploadApproval(request, primary_key):
-    post = Post.objects.get(id=primary_key)
+    post = VolunteeringOption.objects.get(id=primary_key)
     user = request.user
     extendedUsers = UserExtend.objects.all()
     for e in extendedUsers:
@@ -214,12 +214,12 @@ def uploadApproval(request, primary_key):
 
 def viewPost(request, primary_key):
     extendedUsers = UserExtend.objects.all()
-    post = Post.objects.get(id=primary_key)
+    post = VolunteeringOption.objects.get(id=primary_key)
     return render(request, 'photo.html', {'post': post, 'extendedUsers': extendedUsers})
 
 
 def myCoupons(request):
-    stores = Stores.objects.all()
+    stores = Store.objects.all()
     list_stores = list(stores)
     store1 = list_stores[0]
     store2 = list_stores[1]
@@ -243,7 +243,7 @@ def myCoupons(request):
 
 
 def about(request):
-    stores = Stores.objects.all()
+    stores = Store.objects.all()
     list_stores = list(stores)
     store1 = list_stores[0]
     store2 = list_stores[1]
@@ -310,7 +310,7 @@ def uploadVolunteerOption(request):
         for category in categories:
             if category.name == category_name:
                 real_category = category
-        post = Post(full_name=full_name, address=address, city=city, phone_number=phone_number, category=real_category,
+        post = VolunteeringOption(full_name=full_name, address=address, city=city, phone_number=phone_number, category=real_category,
                     image=image, description=description, is_approved=False, value=value)
         post.save()
 
@@ -318,7 +318,7 @@ def uploadVolunteerOption(request):
 
 
 def adminViewVolunteeringRequests(request):
-    posts = Post.objects.filter(is_approved=False)
+    posts = VolunteeringOption.objects.filter(is_approved=False)
     extendedUsers = UserExtend.objects.all()
     if not request.user.is_authenticated:
         redirect('login')
@@ -329,24 +329,24 @@ def adminViewVolunteeringRequests(request):
     if request.method == 'POST':
         for post in posts:
             if request.POST.get(str(post.id)) != None:
-                realPost = Post.objects.get(pk=post.id)
+                realPost = VolunteeringOption.objects.get(pk=post.id)
                 realPost.is_approved = True
                 realPost.save()
-                posts = Post.objects.filter(is_approved=False)
+                posts = VolunteeringOption.objects.filter(is_approved=False)
                 return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
         for post in posts:
             if request.POST.get(str(-post.id)) != None:
-                realPost = Post.objects.get(pk=post.id)
+                realPost = VolunteeringOption.objects.get(pk=post.id)
                 realPost.delete()
-                posts = Post.objects.filter(is_approved=False)
+                posts = VolunteeringOption.objects.filter(is_approved=False)
                 return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
     return render(request, 'admin_view_volunteering_requests.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
 
 def adminViewExistingPosts(request):
-    posts = Post.objects.filter(is_approved=True)
+    posts = VolunteeringOption.objects.filter(is_approved=True)
     extendedUsers = UserExtend.objects.all()
     if not request.user.is_authenticated:
         redirect('login')
@@ -357,9 +357,9 @@ def adminViewExistingPosts(request):
     if request.method == 'POST':
         for post in posts:
             if request.POST.get(str(post.id)) != None:
-                realPost = Post.objects.get(pk=post.id)
+                realPost = VolunteeringOption.objects.get(pk=post.id)
                 realPost.delete()
-                posts = Post.objects.filter(is_approved=True)
+                posts = VolunteeringOption.objects.filter(is_approved=True)
                 return render(request, 'admin_view_existing_posts.html', {'posts': posts, 'extendedUsers': extendedUsers})
 
     return render(request, 'admin_view_existing_posts.html', {'posts': posts, 'extendedUsers': extendedUsers})
