@@ -1,9 +1,9 @@
 {% load static %}
 <head>
   
-  <link href="{% static 'styleUpload2.css' %}" rel="stylesheet">
-  <link href="{% static 'styleUpload4.css' %}" rel="stylesheet">
-    <link href="{% static 'newIndex3.css' %}" rel="stylesheet">
+  <link href="{% static 'styleUpload.css' %}" rel="stylesheet">
+  <link href="{% static 'styleUploadExtra.css' %}" rel="stylesheet">
+    <link href="{% static 'styleIndex.css' %}" rel="stylesheet">
    
     <title>Upload Volunteer Approval Page</title>
 </head>
@@ -36,7 +36,7 @@
 
 </div>
 <div class="col-md-6 offset-md-3 mt-5">
-  <h1 class="btn btn-primary2 ">Please Upload The Post Here</h1> <br><br>
+  <h1 class="btn btn-primary2 ">Please Upload The Volunteering Opportunity Here</h1> <br><br>
   <form accept-charset="UTF-8"   method="POST" enctype="multipart/form-data" onsubmit="myFunction()" >
     {% csrf_token %}
     {{ form.media }}
@@ -47,7 +47,7 @@
     </div>
     
     <div class="form-group">
-        <label for="exampleInputName" STYLE="color: #16507b;"> <b>Volunteer Category:</b></label>
+        <label for="exampleInputName" STYLE="color: #16507b;"> <b>Volunteering Category:</b></label>
         <br>
         <select name="categories" id="categories">
             {% for category in categories %}
@@ -68,7 +68,7 @@
     </div>
 
     <div class="form-group">
-        <label for="exampleInputName" STYLE="color: #16507b;"> <b>Phone Number:</b></label>
+        <label for="exampleInputName" STYLE="color: #16507b;"> <b>Mobile Phone Number:</b></label>
         <input type="text" name="phone" placeholder='Enter Phone here' class="form-control" pattern="05[0-9]{8}" required/> 
     </div>
 
@@ -100,7 +100,7 @@
     <button type="submit" class="btn btn-primary" onclick="myfunction()" >Submit</button>
       <script >
       function myFunction() {
-      alert('your post has been sent to review, and will be checked within 24 hours')  }
+      alert('your volunteering option has been sent to review, and will be checked within 24 hours')  }
     </script>
   </form>
 </div>

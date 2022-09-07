@@ -12,7 +12,7 @@
  
     
     <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'newStyleGallery3.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGalleryExtra.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -71,30 +71,26 @@
         <div class="col-md-9">
             <div class="row">
                 
-                {% for post in posts %}
+                {% for approval in approvals %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img class="image-thumbail" src="{{ post.image.url }}" alt="Card image cap">
+                            <img class="image-thumbail" src="{{ approval.image.url }}" alt="Card image cap">
                             
                             <div class="card-body">
-                                <br><a href="{{ post.image.url }}"><b>View Photo</b></a>
+                                <br><a href="{{ approval.image.url }}"><b>View Approval</b></a>
 
-                                <br><b><small>Category: </b></small></small> <small>{{ post.category.name }}</small><br>
-                                <b> <small>Association Name: </b></small><small>{{ post.full_name }}</small><br>
-                                <b> <small>City: </b></small><small>{{ post.city }}</small><br>
-                                <b>  <small>Address: </b></small><small>{{ post.address }}</small><br>
-                                <b> <small>Phone Number : </b></small><small>{{ post.phone_number }} </b></small><br>
-                                <b> <small>Coins Prize : </b></small><small>{{ post.value }} </b></small><br>
-                                <b> <small>Description : </b></small><small>{{ post.description }} </b></small>
+                                <br><b><small>Username: </b></small></small> <small>{{ approval.user }}</small><br>
+                                <b> <small>Coins Prize : </b></small><small>{{ approval.value }} </b></small><br>
+                                <b> <small>Approval Date : </b></small><small>{{ approval.date }} </b></small>
 
                             </div>
                             <!-- go to photo with the id of the current post-->
                             <section id="hero" >
                             <div class="text-center">
-                                <button type="submit" class="btn-get-started scrollto" value={{post.id}}  name="{{post.id}}">
+                                <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="{{approval.id}}">
                                     YES
                                 </button>
-                                <button type="submit" class="btn-get-started scrollto" value={{post.id}}  name="-{{post.id}}">
+                                <button type="submit" class="btn-get-started scrollto" value={{approval.id}}  name="-{{approval.id}}">
                                     NO
                         </button>    
                             </div>
@@ -103,7 +99,7 @@
                         </div>
                     </div>
                 {% empty %}
-                    <h3>No Association Requests Yet...</h3>
+                    <h3>No Approvals Yet...</h3>
                 {% endfor %}
 
 

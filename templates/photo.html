@@ -7,7 +7,7 @@
     <title>Volunteering Info</title>
     <link href="{% static 'stylePhoto.css' %}" rel="stylesheet">
     <link href="{% static 'stylePhotoExtra.css' %}" rel="stylesheet">
-    <link href="{% static 'indexForPhoto2.css' %}" rel="stylesheet">
+    <link href="{% static 'indexForPhoto.css' %}" rel="stylesheet">
 </head>
 
 <style>
@@ -57,7 +57,7 @@
       <section id="hero">
         <div class="container position-relative">
         {% if user.is_authenticated %}
-        <a href="{% url 'upload' post.id  %}" class="btn-get-started2 scrollto">Upload Volunteering Approval</a>
+        <a href="{% url 'upload_approval' post.id  %}" class="btn-get-started2 scrollto">Upload Volunteering Approval</a>
         {% else %}
         <a href="../../login" class="btn-get-started2 scrollto" onclick="myFunction()">Upload Volunteering Approval</a>
         {% endif %}

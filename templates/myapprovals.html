@@ -12,7 +12,7 @@
 
 
     <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
-    <link href="{% static 'newStyleGallery3.css' %}" rel="stylesheet">
+    <link href="{% static 'newStyleGalleryExtra.css' %}" rel="stylesheet">
 
     <style>
         .image-thumbail {
@@ -60,10 +60,36 @@
 <br><br><br>
 
 <body class="m-5">
-<form method="POST">
-    <div class="container">
-        <div class="row">
+    <form method="POST">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
             
+            <div class="card">
+                <div class="card-header" STYLE="color: #16507b;">
+                    <b>Sort By:</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                <form method="POST">
+                {% csrf_token %}           
+                <li class=" list-group-item">
+                <input type="checkbox" name='date' id="date">
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Date</b></label><br></li></form>
+
+                <li class=" list-group-item">
+                <input type="checkbox" name='price' id="price"/>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+
+                <li class=" list-group-item">
+                <input type="checkbox" name='approved' id='approved'>
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Approved Only</b></label><br></li></form>
+                </ul>
+            </div>
+            <br>
+                
+            <button type="submit" class="btn-get-started scrollto"  >Find Approvals</button>
+
+        </div>
             <div class="col-md-9">
                 <div class="row">
 
