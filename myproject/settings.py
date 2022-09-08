@@ -25,9 +25,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "templates/../static/files/")
 SECRET_KEY = 'django-insecure-*hqnqd$o2+6+-jdk6nd3$9h%bn1*vq-1(srm2aqv$5xwry1@n@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://makeslivesbetter-website.herokuapp.com/','127.0.0.1']
 
 # Application definition
 
