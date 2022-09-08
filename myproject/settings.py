@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT=os.path.join(BASE_DIR, "/files")
+MEDIA_ROOT = os.path.join(BASE_DIR, "/files")
 # MEDIA_URL="/files/"
 
 
@@ -29,7 +29,6 @@ SECRET_KEY = 'django-insecure-*hqnqd$o2+6+-jdk6nd3$9h%bn1*vq-1(srm2aqv$5xwry1@n@
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -75,21 +74,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'MakesLivesBetter',
-        'USER' : 'arielelbaz',
-        'PASSWORD' : 'Ari123a456!',
-        'HOST' : 'database-1.cwbh1j7veclr.eu-central-1.rds.amazonaws.com',
-        'PORT' : '5432',
+        'NAME': 'MakesLivesBetter',
+        'USER': 'arielelbaz',
+        'PASSWORD': 'Ari123a456!',
+        'HOST': 'database-1.cwbh1j7veclr.eu-central-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -109,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -121,21 +117,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 # STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
@@ -146,7 +137,6 @@ AWS_ACCESS_KEY_ID = 'AKIA47V644GEE6P2N5FM'
 AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_STORAGE_BUCKET_NAME = 'arielelel'
-
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
@@ -165,6 +155,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-
 
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/files/files/'
