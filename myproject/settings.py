@@ -15,8 +15,8 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_URL="/files/"
-MEDIA_ROOT=os.path.join(BASE_DIR, "templates/../static/files/")
+MEDIA_ROOT=os.path.join(BASE_DIR, "/files")
+# MEDIA_URL="/files/"
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'tinymce',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME' : 'MakesLivesBetter',
+        'USER' : 'arielelbaz',
+        'PASSWORD' : 'Ari123a456!',
+        'HOST' : 'database-1.cwbh1j7veclr.eu-central-1.rds.amazonaws.com',
+        'PORT' : '5432',
     }
 }
 
@@ -120,7 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
@@ -133,3 +138,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+
+# Amazon S3 Settings
+
+AWS_ACCESS_KEY_ID = 'AKIA47V644GEE6P2N5FM'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'arielelel'
+
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+AWS_DEFAULT_ACL = 'public-read'
+
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+AWS_LOCATION = 'static'
+
+AWS_QUERYSTRING_AUTH = False
+
+AWS_HEADERS = {'Access-Control-Allow-Origin': '*'}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+
+
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/files/files/'
