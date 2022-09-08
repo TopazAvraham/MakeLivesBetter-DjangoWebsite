@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['https://makeslivesbetter-website.herokuapp.com/', '127.0.0.1']
 
 # Application definition
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,7 +148,7 @@ AWS_STORAGE_BUCKET_NAME = 'arielelel'
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-AWS_DEFAULT_ACL = 'public-read'
+AWS_DEFAULT_ACL = 'public-read-write'
 
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
