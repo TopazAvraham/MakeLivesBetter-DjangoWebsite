@@ -169,3 +169,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/files/files/'
+
+import django_heroku
+django_heroku.settings(locals())
