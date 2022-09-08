@@ -26,9 +26,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "/files")
 SECRET_KEY = 'django-insecure-*hqnqd$o2+6+-jdk6nd3$9h%bn1*vq-1(srm2aqv$5xwry1@n@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://makeslivesbetter-website.herokuapp.com/', '127.0.0.1']
 
 # Application definition
 
@@ -41,18 +41,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'tinymce',
+
+    'corsheaders',
+
     'storages',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+
 ]
+
 
 ROOT_URLCONF = 'myproject.urls'
 
