@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = os.path.join(BASE_DIR, "/files/files")
+
 
 # MEDIA_URL="/files/"
 
@@ -27,7 +27,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "/files/files")
 SECRET_KEY = 'django-insecure-*hqnqd$o2+6+-jdk6nd3$9h%bn1*vq-1(srm2aqv$5xwry1@n@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://makeslivesbetter-website.herokuapp.com/', '127.0.0.1']
 
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'tinymce',
-
     'corsheaders',
 
     'storages',
@@ -133,7 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 # STATIC_URL = 'static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -168,7 +167,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/files/files/'
 
 import django_heroku
 django_heroku.settings(locals())
