@@ -9,6 +9,8 @@ from .models import Feature, UserExtend, Store, VolunteeringOption, Category, Ap
 from datetime import datetime
 
 
+
+
 # Create your views here.
 def index(request):
     features = Feature.objects.all()
