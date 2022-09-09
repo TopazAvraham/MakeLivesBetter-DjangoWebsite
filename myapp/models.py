@@ -60,6 +60,7 @@ class Store(models.Model):
     name = CharField(max_length=100)
     product = CharField(max_length=100)
     logo = ImageField(upload_to="files/", null=True, blank=True)
+    id_number = CharField(blank=True, default=0, max_length=100)
     product_photo = ImageField(upload_to="files/", null=True, blank=True)
 
     def __str__(self):
