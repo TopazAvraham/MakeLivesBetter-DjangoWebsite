@@ -61,7 +61,7 @@ The concept of the website is: volunteer, get coins as a rewards for each volunt
   <b> Find volunteering options page </b>
 </p>
 <p align="left">
-  <img width="800" height="350" src="https://github.com/TopazAvraham/IntroductionToCS-University-C-programming/blob/master/Screenshots/3.png?raw=true">
+  <img width="800" height="350" src="https://github.com/TopazAvraham/MakeLivesBetter-DjangoWebsite/blob/master/Screenshots/20.png?raw=true">
 </p>
 <br>
 
@@ -81,6 +81,17 @@ The concept of the website is: volunteer, get coins as a rewards for each volunt
   <img width="800" height="350" src="https://github.com/TopazAvraham/IntroductionToCS-University-C-programming/blob/master/Screenshots/5.png?raw=true">
 </p>
 <br>
+
+
+<p align="left">
+  <b> Prices & Coupons page </b>
+</p>
+<p align="left">
+  <img width="800" height="350" src="https://github.com/TopazAvraham/MakeLivesBetter-DjangoWebsite/blob/master/Screenshots/21.png?raw=true">
+</p>
+
+<br>
+
 
 <p align="left">
   <b> Admin View User's Approvals page  </b>
