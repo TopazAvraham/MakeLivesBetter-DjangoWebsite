@@ -1,12 +1,7 @@
 
 
-<a align = "center" style="font-size: 30px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Make Lives Better Website Link</b></a>
+<a float="center" style="font-size: 30px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Make Lives Better Website Link</b></a>
 
-
-
-<h4 align="center">
-
-</h4>
 
 <h4 align="center">Let's make Israeli people's lives better - MLB community</h4>
 
