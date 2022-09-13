@@ -10,7 +10,7 @@
     <title>Volunteering Options</title>
     <!-- CSS only -->
  
-    
+    <link href="{% static 'styleSelect.css' %}" rel="stylesheet">
     <link href="{% static 'newStyleGallery.css' %}" rel="stylesheet">
     <link href="{% static 'newStyleGalleryExtra.css' %}" rel="stylesheet">
 
@@ -68,15 +68,41 @@
                 <div class="card-header"STYLE="color: #16507b;">
                     <b>Choose Category</b>
                 </div>
-                <ul class="list-group list-group-flush">
-                            <select name="categories" id="categories">
-                            <option  value="All" name="All" class="option-text">All</option>
-                            {% for category in categories %}
-                            <option value="{{category.name}}" name="{{category.name}}">{{category.name}}</option>
-                            {% endfor %}
-                            </select>  
+            </div>
+
+
+            <div class="select-box">
+
+                <div class="select-box__current" tabindex="1">
+                    
+                {% for category in categories %}
+                  <div class="select-box__value" style="position: relative;" >
+                    <input class="select-box__input" type="radio" id="{{category.name}}" value="{{category.name}}" name="categories" />
+                    <p class="select-box__input-text"><b>{{category.name}}</b></p>
+                  </div>
+                 {% endfor %} 
+                  <div class="select-box__value">
+                    <input class="select-box__input" type="radio" id="All" value="All" name="categories" checked="checked"/>
+                    <p class="select-box__input-text"><b>All</b></p>
+                  </div>
+                
+                  <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true"/>
+                </div>
+                <ul class="select-box__list" style="z-index: 2;">
+                    <li>
+                        <label class="select-box__option" for="All" aria-hidden="aria-hidden"><b>All</b></label>
+                    </li>
+                    {% for category in categories %}
+                  <li>
+                    <label class="select-box__option" for="{{category.name}}" aria-hidden="aria-hidden"><b>{{category.name}}</b></label>
+                  </li>
+                  {% endfor %}
+                  
                 </ul>
             </div>
+
+
+
             <br>
             <div class="card">
                 <div class="card-header" STYLE="color: #16507b;">

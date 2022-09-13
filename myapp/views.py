@@ -292,6 +292,9 @@ def adminViewApprovals(request):
         for approval in approvals:
             if request.POST.get(str(-approval.id)) != None:
                 realApproval = ApprovalToConfirm.objects.get(pk=approval.id)
+                approvalPost = UserApproval.objects.get(id=realApproval.id)
+                approvalPost.is_approved = False
+                approvalPost.save()
                 realApproval.delete()
 
                 approvals = ApprovalToConfirm.objects.all()
@@ -397,3 +400,6 @@ def myApprovals(request):
 
     return render(request, 'templates/my_approvals.html',
                   {'approvedPostsFiltered': approvedPostsFiltered, 'extendedUsers': extendedUsers})
+
+
+    
