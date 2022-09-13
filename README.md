@@ -1,6 +1,6 @@
 
 
-<a style="font-size: 30px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Make Lives Better Website Link</b></a>
+<a align = "center" style="font-size: 30px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Make Lives Better Website Link</b></a>
 
 
 
