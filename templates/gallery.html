@@ -74,7 +74,7 @@
             <div class="select-box">
 
                 <div class="select-box__current" tabindex="1">
-                    
+                {% if chosen is None %}
                 {% for category in categories %}
                   <div class="select-box__value" style="position: relative;" >
                     <input class="select-box__input" type="radio" id="{{category.name}}" value="{{category.name}}" name="categories" />
@@ -85,7 +85,26 @@
                     <input class="select-box__input" type="radio" id="All" value="All" name="categories" checked="checked"/>
                     <p class="select-box__input-text"><b>All</b></p>
                   </div>
-                
+                {% else %}
+                {% for category in categories %}
+                {% if chosen == category.name %}              
+                <div class="select-box__value" style="position: relative;" >
+                  <input class="select-box__input" type="radio" id="{{category.name}}" value="{{category.name}}" name="categories" checked="checked"/>
+                  <p class="select-box__input-text"><b>{{category.name}}</b></p>
+                </div>
+                {% else %}
+                <div class="select-box__value" style="position: relative;" >
+                    <input class="select-box__input" type="radio" id="{{category.name}}" value="{{category.name}}" name="categories" />
+                    <p class="select-box__input-text"><b>{{category.name}}</b></p>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="select-box__value">
+                    <input class="select-box__input" type="radio" id="All" value="All" name="categories" />
+                    <p class="select-box__input-text"><b>All</b></p>
+                </div>
+                {% endif %}
+
                   <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg" alt="Arrow Icon" aria-hidden="true"/>
                 </div>
                 <ul class="select-box__list" style="z-index: 2;">
@@ -110,13 +129,28 @@
                 </div>
                 <ul class="list-group list-group-flush">
                 <form method="POST">
-                {% csrf_token %}           
+                {% csrf_token %}  
+                {% if priceChecked == True %}
                 <li class=" list-group-item">
-                <input type="checkbox" name='price' id="price"/>
+                <input type="checkbox" name='price' id="price" checked="checked"/>
                 <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+                {% else %}
                 <li class=" list-group-item">
-                <input type="checkbox" name='name' id="name">
+                <input type="checkbox" name='price' id="price" />
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Coins Prize</b></label><br></li>
+                {% endif %}        
+
+                {% if nameChecked == True %}
+                <li class=" list-group-item">
+                <input type="checkbox" name='name' id="name" checked="checked">
+                <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li>
+            
+                {% else %}
+                <li class=" list-group-item">
+                <input type="checkbox" name='name' id="name" >
                 <label for="vehicle1" STYLE="color: #16507b;"> <b>Name</b></label><br></li></form>
+                {% endif %}
+            </form>
                 </ul>
             </div>
             <br>

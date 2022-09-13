@@ -83,6 +83,8 @@ def gallery(request):
     extendedUsers = UserExtend.objects.all()
     categories = Category.objects.all()
     posts = posts = VolunteeringOption.objects.filter(is_approved=True)
+    priceChecked =False
+    nameChecked=False
 
     if request.method == 'POST':
         category = request.POST.get('categories')
@@ -90,27 +92,32 @@ def gallery(request):
         if category == 'All':
             if request.POST.get('price'):
                 posts = VolunteeringOption.objects.filter(is_approved=True).order_by('value').reverse()
+                priceChecked =True
             elif request.POST.get('name'):
                 posts = VolunteeringOption.objects.filter(is_approved=True).order_by('full_name')
+                nameChecked=True
             else:
                 posts = VolunteeringOption.objects.filter(is_approved=True)
 
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers,'chosen': None, 'priceChecked': priceChecked, 'nameChecked': nameChecked }
             return render(request, 'templates/gallery.html', context)
 
         else:
             if request.POST.get('price'):
                 posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by(
                     'value').reverse()
+                priceChecked =True
             elif request.POST.get('name'):
                 posts = VolunteeringOption.objects.filter(category__name=category, is_approved=True).order_by(
                     'full_name')
+                nameChecked=True
             else:
                 posts = VolunteeringOption.objects.all().filter(category__name=category, is_approved=True)
-            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, }
+
+            context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, 'chosen': category, 'priceChecked': priceChecked, 'nameChecked': nameChecked}
             return render(request, 'templates/gallery.html', context)
 
-    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers}
+    context = {'categories': categories, 'posts': posts, 'extendedUsers': extendedUsers, 'chosen': None, 'priceChecked': priceChecked, 'nameChecked': nameChecked}
     return render(request, 'templates/gallery.html', context)
 
 
