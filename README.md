@@ -5,7 +5,7 @@
 <h4 align="center">Let's make Israeli people's lives better - MLB community</h4>
 
 <p align="center">
-  <a href="##Link to website">Link to website</a> •
+  <a href="https://makelivesbetter.herokuapp.com">Link to website</a> •
   <a href="#Introduction">Introduction</a> •
   <a href="#Screenshots">Screenshots</a> •
   <a href="#Author">Authors</a> •
