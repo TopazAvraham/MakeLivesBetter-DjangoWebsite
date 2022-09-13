@@ -21,4 +21,5 @@ urlpatterns = [
     path('upload_volunteer_option', views.uploadVolunteerOption, name='upload_volunteer_option'),
     path('admin_view_volunteering_requests', views.adminViewVolunteeringRequests, name='admin_view_volunteering_requests'),
     path('admin_view_existing_posts', views.adminViewExistingPosts, name='admin_view_existing_posts'),
-    path('my_approvals', views.myApprovals, name='my_approvals')]
+    path('my_approvals', views.myApprovals, name='my_approvals'),
+    ]
