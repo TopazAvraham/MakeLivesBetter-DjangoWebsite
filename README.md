@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<a style="font-size: 50px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Link To Make Lives Better Website </b></a>
+<a style="font-size: 150px" href="https://makelivesbetter.herokuapp.com" target="_blank"><b>Link To Make Lives Better Website </b></a>
 </p>
 
 <h4 align="center" style="font-size: 30px">Let's make Israeli people's lives better - MLB community</h4>
