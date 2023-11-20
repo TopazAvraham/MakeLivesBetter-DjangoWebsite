@@ -6,8 +6,7 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_URL="files/"
-MEDIA_ROOT=os.path.join(BASE_DIR, "files/")
+
 
 
 env = environ.Env()
@@ -110,7 +109,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static') ,MEDIA_ROOT.replace("files/","static/")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static') , ../files/files]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
